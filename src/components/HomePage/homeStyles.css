@@ -1,0 +1,22 @@
+.footer {
+    min-height: 500px;
+}
+
+.footer-heading {
+    text-transform: uppercase;
+    font-size: 1.125em;
+    margin-bottom: 3px;
+}
+
+.footer-ul li {
+    font-size: 0.875em;
+    padding: 7px 0px;
+}
+
+.footer-ul {
+    margin-top: 2px;
+    list-style-type: none;
+}
+.margin-start-50 {
+    margin-left: 12%;
+}

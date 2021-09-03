@@ -1,15 +1,53 @@
 const express = require("express")
 const morgan = require("morgan")
+const booksApi = require("./apis/booksApi")
+const categoryApi = require("./apis/categoryApi")
+const authorsApi = require("./apis/authorsApi")
+const mongoClient = require("mongodb").MongoClient
+const cors = require("cors")
 require("dotenv").config()
 
 // Express App
 const app = express()
+
+// Cors
+app.use(cors())
 
 // React app connection
 app.use(express.static(`${__dirname}/build`))
 
 // Logging
 app.use(morgan("dev"))
+
+// Body Parser
+app.use(express.json())
+
+// MongoDB Connection
+const DATABASE_URL = process.env.DATABASE_URL;
+(async () => {
+    const client = await mongoClient.connect(DATABASE_URL)
+
+    // Get db object
+    const onlineBookstoreDb = client.db("onlineBookstore")
+
+    // Get collections object
+    const books = onlineBookstoreDb.collection("booksCollection")
+    const category = onlineBookstoreDb.collection("categoryCollection")
+    const authors = onlineBookstoreDb.collection("authorsCollection")
+
+    // Set to app object
+    app.set("books", books)
+    app.set("category", category)
+    app.set("authors", authors)
+
+
+    console.log("[+] Database Connected");
+})()
+
+// APIs
+app.use("/books", booksApi)
+app.use("/category", categoryApi)
+app.use("/authors", authorsApi)
 
 // Error Handler Route
 app.use((err, req, res, next) => {
