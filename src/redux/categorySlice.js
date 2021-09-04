@@ -11,8 +11,6 @@ export const getCategories = createAsyncThunk("getCategories", (async (_, thunkA
     }
 }))
 
-
-
 // Initial State
 const initialCategoryState = {
     categories: [],

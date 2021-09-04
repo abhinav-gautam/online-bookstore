@@ -2,27 +2,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { faBook, faHome, faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getCategories } from '../../redux/categorySlice';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import Message from '../Helpers/Message';
 
 const FirstNavigation = () => {
 
     const { categories, categoryCount, isCategoryLoading, categoryError } = useSelector(state => state.category)
-
-    const dispatch = useDispatch()
-
-    // Loading categories from db if count is zero
-    useEffect(() => {
-        if (!categoryCount) {
-            dispatch(getCategories())
-        }
-    }, []);
-
 
     // Active link style
     const activeLinkStyle = {

@@ -1,22 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getCategories } from '../../redux/categorySlice';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 
 const CategorySidebar = () => {
     const { categories, categoryCount, isCategoryLoading } = useSelector(state => state.category)
-
-    const dispatch = useDispatch()
-
-    // Loading categories from db if count is zero
-    useEffect(() => {
-        if (!categoryCount) {
-            dispatch(getCategories())
-        }
-    }, []);
 
     // Active link style
     const activeLinkStyle = {
