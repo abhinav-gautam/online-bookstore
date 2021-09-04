@@ -5,7 +5,7 @@ import axios from "axios"
 export const getCategories = createAsyncThunk("getCategories", (async (_, thunkAPI) => {
     const { data } = await axios.get("http://localhost:4000/category/")
     if (data.status === "success") {
-        return data
+        return data.payload
     } else {
         return thunkAPI.rejectWithValue(data)
     }
@@ -32,7 +32,7 @@ const categorySlice = createSlice({
         },
         [getCategories.fulfilled]: (state, action) => {
             state.isCategoryLoading = false
-            state.categories = action.payload.data.categories
+            state.categories = action.payload.categories
         },
         [getCategories.rejected]: (state, action) => {
             state.isCategoryLoading = false

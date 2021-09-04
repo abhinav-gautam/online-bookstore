@@ -17,7 +17,7 @@ router.get("/", asyncHandler(async (req, res) => {
     const categories = await category.find().toArray()
     res.status(200).json({
         status: "success",
-        data: {
+        payload: {
             categories
         }
     })

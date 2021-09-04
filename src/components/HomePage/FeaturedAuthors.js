@@ -8,7 +8,7 @@ const FeaturedAuthors = ({ authors, isAuthorsLoading }) => {
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-3 row-cols-xl-5 mt-3 ">
                 {
                     isAuthorsLoading
-                        ? <LoadingSpinner message=" Loading Books..." />
+                        ? <LoadingSpinner message=" Loading Authors..." />
                         : authors?.length
                             ?
                             authors.slice(0, 5).map(author => (
