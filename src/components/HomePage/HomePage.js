@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getFeaturedAuthors } from '../../redux/authorsSlice';
-import { getFeaturedBooks } from '../../redux/booksSlice';
+import { getAuthors, } from '../../redux/authorsSlice';
+import { getBooks, } from '../../redux/booksSlice';
 import CategorySidebar from './CategorySidebar';
 import FeaturedAuthors from './FeaturedAuthors';
 import { getCategories } from '../../redux/categorySlice';
@@ -11,42 +11,35 @@ import FeaturedBooks from './FeaturedBooks';
 import HomeCarousel from './HomeCarousel';
 
 const HomePage = () => {
-    const { featuredBooks, isFeaturedBooksLoading } = useSelector(state => state.books)
-    const { featuredAuthors, isFeaturedAuthorsLoading } = useSelector(state => state.authors)
-    const { categoryCount, categories } = useSelector(state => state.category)
+    const { books, isBooksLoading } = useSelector(state => state.books)
+
+    const { authors, isAuthorsLoading } = useSelector(state => state.authors)
+    const { categories } = useSelector(state => state.category)
 
     const dispatch = useDispatch()
 
     // Loading categories from db 
     useEffect(() => {
-        if (!categoryCount) {
+        if (!categories.count) {
             dispatch(getCategories())
         }
-    }, [categories]);
+    }, []);
 
-    // Loading featured books from db 
+    // Loading books from db 
     useEffect(() => {
-        if (!featuredBooks.bestseller.length) {
-            dispatch(getFeaturedBooks("bestseller"))
+        if (!books.length) {
+            dispatch(getBooks())
         }
-    }, [featuredBooks.bestseller]);
-    useEffect(() => {
-        if (!featuredBooks.newArrival.length) {
-            dispatch(getFeaturedBooks("newArrival"))
-        }
-    }, [featuredBooks.newArrival]);
-    useEffect(() => {
-        if (!featuredBooks.awarded.length) {
-            dispatch(getFeaturedBooks("awarded"))
-        }
-    }, [featuredBooks.awarded]);
+    }, []);
+
+
 
     // Loading authors from db
     useEffect(() => {
-        if (!featuredAuthors?.length) {
-            dispatch(getFeaturedAuthors())
+        if (!authors.length) {
+            dispatch(getAuthors())
         }
-    }, [featuredAuthors]);
+    }, []);
 
     return (
         <div className="container-fluid">
@@ -65,21 +58,24 @@ const HomePage = () => {
                     {/* Featured Books */}
                     <FeaturedBooks
                         title="Bestsellers"
-                        books={featuredBooks.bestseller}
-                        isFeaturedBooksLoading={isFeaturedBooksLoading} />
+                        books={books}
+                        isBooksLoading={isBooksLoading}
+                        feature="bestseller" />
                     <FeaturedBooks
                         title="New Arrivals"
-                        books={featuredBooks.newArrival}
-                        isFeaturedBooksLoading={isFeaturedBooksLoading} />
+                        books={books}
+                        isBooksLoading={isBooksLoading}
+                        feature="newArrival" />
                     <FeaturedBooks
                         title="Award Winners"
-                        books={featuredBooks.awarded}
-                        isFeaturedBooksLoading={isFeaturedBooksLoading} />
+                        books={books}
+                        isBooksLoading={isBooksLoading}
+                        feature="awarded" />
 
                     {/* Featured Authors */}
                     <FeaturedAuthors
-                        featuredAuthors={featuredAuthors}
-                        isFeaturedAuthorsLoading={isFeaturedAuthorsLoading} />
+                        authors={authors}
+                        isAuthorsLoading={isAuthorsLoading} />
                 </div>
             </div>
         </div>

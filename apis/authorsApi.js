@@ -15,11 +15,6 @@ router.use((req, res, next) => {
 router.get("/", asyncHandler(async (req, res) => {
     const query = authors.find()
 
-    // Limiting results
-    if (req.query.limit) {
-        query.limit(+req.query.limit)
-    }
-
     const authorsArray = await query.toArray()
     res.status(200).json({
         status: "success",

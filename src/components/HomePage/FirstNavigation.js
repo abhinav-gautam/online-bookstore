@@ -7,10 +7,11 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import Message from '../Helpers/Message';
+import CategoryItem from './CategoryItem';
 
 const FirstNavigation = () => {
 
-    const { categories, categoryCount, isCategoryLoading, categoryError } = useSelector(state => state.category)
+    const { categories, isCategoryLoading, categoryError } = useSelector(state => state.category)
 
     // Active link style
     const activeLinkStyle = {
@@ -54,13 +55,9 @@ const FirstNavigation = () => {
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {
-                                    categoryCount
+                                    categories.length
                                         ? categories.map(category => (
-                                            <li key={category._id} className="dropdown-item">
-                                                <NavLink exact className="nav-link text-dark" to={`/${category.categoryName}`}>
-                                                    {category.categoryName}
-                                                </NavLink>
-                                            </li>
+                                            <CategoryItem category={category} />
                                         ))
                                         : isCategoryLoading && <li><a className="dropdown-item" href="#"><LoadingSpinner message=" Loading Categories" /></a></li>
                                 }

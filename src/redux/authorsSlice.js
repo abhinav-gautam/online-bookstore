@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Get authors
-export const getFeaturedAuthors = createAsyncThunk("getFeaturedAuthors", async (_, thunkAPI) => {
-    const { data } = await axios.get("http://localhost:4000/authors/?limit=5")
+// Get all authors
+export const getAuthors = createAsyncThunk("getAuthors", async (_, thunkAPI) => {
+    const { data } = await axios.get("http://localhost:4000/authors/")
     if (data.status === "success") {
         return data.payload
     } else {
@@ -13,7 +13,6 @@ export const getFeaturedAuthors = createAsyncThunk("getFeaturedAuthors", async (
 
 const initialAuthorsState = {
     authors: [], isAuthorsLoading: false, authorsError: "",
-    featuredAuthors: [], isFeaturedAuthorsLoading: false, featuredAuthorsError: "",
 }
 
 const authorsSlice = createSlice({
@@ -22,19 +21,19 @@ const authorsSlice = createSlice({
     reducers: {},
     extraReducers: {
         // Get authors
-        [getFeaturedAuthors.pending]: state => {
-            state.isFeaturedAuthorsLoading = true
-            state.featuredAuthorsError = ""
+        [getAuthors.pending]: state => {
+            state.isAuthorsLoading = true
+            state.authorsError = ""
         },
-        [getFeaturedAuthors.fulfilled]: (state, action) => {
+        [getAuthors.fulfilled]: (state, action) => {
             console.log(action.payload);
 
-            state.isFeaturedAuthorsLoading = false
-            state.featuredAuthors = action.payload.authors
+            state.isAuthorsLoading = false
+            state.authors = action.payload.authors
         },
-        [getFeaturedAuthors.rejected]: (state, action) => {
-            state.isFeaturedAuthorsLoading = false
-            state.featuredAuthorsError = action.payload.message
+        [getAuthors.rejected]: (state, action) => {
+            state.isAuthorsLoading = false
+            state.authorsError = action.payload.message
         },
     }
 })

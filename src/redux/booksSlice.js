@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getFeaturedBooks = createAsyncThunk("getFeaturedBooks", async (feature, thunkAPI) => {
-    const { data } = await axios.get(`http://localhost:4000/books/featured/${feature}`)
+export const getBooks = createAsyncThunk("getBooks", async (_, thunkAPI) => {
+    const { data } = await axios.get(`http://localhost:4000/books/`)
     if (data.status === "success") {
-        return thunkAPI.fulfillWithValue({ feature, data: data.payload })
+        return data.payload
     } else {
         return thunkAPI.rejectWithValue(data)
     }
@@ -12,7 +12,6 @@ export const getFeaturedBooks = createAsyncThunk("getFeaturedBooks", async (feat
 
 const initialBooksState = {
     books: [], isBooksLoading: false, booksError: "",
-    featuredBooks: { bestseller: [], newArrival: [], awarded: [] }, isFeaturedBooksLoading: false, featuredBooksError: "",
 }
 
 const booksSlice = createSlice({
@@ -22,17 +21,17 @@ const booksSlice = createSlice({
     },
     extraReducers: {
         // Get featuredBooks
-        [getFeaturedBooks.pending]: state => {
-            state.isFeaturedBooksLoading = true
-            state.featuredBooksError = ""
+        [getBooks.pending]: state => {
+            state.isBooksLoading = true
+            state.booksError = ""
         },
-        [getFeaturedBooks.fulfilled]: (state, action) => {
-            state.isFeaturedBooksLoading = false
-            state.featuredBooks[action.payload.feature] = action.payload.data[action.payload.feature]
+        [getBooks.fulfilled]: (state, action) => {
+            state.isBooksLoading = false
+            state.books = action.payload.books
         },
-        [getFeaturedBooks.rejected]: (state, action) => {
-            state.isFeaturedBooksLoading = false
-            state.featuredBooksError = action.payload.message
+        [getBooks.rejected]: (state, action) => {
+            state.isBooksLoading = false
+            state.booksError = action.payload.message
         },
     }
 })

@@ -16,7 +16,6 @@ const initialCategoryState = {
     categories: [],
     isCategoryLoading: false,
     categoryError: "",
-    categoryCount: 0
 }
 
 // Slice
@@ -24,7 +23,6 @@ const categorySlice = createSlice({
     name: "category",
     initialState: initialCategoryState,
     reducers: {
-
     },
     extraReducers: {
         // Get categories
@@ -35,7 +33,6 @@ const categorySlice = createSlice({
         [getCategories.fulfilled]: (state, action) => {
             state.isCategoryLoading = false
             state.categories = action.payload.data.categories
-            state.categoryCount = action.payload.data.categories.length
         },
         [getCategories.rejected]: (state, action) => {
             state.isCategoryLoading = false
@@ -45,5 +42,4 @@ const categorySlice = createSlice({
     }
 
 })
-
 export default categorySlice.reducer

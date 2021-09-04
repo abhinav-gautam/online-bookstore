@@ -1,9 +1,7 @@
-import CategorySidebar from "./components/HomePage/CategorySidebar";
-import FeaturedAuthors from "./components/HomePage/FeaturedAuthors";
-import FeaturedBooks from "./components/HomePage/FeaturedBooks";
+import { Route, Switch } from "react-router";
+import CategoryPage from "./components/CategoryPage/CategoryPage";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import Footer from "./components/HomePage/Footer";
-import HomeCarousel from "./components/HomePage/HomeCarousel";
 import HomePage from "./components/HomePage/HomePage";
 
 function App() {
@@ -11,10 +9,18 @@ function App() {
     <div >
       {/* First Navigation bar */}
       <FirstNavigation />
+      <Switch>
+        <Route exact path="/">
+          {/* Homepage */}
+          <HomePage />
+        </Route>
+        <Route exact path="/:category">
+          {/* Category Page */}
+          <CategoryPage />
+        </Route>
+      </Switch>
 
-      {/* Homepage */}
-      <HomePage />
-
+      {/* Footer */}
       <Footer />
     </div>
   );

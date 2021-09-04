@@ -11,17 +11,14 @@ router.use((req, res, next) => {
     next()
 })
 
-// Get featured books
-router.get("/featured/:tag", asyncHandler(async (req, res) => {
-    const tag = req.params.tag
-    const featuredBooks = await books.find({ tags: { $regex: tag } }).limit(4).toArray()
+// Get all the books
+router.get("/", asyncHandler(async (req, res) => {
+    const allBooks = await books.find().toArray()
     res.status(200).json({
         status: "success",
         payload: {
-            [tag]: featuredBooks
+            books: allBooks
         }
     })
 }))
-
-
 module.exports = router
