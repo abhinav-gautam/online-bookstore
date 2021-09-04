@@ -3,8 +3,9 @@
 import { faBook, faHome, faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import Message from '../Helpers/Message';
 import CategoryItem from './CategoryItem';
@@ -12,6 +13,13 @@ import CategoryItem from './CategoryItem';
 const FirstNavigation = () => {
 
     const { categories, isCategoryLoading, categoryError } = useSelector(state => state.category)
+
+    const { register, handleSubmit } = useForm();
+
+    const history = useHistory()
+    const onSearchFormSubmit = searchField => {
+        history.push(`/search?query=${searchField.searchQuery}`)
+    }
 
     // Active link style
     const activeLinkStyle = {
@@ -31,8 +39,12 @@ const FirstNavigation = () => {
 
             {/* Search bar */}
             <div className="w-25">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <form class="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
+                    <input
+                        class="form-control me-2"
+                        type="search" name="searchQuery"
+                        placeholder="Search by Title, Author, Publisher or ISBN"
+                        {...register("searchQuery", { required: true })} />
                     <button class="btn btn-outline-danger" type="submit">Search</button>
                 </form>
             </div>

@@ -4,11 +4,11 @@ const BookTile = ({ book }) => {
     return (
         <>
             <div className="mt-5 row">
-                <div className="col-2">
+                <div className="col-xl-2 col-lg-4">
                     <img src={book.bookImage} alt="" width="200px" height="300px" />
 
                 </div>
-                <div className="col-5 border-end pe-5">
+                <div className="col-xl-5 border-end pe-5">
                     <div className="ms-4 mt-5">
                         <p className="h3 fw-bold ">{book.bookTitle}</p>
                         <div className="d-flex mt-3">
@@ -28,7 +28,7 @@ const BookTile = ({ book }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-5 ps-5">
+                <div className="col-xl-5 ps-5">
                     <div className="mt-5">
                         <p className="text-success fs-3 fw-bold">Available</p>
                         <p>Ships within <strong>4-6 Days</strong></p>
