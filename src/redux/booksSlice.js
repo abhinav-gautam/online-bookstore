@@ -11,13 +11,16 @@ export const getBooks = createAsyncThunk("getBooks", async (_, thunkAPI) => {
 })
 
 const initialBooksState = {
-    books: [], isBooksLoading: false, booksError: "",
+    books: [], isBooksLoading: false, booksError: "", recentlyViewed: []
 }
 
 const booksSlice = createSlice({
     name: "books",
     initialState: initialBooksState,
     reducers: {
+        addToRecentlyViewed: (state, action) => {
+            state.recentlyViewed.splice(0, 0, action.payload)
+        }
     },
     extraReducers: {
         // Get featuredBooks
@@ -35,5 +38,5 @@ const booksSlice = createSlice({
         },
     }
 })
-
+export const { addToRecentlyViewed } = booksSlice.actions
 export default booksSlice.reducer

@@ -9,6 +9,7 @@ const useQuery = () => new URLSearchParams(useLocation().search)
 
 const SearchPage = () => {
     const query = useQuery().get("query").toLowerCase()
+
     const { books } = useSelector(state => state.books)
 
     const [filteredBooks, setFilteredBooks] = useState([]);

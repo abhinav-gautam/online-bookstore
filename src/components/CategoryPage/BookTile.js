@@ -1,16 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BookTile = ({ book }) => {
     return (
         <>
             <div className="mt-5 row">
                 <div className="col-xl-2 col-lg-4">
-                    <img src={book.bookImage} alt="" width="200px" height="300px" />
-
+                    <Link to={{ pathname: `/book/${book._id}`, state: { book } }}>
+                        <div className="position-relative">
+                            <img src={book.bookImage} alt="" width="200px" height="300px" />
+                            <span class="position-absolute top-0 start-0 translate-middle badge rounded-circle bg-danger p-2">
+                                20% <br /> off
+                                <span class="visually-hidden">discount</span>
+                            </span>
+                        </div>
+                    </Link>
                 </div>
                 <div className="col-xl-5 border-end pe-5">
                     <div className="ms-4 mt-5">
-                        <p className="h3 fw-bold ">{book.bookTitle}</p>
+                        <p className="h3 fw-bold"><Link className="text-dark text-decoration-none" to={{ pathname: `/book/${book._id}`, state: { book } }}> {book.bookTitle}</Link></p>
                         <div className="d-flex mt-3">
                             <div className="border-end pe-5">
                                 <p><strong>Author:</strong> {book.author}</p>

@@ -1,9 +1,10 @@
 import { Route, Switch } from "react-router";
+import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import Footer from "./components/HomePage/Footer";
 import HomePage from "./components/HomePage/HomePage";
-import SearchPage from "./components/Search Page/SearchPage";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
   return (
@@ -12,16 +13,20 @@ function App() {
       <FirstNavigation />
 
       <Switch>
+        {/* Homepage */}
         <Route exact path="/">
-          {/* Homepage */}
           <HomePage />
         </Route>
+        {/* Search Page */}
         <Route exact path="/search">
-          {/* Search Page */}
           <SearchPage />
         </Route>
+        {/* Book Details Page */}
+        <Route exact path="/book/:bookId">
+          <BookDetailsPage />
+        </Route>
+        {/* Category Page */}
         <Route exact path="/:category">
-          {/* Category Page */}
           <CategoryPage />
         </Route>
         {/* Login */}

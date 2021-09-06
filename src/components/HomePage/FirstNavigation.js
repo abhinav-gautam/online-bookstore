@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import Message from '../Helpers/Message';
 import CategoryItem from './CategoryItem';
@@ -17,6 +17,7 @@ const FirstNavigation = () => {
     const { register, handleSubmit } = useForm();
 
     const history = useHistory()
+
     const onSearchFormSubmit = searchField => {
         history.push(`/search?query=${searchField.searchQuery}`)
     }
@@ -34,7 +35,7 @@ const FirstNavigation = () => {
 
             {/* Title */}
             <div>
-                <a className="navbar-brand fs-1 text-decoration-none ms-5 cursor-pointer">Bookworm</a>
+                <Link to="/" className="navbar-brand fs-1 text-decoration-none ms-5 cursor-pointer">Bookworm</Link>
             </div>
 
             {/* Search bar */}
