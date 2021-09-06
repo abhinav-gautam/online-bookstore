@@ -12,7 +12,7 @@ const CategoryItem = ({ category }) => {
             <NavLink exact
                 className="nav-link text-dark text-wrap"
                 activeStyle={activeLinkStyle}
-                to={`/${category.categoryName}`}>
+                to={`/category/${category.categoryName}`}>
                 {category.categoryName}
             </NavLink>
         </li>

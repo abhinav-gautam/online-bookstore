@@ -26,7 +26,7 @@ function App() {
           <BookDetailsPage />
         </Route>
         {/* Category Page */}
-        <Route exact path="/:category">
+        <Route exact path="/category/:category">
           <CategoryPage />
         </Route>
         {/* Login */}
