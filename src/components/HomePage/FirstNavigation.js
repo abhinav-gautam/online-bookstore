@@ -14,12 +14,13 @@ const FirstNavigation = () => {
 
     const { categories, isCategoryLoading, categoryError } = useSelector(state => state.category)
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     const history = useHistory()
 
     const onSearchFormSubmit = searchField => {
         history.push(`/search?query=${searchField.searchQuery}`)
+        reset()
     }
 
     // Active link style
