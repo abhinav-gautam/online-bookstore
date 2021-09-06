@@ -40,13 +40,13 @@ const FirstNavigation = () => {
 
             {/* Search bar */}
             <div className="w-25">
-                <form class="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
+                <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
                     <input
-                        class="form-control me-2"
+                        className="form-control me-2"
                         type="search" name="searchQuery"
                         placeholder="Search by Title, Author, Publisher or ISBN"
                         {...register("searchQuery", { required: true })} />
-                    <button class="btn btn-outline-danger" type="submit">Search</button>
+                    <button className="btn btn-outline-danger" type="submit">Search</button>
                 </form>
             </div>
 

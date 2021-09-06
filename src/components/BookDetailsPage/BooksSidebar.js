@@ -15,7 +15,7 @@ const BooksSidebar = ({ recentlyViewed }) => {
         setSimilarBooks(books.filter(book => (
             book.category === currentBook.category &&
             book._id !== bookId
-        )).splice(0, 3))
+        )).slice(0, 3))
     }, [bookId]);
 
     return (

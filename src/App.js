@@ -2,8 +2,8 @@ import { Route, Switch } from "react-router";
 import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
-import Footer from "./components/HomePage/Footer";
 import HomePage from "./components/HomePage/HomePage";
+import Register from "./components/RegisterPage/Register";
 import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
@@ -31,10 +31,12 @@ function App() {
         </Route>
         {/* Login */}
         {/* Register */}
+        <Route exact path="/register">
+          <Register />
+        </Route>
       </Switch>
 
-      {/* Footer */}
-      <Footer />
+
     </div>
   );
 }

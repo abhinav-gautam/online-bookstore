@@ -3,6 +3,7 @@ const morgan = require("morgan")
 const booksApi = require("./apis/booksApi")
 const categoryApi = require("./apis/categoryApi")
 const authorsApi = require("./apis/authorsApi")
+const usersApi = require("./apis/usersApi")
 const mongoClient = require("mongodb").MongoClient
 const cors = require("cors")
 require("dotenv").config()
@@ -34,12 +35,13 @@ const DATABASE_URL = process.env.DATABASE_URL;
     const books = onlineBookstoreDb.collection("booksCollection")
     const category = onlineBookstoreDb.collection("categoryCollection")
     const authors = onlineBookstoreDb.collection("authorsCollection")
+    const users = onlineBookstoreDb.collection("usersCollection")
 
     // Set to app object
     app.set("books", books)
     app.set("category", category)
     app.set("authors", authors)
-
+    app.set("users", users)
 
     console.log("[+] Database Connected");
 })()
@@ -48,6 +50,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
 app.use("/books", booksApi)
 app.use("/category", categoryApi)
 app.use("/authors", authorsApi)
+app.use("/users", usersApi)
 
 // Error Handler Route
 app.use((err, req, res, next) => {

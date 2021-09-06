@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { addToRecentlyViewed } from '../../redux/booksSlice';
+import Footer from '../HomePage/Footer';
 import BookDetails from './BookDetails';
 import BooksSidebar from './BooksSidebar';
 
@@ -19,19 +20,23 @@ const BookDetailsPage = () => {
     }, [book]);
 
     return (
-        <div className="container-fluid">
-            <div className="row">
+        <>
+            <div className="container-fluid">
+                <div className="row">
 
-                {/* Main Content */}
-                <div className="col-8 mt-4 mb-5 ms-5 ps-5">
-                    <BookDetails book={book} />
-                </div>
-                {/* Suggested books Sidebar */}
-                <div className="col-3">
-                    <BooksSidebar recentlyViewed={recentlyViewed} />
+                    {/* Main Content */}
+                    <div className="col-8 mt-4 mb-5 ms-5 ps-5">
+                        <BookDetails book={book} />
+                    </div>
+                    {/* Suggested books Sidebar */}
+                    <div className="col-3">
+                        <BooksSidebar recentlyViewed={recentlyViewed} />
+                    </div>
                 </div>
             </div>
-        </div>
+            {/* Footer */}
+            <Footer />
+        </>
     );
 }
 
