@@ -3,6 +3,7 @@ import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import HomePage from "./components/HomePage/HomePage";
+import Login from "./components/LoginPage/Login";
 import Register from "./components/RegisterPage/Register";
 import SearchPage from "./components/SearchPage/SearchPage";
 
@@ -30,6 +31,9 @@ function App() {
           <CategoryPage />
         </Route>
         {/* Login */}
+        <Route exact path="/login">
+          <Login />
+        </Route>
         {/* Register */}
         <Route exact path="/register">
           <Register />

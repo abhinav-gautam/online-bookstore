@@ -21,7 +21,7 @@ const HomePage = () => {
 
     // Loading categories from db 
     useEffect(() => {
-        if (!categories.count) {
+        if (!categories.length) {
             dispatch(getCategories())
         }
     }, []);
@@ -32,8 +32,6 @@ const HomePage = () => {
             dispatch(getBooks())
         }
     }, []);
-
-
 
     // Loading authors from db
     useEffect(() => {

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import Message from '../Helpers/Message';
 import CategoryItem from './CategoryItem';
@@ -17,6 +17,9 @@ const FirstNavigation = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const history = useHistory()
+
+    // const { url } = useRouteMatch()
+    // console.log(url);
 
     const onSearchFormSubmit = searchField => {
         history.push(`/search?query=${searchField.searchQuery}`)
@@ -41,14 +44,17 @@ const FirstNavigation = () => {
 
             {/* Search bar */}
             <div className="w-25">
-                <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
-                    <input
-                        className="form-control me-2"
-                        type="search" name="searchQuery"
-                        placeholder="Search by Title, Author, Publisher or ISBN"
-                        {...register("searchQuery", { required: true })} />
-                    <button className="btn btn-outline-danger" type="submit">Search</button>
-                </form>
+                {
+                    // url !== "/login" && url !== "/register" &&
+                    <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
+                        <input
+                            className="form-control me-2"
+                            type="search" name="searchQuery"
+                            placeholder="Search by Title, Author, Publisher or ISBN"
+                            {...register("searchQuery", { required: true })} />
+                        <button className="btn btn-outline-danger" type="submit">Search</button>
+                    </form>
+                }
             </div>
 
             {/* Right options */}
