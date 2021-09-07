@@ -26,8 +26,6 @@ const authorsSlice = createSlice({
             state.authorsError = ""
         },
         [getAuthors.fulfilled]: (state, action) => {
-            console.log(action.payload);
-
             state.isAuthorsLoading = false
             state.authors = action.payload.authors
         },

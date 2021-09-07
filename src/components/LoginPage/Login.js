@@ -58,7 +58,7 @@ const Login = () => {
                                 </div>
 
                                 {/* Password */}
-                                <div className="form-floating mt-4">
+                                <div className="form-floating mt-4 mb-4">
                                     <input
                                         type="password" className="form-control form-control-custom"
                                         name="password" id="password" placeholder="#"

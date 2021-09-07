@@ -1,12 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { getAuthors, } from '../../redux/authorsSlice';
-import { getBooks, } from '../../redux/booksSlice';
 import CategorySidebar from './CategorySidebar';
 import FeaturedAuthors from './FeaturedAuthors';
-import { getCategories } from '../../redux/categorySlice';
 import FeaturedBooks from './FeaturedBooks';
 import HomeCarousel from './HomeCarousel';
 import Footer from './Footer';
@@ -15,30 +11,6 @@ const HomePage = () => {
     const { books, isBooksLoading } = useSelector(state => state.books)
 
     const { authors, isAuthorsLoading } = useSelector(state => state.authors)
-    const { categories } = useSelector(state => state.category)
-
-    const dispatch = useDispatch()
-
-    // Loading categories from db 
-    useEffect(() => {
-        if (!categories.length) {
-            dispatch(getCategories())
-        }
-    }, []);
-
-    // Loading books from db 
-    useEffect(() => {
-        if (!books.length) {
-            dispatch(getBooks())
-        }
-    }, []);
-
-    // Loading authors from db
-    useEffect(() => {
-        if (!authors.length) {
-            dispatch(getAuthors())
-        }
-    }, []);
 
     return (
         <>

@@ -1,29 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { faBook, faHome, faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faHome, faShoppingCart, faSignInAlt, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { Link, NavLink, useHistory, useRouteMatch } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import Message from '../Helpers/Message';
+import resetAllState from '../Helpers/resetAllState';
 import CategoryItem from './CategoryItem';
+import defaultProfilePic from "../../media/defaultProfilePic.png"
 
 const FirstNavigation = () => {
 
     const { categories, isCategoryLoading, categoryError } = useSelector(state => state.category)
+    const { user, isAuth } = useSelector(state => state.user)
+    const { cartCount } = useSelector(state => state.cart)
 
     const { register, handleSubmit, reset } = useForm();
 
     const history = useHistory()
-
-    // const { url } = useRouteMatch()
-    // console.log(url);
+    const dispatch = useDispatch()
 
     const onSearchFormSubmit = searchField => {
         history.push(`/search?query=${searchField.searchQuery}`)
         reset()
+    }
+
+    // Function to handle logout
+    const handleLogout = () => {
+        resetAllState(dispatch)
+        history.push("/")
     }
 
     // Active link style
@@ -44,17 +53,14 @@ const FirstNavigation = () => {
 
             {/* Search bar */}
             <div className="w-25">
-                {
-                    // url !== "/login" && url !== "/register" &&
-                    <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
-                        <input
-                            className="form-control me-2"
-                            type="search" name="searchQuery"
-                            placeholder="Search by Title, Author, Publisher or ISBN"
-                            {...register("searchQuery", { required: true })} />
-                        <button className="btn btn-outline-danger" type="submit">Search</button>
-                    </form>
-                }
+                <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
+                    <input
+                        className="form-control me-2"
+                        type="search" name="searchQuery"
+                        placeholder="Search by Title, Author, Publisher or ISBN"
+                        {...register("searchQuery", { required: true })} />
+                    <button className="btn btn-outline-danger" type="submit">Search</button>
+                </form>
             </div>
 
             {/* Right options */}
@@ -66,7 +72,7 @@ const FirstNavigation = () => {
 
                 {/* Nav */}
                 <div className="collapse navbar-collapse" id="menu">
-                    <ul className="navbar-nav justify-content-evenly ms-auto me-5">
+                    <ul className="navbar-nav justify-content-evenly align-items-center ms-auto me-5">
                         <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className="nav-link" to="/"><FontAwesomeIcon icon={faHome} /> Home</NavLink></li>
                         {/* Categories Dropdown */}
                         <li className="nav-item dropdown">
@@ -83,8 +89,35 @@ const FirstNavigation = () => {
                                 }
                             </ul>
                         </li>
-                        <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className="nav-link" to="/login"><FontAwesomeIcon icon={faSignInAlt} /> Login</NavLink></li>
-                        <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className="nav-link" to="/register"><FontAwesomeIcon icon={faUserPlus} /> Register</NavLink></li>
+                        {
+                            isAuth
+                                ? <>
+                                    <li class="nav-item me-4">
+                                        <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to={`/cart`}><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                            {cartCount}
+                                        </span></NavLink>
+                                    </li>
+                                    <li class="nav-item dropdown me-5">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {
+                                                user.profilePicture
+                                                    ?
+                                                    <img src={user.profilePicture} className="border border-dark rounded-circle" width="50px" alt="" />
+                                                    :
+                                                    <img src={defaultProfilePic} className="border border-dark rounded-circle" width="50px" alt="" />
+                                            }
+                                        </a>
+                                        <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
+                                            <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
+                                        </ul>
+                                    </li>
+                                </>
+                                :
+                                <>
+                                    <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className="nav-link" to="/login"><FontAwesomeIcon icon={faSignInAlt} /> Login</NavLink></li>
+                                    <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className="nav-link" to="/register"><FontAwesomeIcon icon={faUserPlus} /> Register</NavLink></li>
+                                </>
+                        }
 
                     </ul>
                 </div>

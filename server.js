@@ -4,6 +4,7 @@ const booksApi = require("./apis/booksApi")
 const categoryApi = require("./apis/categoryApi")
 const authorsApi = require("./apis/authorsApi")
 const usersApi = require("./apis/usersApi")
+const cartApi = require("./apis/cartApi")
 const mongoClient = require("mongodb").MongoClient
 const cors = require("cors")
 require("dotenv").config()
@@ -35,6 +36,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
     const books = onlineBookstoreDb.collection("booksCollection")
     const category = onlineBookstoreDb.collection("categoryCollection")
     const authors = onlineBookstoreDb.collection("authorsCollection")
+    const cart = onlineBookstoreDb.collection("cartCollection")
     const users = onlineBookstoreDb.collection("usersCollection")
 
     // Set to app object
@@ -42,6 +44,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
     app.set("category", category)
     app.set("authors", authors)
     app.set("users", users)
+    app.set("cart", cart)
 
     console.log("[+] Database Connected");
 })()
@@ -50,6 +53,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
 app.use("/books", booksApi)
 app.use("/category", categoryApi)
 app.use("/authors", authorsApi)
+app.use("/cart", cartApi)
 app.use("/users", usersApi)
 
 // Error Handler Route

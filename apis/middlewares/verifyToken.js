@@ -8,7 +8,7 @@ const verifyToken = (req, res, next) => {
         throw new Error("token not available")
     }
 
-    const { username } = jwt.verify(token, process.env.SECRET)
+    const { username } = jwt.verify(token, process.env.SECRET_JWT)
     req.username = username
     next()
 }

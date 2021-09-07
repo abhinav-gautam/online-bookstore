@@ -15,7 +15,7 @@ const CategoryPage = () => {
     // Filtering books based on category
     useEffect(() => {
         setFilteredBooks(books.filter(book => book.category === category))
-    }, [category]);
+    }, [category, books]);
 
     return (
         <>

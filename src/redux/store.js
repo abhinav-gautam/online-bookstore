@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authorsReducer from './authorsSlice';
 import booksReducer from './booksSlice';
+import cartReducer from './cartSlice';
 import categoryReducer from './categorySlice';
 import userReducer from './userSlice';
 
@@ -9,6 +10,7 @@ export default configureStore({
         category: categoryReducer,
         books: booksReducer,
         authors: authorsReducer,
-        user: userReducer
+        user: userReducer,
+        cart: cartReducer
     }
 })

@@ -32,9 +32,12 @@ const userSlice = createSlice({
     initialState: initialUserState,
     reducers: {
         setUser: (state, action) => {
-            console.log(action);
             state.user = action.payload
             state.isAuth = true
+            return state
+        },
+        resetUser: state => {
+            state = initialUserState
             return state
         }
     },
