@@ -1,13 +1,13 @@
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { removeCartItem } from '../../redux/cartSlice';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 
-const HomeCart = () => {
-    const { cartItems, cartCount, isCartLoading } = useSelector(state => state.cart)
+const HomeCart = ({ cartItems, cartCount, isCartLoading, cartSummary }) => {
+
     const { path } = useRouteMatch()
     const dispatch = useDispatch()
 
@@ -56,11 +56,11 @@ const HomeCart = () => {
                                                 </div>
                                             </div>
                                             <div className="col-2">
-                                                <div className="text-muted d-flex flex-column align-items-end">
-                                                    <div>
+                                                <div className="d-flex flex-column align-items-end">
+                                                    <div className="fw-bold text-danger">
                                                         Rs. {item.price}
                                                     </div>
-                                                    <div onClick={() => handleRemoveCartItem({ item, index })} className="cursor-pointer"><FontAwesomeIcon icon={faTrashAlt} /></div>
+                                                    <div onClick={() => handleRemoveCartItem({ item, index })} className="text-muted cursor-pointer"><FontAwesomeIcon icon={faTrashAlt} /></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,28 +71,15 @@ const HomeCart = () => {
                             }
                             <li className="list-group-item d-flex justify-content-between ">
                                 <span>Total </span>
-                                <strong>Rs.
-                                    {
-                                        cartItems.map(item => +item.price).reduce((total, current) => total += current)
-                                    }
+                                <strong>Rs. {(cartSummary.netTotal - cartSummary.deliveryCharge)}
                                 </strong>
                             </li>
                         </>
                 }
 
             </ul>
-            {/* {
-                cartCount >= 0 &&
-               
-            } */}
-            <div className="card p-2 ms-auto mb-5">
-                <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Promo code" />
-                    <div className="input-group-append">
-                        <button type="submit" className="btn btn-secondary">Redeem</button>
-                    </div>
-                </div>
-            </div>
+
+
         </div>
     );
 }

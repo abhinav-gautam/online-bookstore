@@ -1,18 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import BookImage from './BookImage';
 
 const BooksSidebarBook = ({ book }) => {
     const history = useHistory()
 
     return (
         <div className="d-flex mt-5 cursor-pointer" onClick={() => history.push({ pathname: `/book/${book._id}`, state: { book } })}>
-            <div className="position-relative">
-                <img src={book.bookImage} alt="" width="150px" />
-                <span class="position-absolute top-0 start-0 translate-middle badge rounded-circle bg-danger p-2">
-                    20% <br /> off
-                    <span class="visually-hidden">discount</span>
-                </span>
-            </div>
+            <BookImage book={book} width="150px" height="" />
+
             <div className="ps-4 d-flex flex-column">
                 <p className="fw-bold">
                     {

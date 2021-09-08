@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { faBook, faHome, faShoppingCart, faSignInAlt, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faColumns, faHome, faShoppingCart, faSignInAlt, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -108,6 +108,7 @@ const FirstNavigation = () => {
                                             }
                                         </a>
                                         <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
+                                            <li className="nav-item" ><NavLink exact className="nav-link text-dark" to={`/userdashboard/${user.username}`} ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
                                             <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
                                         </ul>
                                     </li>

@@ -1,28 +1,34 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, useRouteMatch, Redirect, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, useRouteMatch } from 'react-router-dom';
 import CartPage from '../CartPage/CartPage';
+import UserDashboardSidebar from './UserDashboardSidebar';
 
 const UserDashboardMain = () => {
     const { path, url } = useRouteMatch()
 
-    // useEffect(() => {
-    //     if (path==="/userdashboard/:username/cart") {
-    //         history.push
-    //     }
-    // }, [path]);
+
 
     return (
         <Router>
-            <div>
-                <Link to={`${url}/cart`}>Cart</Link>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-2">
+                        <UserDashboardSidebar url={url} />
+                    </div>
+                    <div className="col-10 ">
+                        <div className="border-start">
+                            <Switch>
+                                {/* Cart Page */}
+                                <Route exact path={`${path}/cart`}>
+                                    <CartPage />
+                                </Route>
+                            </Switch>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <Switch>
-                {/* Cart Page */}
-                <Route exact path={`${path}/cart`}>
-                    <CartPage />
-                </Route>
-            </Switch>
-
+            {/* Footer */}
+            {/* <Footer /> */}
         </Router>
     );
 }
