@@ -8,8 +8,7 @@ const BooksSidebar = ({ recentlyViewed }) => {
     const { books } = useSelector(state => state.books)
     const [similarBooks, setSimilarBooks] = useState([]);
 
-    const { bookId } = useParams()
-
+    let { bookId } = useParams()
     useEffect(() => {
         const currentBook = books.find(book => book._id === bookId)
         setSimilarBooks(books.filter(book => (

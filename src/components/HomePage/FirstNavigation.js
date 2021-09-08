@@ -93,7 +93,7 @@ const FirstNavigation = () => {
                             isAuth
                                 ? <>
                                     <li class="nav-item me-4">
-                                        <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to={`/cart`}><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                        <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to={`/userdashboard/${user.username}/cart`}><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
                                             {cartCount}
                                         </span></NavLink>
                                     </li>

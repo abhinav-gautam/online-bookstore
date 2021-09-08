@@ -16,7 +16,11 @@ router.use((req, res, next) => {
 router.post("/addItem", verifyToken, asyncHandler(async (req, res) => {
     const { book } = req.body
     const username = req.username
-    await cart.insertOne({ username, book })
+    if (await cart.findOne({ username })) {
+        await cart.update({ username }, { $push: { cart: book } })
+    } else {
+        await cart.insertOne({ username, cart: [book] })
+    }
     res.status(201).json({
         status: "success",
         message: "item added"
@@ -29,7 +33,7 @@ router.get("/getItems", verifyToken, asyncHandler(async (req, res) => {
     const items = await cart.find({ username }).toArray()
     res.status(200).json({
         status: "success",
-        items
+        items: items[0].cart
     })
 }))
 
@@ -37,7 +41,7 @@ router.get("/getItems", verifyToken, asyncHandler(async (req, res) => {
 router.post("/removeItem", verifyToken, asyncHandler(async (req, res) => {
     const { book } = req.body
     const username = req.username
-    await cart.deleteOne({ username, book })
+    await cart.update({ username }, { $pull: { cart: book } })
     res.status(200).json({
         status: "success",
         message: "item deleted"

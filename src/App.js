@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router";
+import { Route, Switch } from "react-router-dom";
 import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
-import CartPage from "./components/CartPage/CartPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import HomePage from "./components/HomePage/HomePage";
 import Login from "./components/LoginPage/Login";
 import Register from "./components/RegisterPage/Register";
 import SearchPage from "./components/SearchPage/SearchPage";
+import UserDashboardMain from "./components/UserDashboard/UserDashboardMain";
 import { getAuthors } from "./redux/authorsSlice";
 import { getBooks } from "./redux/booksSlice";
 import { loadCart } from "./redux/cartSlice";
@@ -22,6 +23,7 @@ function App() {
   const { user, isAuth } = useSelector(state => state.user)
 
   const dispatch = useDispatch()
+
 
   // Loading categories from db 
   useEffect(() => {
@@ -81,10 +83,11 @@ function App() {
         <Route exact path="/register">
           <Register />
         </Route>
-        {/* Cart Page */}
-        <Route exact path="/cart">
-          <CartPage />
+        {/* Userdashboard */}
+        <Route path="/userdashboard/:username">
+          <UserDashboardMain />
         </Route>
+
       </Switch>
 
 

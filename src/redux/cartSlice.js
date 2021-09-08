@@ -22,6 +22,7 @@ export const loadCart = createAsyncThunk("loadCart", (async (_, thunkAPI) => {
             Authorization: `Bearer ${token}`
         }
     })
+    console.log(data);
     if (data.status === "success") {
         return data
     } else {
@@ -81,7 +82,7 @@ const cartSlice = createSlice({
         },
         [loadCart.fulfilled]: (state, action) => {
             state.isCartLoading = false
-            state.cartItems = action.payload.items.map(item => item.book)
+            state.cartItems = action.payload.items
             state.cartCount = action.payload.items.length
         },
         [loadCart.rejected]: (state, action) => {
