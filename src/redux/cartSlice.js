@@ -28,16 +28,7 @@ export const loadCart = createAsyncThunk("loadCart", (async (_, thunkAPI) => {
         return thunkAPI.rejectWithValue(data)
     }
 }))
-/*
-itemIndex:{
-    item:{
-        book:{},
-        quantity:3
-    },
-    index:2
-}
 
-*/
 export const removeCartItem = createAsyncThunk("removeCartItem", (async (itemIndex, thunkAPI) => {
     const token = localStorage.getItem("token")
     const { data } = await axios.post("http://localhost:4000/cart/removeItem", { book: itemIndex.item.book }, {
@@ -78,6 +69,9 @@ const cartSlice = createSlice({
         resetCart: state => {
             state = initialCartState
             return state
+        },
+        setCartUsername: (state, action) => {
+            state.username = action.payload
         }
     },
     extraReducers: {
@@ -101,8 +95,10 @@ const cartSlice = createSlice({
             state.cartError = ""
         },
         [loadCart.fulfilled]: (state, action) => {
+            console.log(action.payload);
             state.isCartLoading = false
             state.cartItems = action.payload.items
+            state.username = action.payload.username
         },
         [loadCart.rejected]: (state, action) => {
             state.isCartLoading = false
@@ -127,18 +123,6 @@ const cartSlice = createSlice({
             state.isCartLoading = true
             state.cartError = ""
         },
-        /*
-        cartItems= [
-            {
-            book:{},
-            quantity:2
-        },{}
-        ]
-        action.payload = {
-            book:{},
-            quantity:2
-        }
-        */
         [updateItemQty.fulfilled]: (state, action) => {
             state.isCartLoading = false
             state.cartItems
@@ -152,5 +136,5 @@ const cartSlice = createSlice({
         },
     }
 })
-export const { resetCart } = cartSlice.actions
+export const { resetCart, setCartUsername } = cartSlice.actions
 export default cartSlice.reducer

@@ -1,6 +1,6 @@
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import { removeCartItem, updateItemQty } from '../../redux/cartSlice';
@@ -14,9 +14,8 @@ const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {
     const handleRemoveCartItem = (itemIndex) => {
         dispatch(removeCartItem(itemIndex))
     }
-    /*
-    newCart = [{book:{},quantity:5},{}]
-    */
+    // Decrease the quantity only if its greater than 1 
+    // else completey removing the item from the cart
     const decQty = ({ item, index }) => {
         let newCart = JSON.parse(JSON.stringify(cartItems))
         if (newCart[index].quantity === 1) {
@@ -26,6 +25,7 @@ const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {
             dispatch(updateItemQty(newCart[index]))
         }
     }
+    // Increasing the quantity 
     const incQty = (index) => {
         let newCart = JSON.parse(JSON.stringify(cartItems))
         newCart[index].quantity++

@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink, } from 'react-router-dom';
 
 const UserDashboardSidebar = ({ url }) => {
-    console.log(url);
     // Active link style
     const activeLinkStyle = {
         fontWeight: "bold",

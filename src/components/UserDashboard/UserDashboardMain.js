@@ -1,13 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
 import CartPage from '../CartPage/CartPage';
 import ProfilePage from './ProfilePage';
 import UserDashboardSidebar from './UserDashboardSidebar';
 
 const UserDashboardMain = () => {
     const { path, url } = useRouteMatch()
-
-
 
     return (
         <Router>
@@ -34,6 +32,7 @@ const UserDashboardMain = () => {
             </div>
             {/* Footer */}
             {/* <Footer /> */}
+            <Redirect to={`${url}/profile`} />
         </Router>
     );
 }

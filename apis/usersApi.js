@@ -1,8 +1,11 @@
 const express = require("express")
 const asyncHandler = require("express-async-handler")
 const bcrypt = require("bcryptjs")
+const verifyToken = require("./middlewares/verifyToken");
+const multerObj = require("./middlewares/saveImage")
 const jwt = require("jsonwebtoken")
 const CryptoJS = require("crypto-js")
+const ObjectId = require("mongodb").ObjectId
 
 const router = express.Router()
 
@@ -57,6 +60,40 @@ router.post("/login", asyncHandler(async (req, res) => {
         status: "success",
         token: signedToken,
         user: userAlreadyExists
+    })
+}))
+
+// Update User
+router.put("/update", verifyToken, multerObj.single("profilePicture"), asyncHandler(async (req, res) => {
+    // Decrypting the user
+    let user = JSON.parse(CryptoJS.AES.decrypt(req.body.user, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+    // Setting the profile picture if exists
+    if (req.file) {
+        user.profilePicture = req.file.path
+    }
+    // Checking if username is changed
+    if (user.username !== user.cartUsername) {
+        // Checking if username already exists
+        const userDb = await users.findOne({ username: user.username })
+        if (userDb) {
+            throw new Error("username not available")
+        }
+        // If username is available changing the username in cart collection
+        await req.app.get("cart").updateOne({ username: user.cartUsername }, { $set: { username: user.username } })
+    }
+    // Getting the user id in var and deleting it from the obj for updation
+    const userId = user._id
+    delete user._id
+    delete user.cartUsername
+    await users.updateOne({ _id: new ObjectId(userId) }, { $set: user })
+    // Again adding the user id
+    user._id = userId
+    // Encrypting the user
+    user = CryptoJS.AES.encrypt(JSON.stringify(user), process.env.REACT_APP_SECRET_CRYPTO).toString()
+    res.status(201).json({
+        status: "success",
+        message: "user updated",
+        user
     })
 }))
 
