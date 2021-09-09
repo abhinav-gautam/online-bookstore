@@ -5,31 +5,40 @@ import CartSummary from './CartSummary';
 import HomeCart from './HomeCart';
 
 const CartPage = () => {
-    const { cartItems, cartCount, isCartLoading } = useSelector(state => state.cart)
+    const { cartItems, isCartLoading } = useSelector(state => state.cart)
     const [cartSummary, setCartSummary] = useState({});
+    const [totalItems, setTotalItems] = useState(0);
 
     useEffect(() => {
-        const deliveryCharge = cartCount * 40
+        if (cartItems.length) {
+            setTotalItems(cartItems.map(item => +item.quantity).reduce((total, current) => total += current))
+        }
+    }, [cartItems]);
+
+    // Calculating cart summary
+    useEffect(() => {
+        const uniqueItems = cartItems.length
+        const deliveryCharge = totalItems * 40
         let netTotal = 0
-        if (cartCount) {
-            netTotal = cartItems.map(item => +item.price).reduce((total, current) => total += current) + deliveryCharge
+        if (uniqueItems) {
+            netTotal = cartItems.map(item => +item.book.price * item.quantity).reduce((total, current) => total += current) + deliveryCharge
         }
         const totalDiscount = netTotal * .20
         const grossTotal = netTotal + totalDiscount
         console.log(grossTotal);
         setCartSummary({ totalDiscount, netTotal, grossTotal, deliveryCharge })
-    }, [cartCount]);
+    }, [cartItems, totalItems]);
     return (
         <>
             <div className="container-fluid top-margin-150">
                 <div className="row mt-5">
                     <div className="col-12 col-md-6 ps-5">
                         <HomeCart
-                            cartItems={cartItems} cartCount={cartCount}
+                            cartItems={cartItems} totalItems={totalItems}
                             isCartLoading={isCartLoading} cartSummary={cartSummary} />
                     </div>
                     <div className="col-12 col-md-6 ps-5">
-                        <CartSummary cartSummary={cartSummary} cartCount={cartCount} />
+                        <CartSummary cartSummary={cartSummary} totalItems={totalItems} />
                     </div>
                 </div>
             </div>

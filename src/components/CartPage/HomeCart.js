@@ -1,30 +1,47 @@
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
-import { removeCartItem } from '../../redux/cartSlice';
+import { removeCartItem, updateItemQty } from '../../redux/cartSlice';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 
-const HomeCart = ({ cartItems, cartCount, isCartLoading, cartSummary }) => {
+const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {
 
     const { path } = useRouteMatch()
     const dispatch = useDispatch()
 
-    const handleRemoveCartItem = (item) => {
-        dispatch(removeCartItem(item))
+    const handleRemoveCartItem = (itemIndex) => {
+        dispatch(removeCartItem(itemIndex))
+    }
+    /*
+    newCart = [{book:{},quantity:5},{}]
+    */
+    const decQty = ({ item, index }) => {
+        let newCart = JSON.parse(JSON.stringify(cartItems))
+        if (newCart[index].quantity === 1) {
+            dispatch(removeCartItem({ item, index }))
+        } else {
+            newCart[index].quantity--
+            dispatch(updateItemQty(newCart[index]))
+        }
+    }
+    const incQty = (index) => {
+        let newCart = JSON.parse(JSON.stringify(cartItems))
+        newCart[index].quantity++
+        dispatch(updateItemQty(newCart[index]))
     }
 
     return (
         <div className={path === "/userdashboard/:username/cart" ? "" : " width-450"}>
             <div className="d-flex justify-content-between align-items-center mb-3 h4">
                 <span className="text-dark">Your cart</span>
-                <span className="badge bg-secondary rounded-circle">{cartCount}</span>
+                <span className="badge bg-secondary rounded-circle">{totalItems}</span>
             </div>
 
             <ul className={path === "/userdashboard/:username/cart" ? "list-group list-group-scroll-cart mb-3" : "list-group list-group-scroll mb-3"}>
                 {
-                    !cartCount
+                    !totalItems
                         ? <>
                             {
                                 isCartLoading
@@ -43,22 +60,33 @@ const HomeCart = ({ cartItems, cartCount, isCartLoading, cartSummary }) => {
                                         <div className="row">
                                             <div className="col-10 d-flex">
                                                 <div>
-                                                    <img src={item.bookImage} alt="" width="100px" height="130px" />
+                                                    <img src={item.book.bookImage} alt="" width="150px" height="210px" />
                                                 </div>
                                                 <div className="ps-4">
-                                                    <h6 className="fw-bold fs-5">{item.bookTitle}</h6>
+                                                    <h6 className="fw-bold fs-5">{item.book.bookTitle}</h6>
                                                     <div className="d-flex mt-3">
                                                         <div className="pe-5">
-                                                            <p><strong>Author:</strong> {item.author}</p>
-                                                            <p><strong>Publisher:</strong> {item.publisher}</p>
+                                                            <p><strong>Author:</strong> {item.book.author}</p>
+                                                            <p><strong>Publisher:</strong> {item.book.publisher}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="d-flex align-items-center">
+                                                        <div><strong>Quantity:</strong></div>
+                                                        <div className="input-group input-group-sm input-group-custom ms-4">
+                                                            <div className="input-group-text cursor-pointer" onClick={() => decQty({ item, index })}>-</div>
+                                                            <input type="text" className="form-control text-center" placeholder="Qty" value={item.quantity} />
+                                                            <div className="input-group-text cursor-pointer" onClick={() => incQty(index)}>+</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="col-2">
                                                 <div className="d-flex flex-column align-items-end">
+                                                    <div className="text-muted">
+                                                        <small> {item.quantity} X Rs. {item.book.price}=</small>
+                                                    </div>
                                                     <div className="fw-bold text-danger">
-                                                        Rs. {item.price}
+                                                        Rs. {item.quantity * item.book.price}
                                                     </div>
                                                     <div onClick={() => handleRemoveCartItem({ item, index })} className="text-muted cursor-pointer"><FontAwesomeIcon icon={faTrashAlt} /></div>
                                                 </div>
@@ -69,10 +97,9 @@ const HomeCart = ({ cartItems, cartCount, isCartLoading, cartSummary }) => {
                                     </li>
                                 ))
                             }
-                            <li className="list-group-item d-flex justify-content-between ">
-                                <span>Total </span>
-                                <strong>Rs. {(cartSummary.netTotal - cartSummary.deliveryCharge)}
-                                </strong>
+                            <li className="list-group-item d-flex justify-content-between fw-bold">
+                                <span>Total <small className="text-muted fst-italic">({totalItems} items)</small></span>
+                                Rs. {(cartSummary.netTotal - cartSummary.deliveryCharge)}
                             </li>
                         </>
                 }

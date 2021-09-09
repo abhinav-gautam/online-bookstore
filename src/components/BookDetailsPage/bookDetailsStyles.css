@@ -1,0 +1,6 @@
+.input-group-custom {
+    width: 120px;
+}
+.input-group-custom input {
+    box-shadow: none !important;
+}

@@ -35,7 +35,7 @@ const BookCard = ({ book }) => {
                     {
                         isAuth &&
                         <div className="btn-group">
-                            <button className="btn btn-sm btn-danger " onClick={() => dispatch(addItemToCart(book))}>Add to Cart <FontAwesomeIcon icon={faCartPlus} /></button>
+                            <button className="btn btn-sm btn-danger " onClick={() => dispatch(addItemToCart({ book, quantity: 1 }))}>Add to Cart <FontAwesomeIcon icon={faCartPlus} /></button>
                             <button className="btn btn-sm btn-secondary">Add to Wishlist <FontAwesomeIcon icon={faClipboardList} /></button>
                         </div>
                     }

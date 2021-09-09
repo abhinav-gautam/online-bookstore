@@ -1,11 +1,11 @@
 import React from 'react';
 
-const CartSummary = ({ cartCount, cartSummary }) => {
+const CartSummary = ({ totalItems, cartSummary }) => {
     return (
         <div>
             <span className="h4 text-dark">Cart Summary</span>
             {
-                cartCount
+                totalItems
                     ? <>
                         <ul className="list-group mt-3">
 
@@ -16,15 +16,15 @@ const CartSummary = ({ cartCount, cartSummary }) => {
                                 </div>
                             </li>
                             <li className="list-group-item">
-                                <div className="row fw-bold text-success">
-                                    <div className="col-9">Total Discount</div>
-                                    <div className="col-3">- Rs. {cartSummary.totalDiscount?.toFixed(2)}</div>
+                                <div className="row fw-bold text-danger">
+                                    <div className="col-9">Delivery Charge <small className="text-muted fst-italic">({totalItems} items)</small></div>
+                                    <div className="col-3">+ Rs. {cartSummary.deliveryCharge?.toFixed(2)}</div>
                                 </div>
                             </li>
                             <li className="list-group-item">
-                                <div className="row fw-bold text-danger">
-                                    <div className="col-9">Delivery Charge</div>
-                                    <div className="col-3">+ Rs. {cartSummary.deliveryCharge?.toFixed(2)}</div>
+                                <div className="row fw-bold text-success">
+                                    <div className="col-9">Total Discount</div>
+                                    <div className="col-3">- Rs. {cartSummary.totalDiscount?.toFixed(2)}</div>
                                 </div>
                             </li>
                         </ul>

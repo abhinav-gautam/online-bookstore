@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { faBook, faColumns, faHome, faShoppingCart, faSignInAlt, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -17,7 +17,15 @@ const FirstNavigation = () => {
 
     const { categories, isCategoryLoading, categoryError } = useSelector(state => state.category)
     const { user, isAuth } = useSelector(state => state.user)
-    const { cartCount } = useSelector(state => state.cart)
+    const { cartItems } = useSelector(state => state.cart)
+    const [totalItems, setTotalItems] = useState(0);
+
+    useEffect(() => {
+        if (cartItems.length) {
+            setTotalItems(cartItems.map(item => +item.quantity).reduce((total, current) => total += current))
+        }
+    }, [cartItems]);
+
 
     const { register, handleSubmit, reset } = useForm();
 
@@ -93,8 +101,8 @@ const FirstNavigation = () => {
                             isAuth
                                 ? <>
                                     <li class="nav-item me-4">
-                                        <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to={`/userdashboard/${user.username}/cart`}><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
-                                            {cartCount}
+                                        <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to="/userdashboard/cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                            {totalItems}
                                         </span></NavLink>
                                     </li>
                                     <li class="nav-item dropdown me-5">
@@ -108,7 +116,7 @@ const FirstNavigation = () => {
                                             }
                                         </a>
                                         <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
-                                            <li className="nav-item" ><NavLink exact className="nav-link text-dark" to={`/userdashboard/${user.username}`} ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
+                                            <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard" ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
                                             <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
                                         </ul>
                                     </li>

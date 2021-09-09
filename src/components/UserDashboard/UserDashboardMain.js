@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch } from 'react-router-dom';
 import CartPage from '../CartPage/CartPage';
+import ProfilePage from './ProfilePage';
 import UserDashboardSidebar from './UserDashboardSidebar';
 
 const UserDashboardMain = () => {
@@ -21,6 +22,10 @@ const UserDashboardMain = () => {
                                 {/* Cart Page */}
                                 <Route exact path={`${path}/cart`}>
                                     <CartPage />
+                                </Route>
+                                {/* Profile Page */}
+                                <Route exact path={`${path}/profile`}>
+                                    <ProfilePage />
                                 </Route>
                             </Switch>
                         </div>

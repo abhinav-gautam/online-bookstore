@@ -84,7 +84,7 @@ function App() {
           <Register />
         </Route>
         {/* Userdashboard */}
-        <Route path="/userdashboard/:username">
+        <Route path="/userdashboard">
           <UserDashboardMain />
         </Route>
 
