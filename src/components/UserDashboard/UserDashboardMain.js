@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch, Redirect, useLocation } from 'react-router-dom';
 import CartPage from '../CartPage/CartPage';
+import WishlistPage from '../WishlistPage/WishlistPage';
 import ProfilePage from './ProfilePage';
 import UserDashboardSidebar from './UserDashboardSidebar';
 
@@ -27,9 +28,7 @@ const UserDashboardMain = () => {
                                 </Route>
                                 {/* Wishlist Page */}
                                 <Route exact path={`${path}/wishlist`}>
-                                    <div>
-                                        Wish List Page
-                                    </div>
+                                    <WishlistPage />
                                 </Route>
                             </Switch>
                         </div>

@@ -18,7 +18,7 @@ const BookDetails = ({ book }) => {
                     <div className="ps-5 mt-5">
                         <BookTitleDetails book={book} />
                     </div>
-                    <div className="ps-5">
+                    <div className="ps-5 mt-5">
                         {
                             isAuth &&
                             <AvailabilityDetails book={book} />

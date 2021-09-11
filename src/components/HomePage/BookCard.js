@@ -4,9 +4,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { addItemToCart } from '../../redux/cartReducers';
+import { addItemToWishlist } from '../../redux/wishlistReducers';
 
 const BookCard = ({ book }) => {
     const dispatch = useDispatch()
+    const { wishlistItems } = useSelector(state => state.wishlist)
     const history = useHistory()
     const { isAuth } = useSelector(state => state.user)
     return (
@@ -36,7 +38,7 @@ const BookCard = ({ book }) => {
                         isAuth &&
                         <div className="btn-group">
                             <button className="btn btn-sm btn-danger " onClick={() => dispatch(addItemToCart({ book, quantity: 1 }))}>Add to Cart <FontAwesomeIcon icon={faCartPlus} /></button>
-                            <button className="btn btn-sm btn-secondary">Add to Wishlist <FontAwesomeIcon icon={faClipboardList} /></button>
+                            <button className="btn btn-sm btn-secondary" onClick={() => !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>Add to Wishlist <FontAwesomeIcon icon={faClipboardList} /></button>
                         </div>
                     }
 

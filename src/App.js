@@ -14,11 +14,13 @@ import { getAuthors } from "./redux/authorsReducers";
 import { getBooks } from "./redux/booksReducers";
 import { loadCart } from "./redux/cartReducers";
 import { getCategories } from "./redux/categoryReducers";
+import { loadWishlist } from "./redux/wishlistReducers";
 
 function App() {
   const { books } = useSelector(state => state.books)
   const { authors } = useSelector(state => state.authors)
   const { cartItems } = useSelector(state => state.cart)
+  const { wishlistItems } = useSelector(state => state.wishlist)
   const { categories } = useSelector(state => state.category)
   const { user, isAuth } = useSelector(state => state.user)
 
@@ -50,6 +52,13 @@ function App() {
   useEffect(() => {
     if (!cartItems.length && isAuth) {
       dispatch(loadCart())
+    }
+  }, [user])
+
+  // Loading wishlist from db
+  useEffect(() => {
+    if (!wishlistItems.length && isAuth) {
+      dispatch(loadWishlist())
     }
   }, [user])
 

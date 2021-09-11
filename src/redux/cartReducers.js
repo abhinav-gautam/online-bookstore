@@ -1,15 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 
-export const addItemToCart = createAsyncThunk("addItemToCart", (async (bookQty, thunkAPI) => {
+export const addItemToCart = createAsyncThunk("addItemToCart", (async ({ book, quantity }, thunkAPI) => {
     const token = localStorage.getItem("token")
-    const { data } = await axios.post("http://localhost:4000/cart/addItem", { book: bookQty.book, quantity: bookQty.quantity }, {
+    const { data } = await axios.post("http://localhost:4000/cart/addItem", { book, quantity }, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
     if (data.status === "success") {
-        return thunkAPI.fulfillWithValue(bookQty)
+        return thunkAPI.fulfillWithValue({ book, quantity })
     } else {
         return thunkAPI.rejectWithValue(data)
     }
@@ -29,29 +29,29 @@ export const loadCart = createAsyncThunk("loadCart", (async (_, thunkAPI) => {
     }
 }))
 
-export const removeCartItem = createAsyncThunk("removeCartItem", (async (itemIndex, thunkAPI) => {
+export const removeCartItem = createAsyncThunk("removeCartItem", (async ({ item, index }, thunkAPI) => {
     const token = localStorage.getItem("token")
-    const { data } = await axios.post("http://localhost:4000/cart/removeItem", { book: itemIndex.item.book }, {
+    const { data } = await axios.post("http://localhost:4000/cart/removeItem", { book: item.book }, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
     if (data.status === "success") {
-        return thunkAPI.fulfillWithValue(itemIndex.index)
+        return thunkAPI.fulfillWithValue(index)
     } else {
         return thunkAPI.rejectWithValue(data)
     }
 }))
 
-export const updateItemQty = createAsyncThunk("updateItemQty", (async (bookQty, thunkAPI) => {
+export const updateItemQty = createAsyncThunk("updateItemQty", (async ({ book, quantity }, thunkAPI) => {
     const token = localStorage.getItem("token")
-    const { data } = await axios.post("http://localhost:4000/cart/updateQty", { book: bookQty.book, quantity: bookQty.quantity }, {
+    const { data } = await axios.post("http://localhost:4000/cart/updateQty", { book, quantity }, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
     if (data.status === "success") {
-        return thunkAPI.fulfillWithValue(bookQty)
+        return thunkAPI.fulfillWithValue({ book, quantity })
     } else {
         return thunkAPI.rejectWithValue(data)
     }

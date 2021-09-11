@@ -39,7 +39,6 @@ const cartSlice = createSlice({
             state.cartError = ""
         },
         [loadCart.fulfilled]: (state, action) => {
-            console.log(action.payload);
             state.isCartLoading = false
             state.cartItems = action.payload.items
             state.cartUsername = action.payload.cartUsername

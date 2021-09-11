@@ -46,7 +46,7 @@ router.get("/getItems", verifyToken, asyncHandler(async (req, res) => {
     res.status(200).json({
         status: "success",
         items: items.cart,
-        username: items.username
+        cartUsername: items.username
     })
 }))
 
@@ -71,8 +71,5 @@ router.post("/updateQty", verifyToken, asyncHandler(async (req, res) => {
         message: "quantity updated"
     })
 }))
-
-
-
 
 module.exports = router

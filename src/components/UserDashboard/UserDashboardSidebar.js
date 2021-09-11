@@ -7,6 +7,7 @@ import { NavLink, } from 'react-router-dom';
 const UserDashboardSidebar = ({ url }) => {
     const [totalItems, setTotalItems] = useState(0);
     const { cartItems } = useSelector(state => state.cart)
+    const { wishlistItems } = useSelector(state => state.wishlist)
 
     useEffect(() => {
         if (cartItems.length) {
@@ -49,7 +50,12 @@ const UserDashboardSidebar = ({ url }) => {
                             className="nav-link text-dark text-wrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/wishlist`}>
-                            <FontAwesomeIcon icon={faClipboard} /> Wishlist
+                            <span className="position-relative pt-2">
+                                <FontAwesomeIcon icon={faClipboard} /> Wishlist
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                    {wishlistItems.length}
+                                </span>
+                            </span>
                         </NavLink>
                     </li>
                 </ul>
