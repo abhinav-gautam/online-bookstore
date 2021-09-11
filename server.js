@@ -1,11 +1,12 @@
 const express = require("express")
 const morgan = require("morgan")
+const mongoClient = require("mongodb").MongoClient
 const booksApi = require("./apis/booksApi")
 const categoryApi = require("./apis/categoryApi")
 const authorsApi = require("./apis/authorsApi")
 const usersApi = require("./apis/usersApi")
 const cartApi = require("./apis/cartApi")
-const mongoClient = require("mongodb").MongoClient
+const wishlistApi = require("./apis/wishlistApi")
 const cors = require("cors")
 require("dotenv").config()
 
@@ -38,11 +39,13 @@ const DATABASE_URL = process.env.DATABASE_URL;
     const authors = onlineBookstoreDb.collection("authorsCollection")
     const cart = onlineBookstoreDb.collection("cartCollection")
     const users = onlineBookstoreDb.collection("usersCollection")
+    const wishlist = onlineBookstoreDb.collection("wishlistCollection")
 
     // Set to app object
     app.set("books", books)
     app.set("category", category)
     app.set("authors", authors)
+    app.set("wishlist", wishlist)
     app.set("users", users)
     app.set("cart", cart)
 
@@ -55,6 +58,7 @@ app.use("/category", categoryApi)
 app.use("/authors", authorsApi)
 app.use("/cart", cartApi)
 app.use("/users", usersApi)
+app.use("/wishlist", wishlistApi)
 
 // Error Handler Route
 app.use((err, req, res, next) => {

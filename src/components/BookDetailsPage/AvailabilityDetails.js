@@ -2,7 +2,7 @@ import { faCartPlus, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../../redux/cartSlice';
+import { addItemToCart } from '../../redux/cartReducers';
 import "./bookDetailsStyles.css"
 
 const AvailabilityDetails = ({ book }) => {

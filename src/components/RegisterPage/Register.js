@@ -10,7 +10,7 @@ import CryptoJS from 'crypto-js';
 import bcrypt from 'bcryptjs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { userLogin } from '../../redux/userSlice';
+import { userLogin } from '../../redux/userReducers';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();

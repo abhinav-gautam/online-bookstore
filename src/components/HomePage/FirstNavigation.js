@@ -116,7 +116,7 @@ const FirstNavigation = () => {
                                             }
                                         </a>
                                         <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
-                                            <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard" ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
+                                            <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard/profile" ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
                                             <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
                                         </ul>
                                     </li>

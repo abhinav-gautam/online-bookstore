@@ -10,10 +10,10 @@ import Login from "./components/LoginPage/Login";
 import Register from "./components/RegisterPage/Register";
 import SearchPage from "./components/SearchPage/SearchPage";
 import UserDashboardMain from "./components/UserDashboard/UserDashboardMain";
-import { getAuthors } from "./redux/authorsSlice";
-import { getBooks } from "./redux/booksSlice";
-import { loadCart } from "./redux/cartSlice";
-import { getCategories } from "./redux/categorySlice";
+import { getAuthors } from "./redux/authorsReducers";
+import { getBooks } from "./redux/booksReducers";
+import { loadCart } from "./redux/cartReducers";
+import { getCategories } from "./redux/categoryReducers";
 
 function App() {
   const { books } = useSelector(state => state.books)
@@ -87,7 +87,6 @@ function App() {
         <Route path="/userdashboard">
           <UserDashboardMain />
         </Route>
-
       </Switch>
 
 

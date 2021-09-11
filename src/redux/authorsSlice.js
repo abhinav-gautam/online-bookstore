@@ -1,15 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-// Get all authors
-export const getAuthors = createAsyncThunk("getAuthors", async (_, thunkAPI) => {
-    const { data } = await axios.get("http://localhost:4000/authors/")
-    if (data.status === "success") {
-        return data.payload
-    } else {
-        return thunkAPI.rejectWithValue(data)
-    }
-})
+import { createSlice } from '@reduxjs/toolkit';
+import { getAuthors } from './authorsReducers';
 
 const initialAuthorsState = {
     authors: [], isAuthorsLoading: false, authorsError: "",

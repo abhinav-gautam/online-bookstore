@@ -1,7 +1,19 @@
-import React from 'react';
+import { faClipboard, faShoppingCart, faUserCog } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink, } from 'react-router-dom';
 
 const UserDashboardSidebar = ({ url }) => {
+    const [totalItems, setTotalItems] = useState(0);
+    const { cartItems } = useSelector(state => state.cart)
+
+    useEffect(() => {
+        if (cartItems.length) {
+            setTotalItems(cartItems.map(item => +item.quantity).reduce((total, current) => total += current))
+        }
+    }, [cartItems]);
+
     // Active link style
     const activeLinkStyle = {
         fontWeight: "bold",
@@ -16,7 +28,7 @@ const UserDashboardSidebar = ({ url }) => {
                             className="nav-link text-dark text-wrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/profile`}>
-                            Profile
+                            <FontAwesomeIcon icon={faUserCog} /> Profile
                         </NavLink>
                     </li>
                     <li className="dropdown-item">
@@ -24,7 +36,12 @@ const UserDashboardSidebar = ({ url }) => {
                             className="nav-link text-dark text-wrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/cart`}>
-                            Cart
+                            <span className="position-relative pt-2">
+                                <FontAwesomeIcon icon={faShoppingCart} /> Cart
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                    {totalItems}
+                                </span>
+                            </span>
                         </NavLink>
                     </li>
                     <li className="dropdown-item">
@@ -32,7 +49,7 @@ const UserDashboardSidebar = ({ url }) => {
                             className="nav-link text-dark text-wrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/wishlist`}>
-                            Wishlist
+                            <FontAwesomeIcon icon={faClipboard} /> Wishlist
                         </NavLink>
                     </li>
                 </ul>

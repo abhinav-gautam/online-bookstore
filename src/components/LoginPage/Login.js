@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { userLogin } from '../../redux/userSlice';
+import { userLogin } from '../../redux/userReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import "./loginStyles.css";
 import CryptoJS from 'crypto-js';

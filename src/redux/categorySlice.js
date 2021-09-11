@@ -1,15 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from "axios"
-
-// Get All Categories
-export const getCategories = createAsyncThunk("getCategories", (async (_, thunkAPI) => {
-    const { data } = await axios.get("http://localhost:4000/category/")
-    if (data.status === "success") {
-        return data.payload
-    } else {
-        return thunkAPI.rejectWithValue(data)
-    }
-}))
+import { createSlice } from '@reduxjs/toolkit';
+import { getCategories } from './categoryReducers';
 
 // Initial State
 const initialCategoryState = {

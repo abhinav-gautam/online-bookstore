@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
-import { removeCartItem, updateItemQty } from '../../redux/cartSlice';
+import { removeCartItem, updateItemQty } from '../../redux/cartReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 
 const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {

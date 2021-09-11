@@ -25,7 +25,6 @@ const CartPage = () => {
         }
         const totalDiscount = netTotal * .20
         const grossTotal = netTotal + totalDiscount
-        console.log(grossTotal);
         setCartSummary({ totalDiscount, netTotal, grossTotal, deliveryCharge })
     }, [cartItems, totalItems]);
     return (

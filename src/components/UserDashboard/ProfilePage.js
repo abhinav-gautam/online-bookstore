@@ -6,14 +6,16 @@ import ProfileSidebar from './ProfileSidebar';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import CryptoJS from 'crypto-js';
-import { updateUser } from '../../redux/userSlice';
+import { updateUser } from '../../redux/userReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import { setCartUsername } from '../../redux/cartSlice';
 
 const ProfilePage = () => {
     const { user, userErrors, isUserLoading } = useSelector(state => state.user)
-    const { username } = useSelector(state => state.cart)
+    const { cartUsername } = useSelector(state => state.cart)
+
     const [file, setFile] = useState(null);
+
     const { register, handleSubmit } = useForm({
         defaultValues: {
             name: user.name,
@@ -22,10 +24,11 @@ const ProfilePage = () => {
             phone: user.phone
         }
     })
+
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (user.username !== username) {
+        if (user.username !== cartUsername) {
             dispatch(setCartUsername(user.username))
         }
     }, [user.username]);
@@ -36,14 +39,14 @@ const ProfilePage = () => {
 
         // Appending image to it
         if (file) {
-            console.log(file);
             formData.append("profilePicture", file, file.name)
         }
 
         // Appending productObj
         userEdited._id = user._id
-        userEdited.cartUsername = username
+        userEdited.cartUsername = cartUsername
         userEdited = CryptoJS.AES.encrypt(JSON.stringify(userEdited), process.env.REACT_APP_SECRET_CRYPTO).toString()
+
         formData.append("user", userEdited)
 
         dispatch(updateUser(formData))

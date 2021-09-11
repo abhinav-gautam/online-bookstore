@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useRouteMatch, Redirect, useLocation } from 'react-router-dom';
 import CartPage from '../CartPage/CartPage';
 import ProfilePage from './ProfilePage';
 import UserDashboardSidebar from './UserDashboardSidebar';
@@ -25,6 +25,12 @@ const UserDashboardMain = () => {
                                 <Route exact path={`${path}/profile`}>
                                     <ProfilePage />
                                 </Route>
+                                {/* Wishlist Page */}
+                                <Route exact path={`${path}/wishlist`}>
+                                    <div>
+                                        Wish List Page
+                                    </div>
+                                </Route>
                             </Switch>
                         </div>
                     </div>
@@ -32,7 +38,7 @@ const UserDashboardMain = () => {
             </div>
             {/* Footer */}
             {/* <Footer /> */}
-            <Redirect to={`${url}/profile`} />
+
         </Router>
     );
 }
