@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { userLogin } from '../../redux/userReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import "./loginStyles.css";
-import CryptoJS from 'crypto-js';
+import { encrypt } from '../Helpers/encryption';
 // import { setError } from '../redux/errorSlice';
 
 const Login = () => {
@@ -20,7 +20,7 @@ const Login = () => {
 
     // Function to handle login form submit
     const onLoginFormSubmit = (user) => {
-        user = CryptoJS.AES.encrypt(JSON.stringify(user), process.env.REACT_APP_SECRET_CRYPTO).toString()
+        user = encrypt(user)
         dispatch(userLogin({ user }))
     }
 

@@ -43,13 +43,11 @@ const userSlice = createSlice({
             state.isUserLoading = true
         },
         [updateUser.fulfilled]: (state, action) => {
-            console.log("fulfil", action.payload);
             state.user = { ...state.user, ...action.payload }
             state.isUserLoading = false
             state.userErrors = ""
         },
         [updateUser.rejected]: (state, action) => {
-            console.log("rejected", action.payload);
             state.isUserLoading = false
             state.userErrors = action.payload.message
         },

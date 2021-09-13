@@ -6,11 +6,11 @@ import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
-import CryptoJS from 'crypto-js';
 import bcrypt from 'bcryptjs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../redux/userReducers';
+import { encrypt } from '../Helpers/encryption';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -47,13 +47,13 @@ const Register = () => {
 
         const normalUsername = user.username
         // Encrypting password
-        user = CryptoJS.AES.encrypt(JSON.stringify(user), process.env.REACT_APP_SECRET_CRYPTO).toString()
+        user = encrypt(user)
         // Making post request to API
         setIsLoading(true)
         const { data } = await axios.post("http://localhost:4000/users/register", { user })
         if (data.status === "success") {
             setIsLoading(false)
-            const loginUser = CryptoJS.AES.encrypt(JSON.stringify({ username: normalUsername, password: normalPassword }), process.env.REACT_APP_SECRET_CRYPTO).toString()
+            const loginUser = encrypt({ username: normalUsername, password: normalPassword })
             dispatch(userLogin({ user: loginUser }))
             // history.push("/")
         } else {

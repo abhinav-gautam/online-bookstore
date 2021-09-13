@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import CryptoJS from 'crypto-js';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import bcrypt from 'bcryptjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../redux/userReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
+import { encrypt } from '../Helpers/encryption';
 
 const ChangePasswordModal = ({ show, setShow }) => {
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -23,7 +23,7 @@ const ChangePasswordModal = ({ show, setShow }) => {
             // Creating a new user object
             let newUser = { oldPassword, newPassword, username: user.username }
             // Encrypting the user obj
-            newUser = CryptoJS.AES.encrypt(JSON.stringify(newUser), process.env.REACT_APP_SECRET_CRYPTO).toString()
+            newUser = encrypt(newUser)
             // Adding encrypted new user to the form data
             formData.append("user", newUser)
             // Dispatching update user action

@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import ProfileSidebar from './ProfileSidebar';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import CryptoJS from 'crypto-js';
 import { updateUser } from '../../redux/userReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import { setCartUsername } from '../../redux/cartSlice';
+import { encrypt } from '../Helpers/encryption';
 
 const ProfilePage = () => {
     const { user, userErrors, isUserLoading } = useSelector(state => state.user)
@@ -50,7 +50,7 @@ const ProfilePage = () => {
         // Appending productObj
         userEdited._id = user._id
         userEdited.cartUsername = cartUsername
-        userEdited = CryptoJS.AES.encrypt(JSON.stringify(userEdited), process.env.REACT_APP_SECRET_CRYPTO).toString()
+        userEdited = encrypt(userEdited)
 
         formData.append("user", userEdited)
 

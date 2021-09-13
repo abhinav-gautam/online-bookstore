@@ -1,6 +1,6 @@
-import CryptoJS from 'crypto-js';
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
+import { decrypt } from '../components/Helpers/encryption';
 
 // User Login
 export const userLogin = createAsyncThunk("loginUser", async (userCreds, thunkAPI) => {
@@ -8,7 +8,7 @@ export const userLogin = createAsyncThunk("loginUser", async (userCreds, thunkAP
     if (data.status === "success") {
         localStorage.setItem("token", data.token)
         localStorage.setItem("user", data.user)
-        const decryptedUser = JSON.parse(CryptoJS.AES.decrypt(data.user, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+        const decryptedUser = decrypt(data.user)
         return decryptedUser
     } else if (data.status === "failed") {
         return thunkAPI.rejectWithValue(data)
@@ -23,9 +23,8 @@ export const updateUser = createAsyncThunk("updateuser", async (formData, thunkA
             Authorization: `Bearer ${token}`
         }
     })
-    console.log(data);
     if (data.status === "success") {
-        const decryptedUser = JSON.parse(CryptoJS.AES.decrypt(data.user, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+        const decryptedUser = decrypt(data.user)
         return decryptedUser
     } else {
         return thunkAPI.rejectWithValue(data)

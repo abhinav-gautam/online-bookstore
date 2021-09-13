@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs")
 const verifyToken = require("./middlewares/verifyToken");
 const multerObj = require("./middlewares/saveImage")
 const jwt = require("jsonwebtoken")
-const CryptoJS = require("crypto-js")
-const ObjectId = require("mongodb").ObjectId
+const ObjectId = require("mongodb").ObjectId;
+const { decrypt, encrypt } = require("../helpers/encryption");
 
 const router = express.Router()
 
@@ -21,7 +21,7 @@ router.use((req, res, next) => {
 router.post("/register", asyncHandler(async (req, res) => {
     let newUser = req.body
     // Decrypting the user object
-    newUser = JSON.parse(CryptoJS.AES.decrypt(newUser.user, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+    newUser = decrypt(newUser.user)
     // Checking if username already exists
     const userAlreadyExists = await users.findOne({ username: newUser.username })
     if (userAlreadyExists) {
@@ -39,7 +39,7 @@ router.post("/register", asyncHandler(async (req, res) => {
 router.post("/login", asyncHandler(async (req, res) => {
     let userCred = req.body
     // Decrypting the user object
-    userCred = JSON.parse(CryptoJS.AES.decrypt(userCred.user, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+    userCred = decrypt(userCred.user)
     // Authenticating username
     let userAlreadyExists = await users.findOne({ username: userCred.username })
     if (!userAlreadyExists) {
@@ -53,7 +53,7 @@ router.post("/login", asyncHandler(async (req, res) => {
     // Deleting the password from the user
     delete userAlreadyExists.password
     // Encrypting the user
-    userAlreadyExists = CryptoJS.AES.encrypt(JSON.stringify(userAlreadyExists), process.env.REACT_APP_SECRET_CRYPTO).toString()
+    userAlreadyExists = encrypt(userAlreadyExists)
     // Generating token
     const signedToken = jwt.sign({ username: userCred.username }, process.env.SECRET_JWT, { expiresIn: "10d" })
     res.status(200).json({
@@ -66,7 +66,7 @@ router.post("/login", asyncHandler(async (req, res) => {
 // Update User
 router.put("/update", verifyToken, multerObj.single("profilePicture"), asyncHandler(async (req, res) => {
     // Decrypting the user
-    let user = JSON.parse(CryptoJS.AES.decrypt(req.body.user, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+    let user = decrypt(req.body.user)
     // Setting the profile picture if exists
     if (req.file) {
         user.profilePicture = req.file.path
@@ -84,7 +84,7 @@ router.put("/update", verifyToken, multerObj.single("profilePicture"), asyncHand
         await users.updateOne({ username: user.username }, { $set: { password: user.newPassword } })
         // Deleting the password from the user
         delete userDb.password
-        userDb = CryptoJS.AES.encrypt(JSON.stringify(userDb), process.env.REACT_APP_SECRET_CRYPTO).toString()
+        userDb = encrypt(userDb)
         return res.status(200).json({
             status: "success",
             message: "password updated",
@@ -109,7 +109,7 @@ router.put("/update", verifyToken, multerObj.single("profilePicture"), asyncHand
     // Again adding the user id
     user._id = userId
     // Encrypting the user
-    user = CryptoJS.AES.encrypt(JSON.stringify(user), process.env.REACT_APP_SECRET_CRYPTO).toString()
+    user = encrypt(user)
     res.status(201).json({
         status: "success",
         message: "user updated",

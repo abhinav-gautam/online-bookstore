@@ -37,7 +37,6 @@ router.get("/getItems", verifyToken, asyncHandler(async (req, res) => {
 // Remove item from the wishlist collection
 router.post("/removeItem", verifyToken, asyncHandler(async (req, res) => {
     const { book } = req.body
-    console.log(book);
     const username = req.username
     await wishlist.updateOne({ username }, { $pull: { wishlist: book } })
     res.status(200).json({
