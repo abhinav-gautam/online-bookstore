@@ -71,6 +71,26 @@ router.put("/update", verifyToken, multerObj.single("profilePicture"), asyncHand
     if (req.file) {
         user.profilePicture = req.file.path
     }
+    // Checking if request is for password change
+    if (user.newPassword) {
+        // Get the user with the username
+        let userDb = await users.findOne({ username: user.username })
+        // Checking if old password is correct
+        const isOldPasswordOk = bcrypt.compareSync(user.oldPassword, userDb.password)
+        if (!isOldPasswordOk) {
+            throw new Error("invalid old password")
+        }
+        // Updating the password
+        await users.updateOne({ username: user.username }, { $set: { password: user.newPassword } })
+        // Deleting the password from the user
+        delete userDb.password
+        userDb = CryptoJS.AES.encrypt(JSON.stringify(userDb), process.env.REACT_APP_SECRET_CRYPTO).toString()
+        return res.status(200).json({
+            status: "success",
+            message: "password updated",
+            user: userDb
+        })
+    }
     // Checking if username is changed
     if (user.username !== user.cartUsername) {
         // Checking if username already exists

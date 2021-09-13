@@ -23,6 +23,7 @@ export const updateUser = createAsyncThunk("updateuser", async (formData, thunkA
             Authorization: `Bearer ${token}`
         }
     })
+    console.log(data);
     if (data.status === "success") {
         const decryptedUser = JSON.parse(CryptoJS.AES.decrypt(data.user, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
         return decryptedUser

@@ -14,9 +14,13 @@ const ProfilePage = () => {
     const { user, userErrors, isUserLoading } = useSelector(state => state.user)
     const { cartUsername } = useSelector(state => state.cart)
 
+    const dispatch = useDispatch()
+    const [show, setShow] = useState(false);
+
     const [file, setFile] = useState(null);
 
-    const { register, handleSubmit } = useForm({
+    // Useform hook with form pre-population
+    const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             name: user.name,
             username: user.username,
@@ -25,14 +29,15 @@ const ProfilePage = () => {
         }
     })
 
-    const dispatch = useDispatch()
 
+    // Cascade username update in cart and wishlist collection 
     useEffect(() => {
         if (user.username !== cartUsername) {
             dispatch(setCartUsername(user.username))
         }
     }, [user.username]);
 
+    // Custom form submit handler
     const updateFormSubmit = userEdited => {
         // Creating formData object
         const formData = new FormData()
@@ -127,11 +132,12 @@ const ProfilePage = () => {
                                     </div>
 
                                 </div>
-                                {userErrors && <p className="alert alert-danger w-25 text-center mx-auto py-2 mt-2">{userErrors}</p>}
+                                {errors.name?.type === "required" && <p className="alert alert-danger w-25 text-center mx-auto py-2 mt-2">Name is required</p>}
+                                {errors.username?.type === "required" && <p className="alert alert-danger w-25 text-center mx-auto py-2 mt-2">Username is required</p>}
+                                {errors.email?.type === "required" && <p className="alert alert-danger w-25 text-center mx-auto py-2 mt-2">Email is required</p>}
+                                {userErrors && !show && <p className="alert alert-danger w-25 text-center mx-auto py-2 mt-2">{userErrors}</p>}
                                 <div className="text-center mt-4 mb-5">
-                                    {
-                                        isUserLoading && <LoadingSpinner message=" Saving Changes..." />
-                                    }
+                                    {isUserLoading && !show && <LoadingSpinner message=" Saving Changes..." />}
                                     <button className="btn btn-danger mt-3" type="submit">Save</button>
                                     <button className="btn btn-secondary mt-3 ms-4">Reset</button>
                                 </div>
@@ -139,7 +145,7 @@ const ProfilePage = () => {
                         </div>
                     </div>
                     <div className="col-12 col-md-4">
-                        <ProfileSidebar />
+                        <ProfileSidebar show={show} setShow={setShow} />
                     </div>
                 </div>
             </div>
