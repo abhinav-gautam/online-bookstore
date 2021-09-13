@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,7 +34,6 @@ const Login = () => {
                 history.push(`/admindashboard/${user.username}`)
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuth]);
 
     return (
