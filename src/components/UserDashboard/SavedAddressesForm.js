@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addAddress, updateAddress } from '../../redux/userReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 
-const SavedAddressesForm = ({ updateIndex, setShow }) => {
+const SavedAddressesForm = ({ updateIndex, setShow, setUpdateIndex }) => {
     const { user, isUserLoading } = useSelector(state => state.user)
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -16,9 +16,10 @@ const SavedAddressesForm = ({ updateIndex, setShow }) => {
         const userAddress = { username: user.username, address: newAddress }
 
         // Updating an Address
-        if (updateAddress) {
+        if (updateIndex >= 0) {
             userAddress.index = updateIndex
             dispatch(updateAddress(userAddress))
+            setUpdateIndex(-1)
             return setShow(false)
         }
 

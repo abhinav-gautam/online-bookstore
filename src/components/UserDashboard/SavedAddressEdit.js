@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import SavedAddressesForm from './SavedAddressesForm';
 
-const SavedAddressEdit = ({ show, setShow, updateIndex }) => {
+const SavedAddressEdit = ({ show, setShow, updateIndex, setUpdateIndex }) => {
 
     return (
         <Modal
@@ -14,10 +14,10 @@ const SavedAddressEdit = ({ show, setShow, updateIndex }) => {
             centered
         >
             <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
+                <Modal.Title>Edit Address</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <SavedAddressesForm updateIndex={updateIndex} setShow={setShow} />
+                <SavedAddressesForm updateIndex={updateIndex} setUpdateIndex={setUpdateIndex} setShow={setShow} />
             </Modal.Body>
         </Modal>
     );

@@ -26,7 +26,8 @@ const cartSlice = createSlice({
         },
         [addItemToCart.fulfilled]: (state, action) => {
             state.isCartLoading = false
-            state.cartItems.push(action.payload)
+            const index = state.cartItems.findIndex(bookQty => JSON.stringify(bookQty.book) === JSON.stringify(action.payload.book))
+            index >= 0 ? state.cartItems[index]["quantity"] += action.payload.quantity : state.cartItems.push(action.payload)
         },
         [addItemToCart.rejected]: (state, action) => {
             state.isCartLoading = false

@@ -18,14 +18,9 @@ const EditProfile = ({ show }) => {
 
     // Useform hook with form pre-population
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        defaultValues: {
-            name: user.name,
-            username: user.username,
-            email: user.email,
-            phone: user.phone
-        }
+        defaultValues: { ...user }
     })
-
+    console.log(errors);
 
     // Cascade username update in cart and wishlist collection 
     useEffect(() => {

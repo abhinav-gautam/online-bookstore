@@ -24,6 +24,9 @@ const FirstNavigation = () => {
         if (cartItems.length) {
             setTotalItems(cartItems.map(item => +item.quantity).reduce((total, current) => total += current))
         }
+        if (!cartItems.length) {
+            setTotalItems(0)
+        }
     }, [cartItems]);
 
 

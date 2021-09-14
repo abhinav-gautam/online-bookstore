@@ -16,7 +16,7 @@ const SavedAddresses = () => {
             <p className="h4 mt-4">Add New Address</p>
             <SavedAddressesForm />
             {/* Saved Address Edit Modal */}
-            <SavedAddressEdit show={show} setShow={setShow} updateIndex={updateIndex} />
+            <SavedAddressEdit show={show} setShow={setShow} setUpdateIndex={setUpdateIndex} updateIndex={updateIndex} />
         </div>
     );
 }
