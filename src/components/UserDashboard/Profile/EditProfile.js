@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { setCartUsername } from '../../redux/cartSlice';
-import defaultProfilePic from "../../media/defaultProfilePic.png"
+import { setCartUsername } from '../../../redux/cartSlice';
+import defaultProfilePic from "../../../media/defaultProfilePic.png"
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { encrypt } from '../Helpers/encryption';
-import { updateUser } from '../../redux/userReducers';
-import LoadingSpinner from '../Helpers/LoadingSpinner';
+import { encrypt } from '../../Helpers/encryption';
+import { updateUser } from '../../../redux/userReducers';
+import LoadingSpinner from '../../Helpers/LoadingSpinner';
 
 const EditProfile = ({ show }) => {
     const { user, userErrors, isUserLoading } = useSelector(state => state.user)

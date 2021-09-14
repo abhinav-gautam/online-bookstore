@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { deleteAddress } from '../../redux/userReducers';
-import LoadingSpinner from '../Helpers/LoadingSpinner';
+import { deleteAddress } from '../../../redux/userReducers';
+import LoadingSpinner from '../../Helpers/LoadingSpinner';
 
 const SavedAddressesTable = ({ setShow, setUpdateIndex }) => {
     const { user, isUserLoading } = useSelector(state => state.user)

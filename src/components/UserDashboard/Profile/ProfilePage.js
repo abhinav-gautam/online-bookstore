@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SavedAddresses from '../SavedAddresses/SavedAddresses';
 import EditProfile from './EditProfile';
 import ProfileSidebar from './ProfileSidebar';
-import SavedAddresses from './SavedAddresses';
 
 const ProfilePage = () => {
     const { user } = useSelector(state => state.user)

@@ -3,9 +3,9 @@ import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import bcrypt from 'bcryptjs';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from '../../redux/userReducers';
-import LoadingSpinner from '../Helpers/LoadingSpinner';
-import { encrypt } from '../Helpers/encryption';
+import { updateUser } from '../../../redux/userReducers';
+import LoadingSpinner from '../../Helpers/LoadingSpinner';
+import { encrypt } from '../../Helpers/encryption';
 
 const ChangePasswordModal = ({ show, setShow }) => {
     const { register, handleSubmit, formState: { errors } } = useForm()

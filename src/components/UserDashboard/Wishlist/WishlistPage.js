@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
-import AvailabilityDetails from '../BookDetailsPage/AvailabilityDetails';
-import BookImage from '../BookDetailsPage/BookImage';
-import BookTitleDetails from '../BookDetailsPage/BookTitleDetails';
-import LoadingSpinner from '../Helpers/LoadingSpinner';
+import AvailabilityDetails from '../../BookDetailsPage/AvailabilityDetails';
+import BookImage from '../../BookDetailsPage/BookImage';
+import BookTitleDetails from '../../BookDetailsPage/BookTitleDetails';
+import LoadingSpinner from '../../Helpers/LoadingSpinner';
 
 const WishlistPage = () => {
 

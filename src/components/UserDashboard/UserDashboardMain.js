@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch } from 'react-router-dom';
 import CartPage from '../CartPage/CartPage';
-import WishlistPage from '../WishlistPage/WishlistPage';
-import ProfilePage from './ProfilePage';
+import ProfilePage from './Profile/ProfilePage';
 import UserDashboardSidebar from './UserDashboardSidebar';
+import WishlistPage from './Wishlist/WishlistPage';
 
 const UserDashboardMain = () => {
     const { path, url } = useRouteMatch()

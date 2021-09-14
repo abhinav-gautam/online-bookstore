@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch } from 'react-router-dom';
-import ProfilePage from '../UserDashboard/ProfilePage';
+import ProfilePage from '../UserDashboard/Profile/ProfilePage';
 import AdminDashboardSidebar from './AdminDashboardSidebar';
 import CategoriesPage from './Categories/CategoriesPage';
 

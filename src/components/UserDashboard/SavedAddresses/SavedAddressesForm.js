@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAddress, updateAddress } from '../../redux/userReducers';
-import LoadingSpinner from '../Helpers/LoadingSpinner';
+import { addAddress, updateAddress } from '../../../redux/userReducers';
+import LoadingSpinner from '../../Helpers/LoadingSpinner';
 
 const SavedAddressesForm = ({ updateIndex, setShow, setUpdateIndex }) => {
     const { user, isUserLoading } = useSelector(state => state.user)
