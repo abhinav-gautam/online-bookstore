@@ -30,3 +30,48 @@ export const updateUser = createAsyncThunk("updateuser", async (formData, thunkA
         return thunkAPI.rejectWithValue(data)
     }
 })
+
+// Add address
+export const addAddress = createAsyncThunk("addAddress", async (user, thunkAPI) => {
+    const token = localStorage.getItem("token")
+    const { data } = await axios.post("http://localhost:4000/users/addAddress", user, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return thunkAPI.fulfillWithValue(user.address)
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})
+
+// Delete address
+export const deleteAddress = createAsyncThunk("deleteAddress", async ({ user, index }, thunkAPI) => {
+    const token = localStorage.getItem("token")
+    const { data } = await axios.post("http://localhost:4000/users/deleteAddress", user, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return thunkAPI.fulfillWithValue(index)
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})
+
+// Delete address
+export const updateAddress = createAsyncThunk("updateAddress", async (user, thunkAPI) => {
+    const token = localStorage.getItem("token")
+    const { data } = await axios.post("http://localhost:4000/users/updateAddress", user, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return thunkAPI.fulfillWithValue(user)
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})

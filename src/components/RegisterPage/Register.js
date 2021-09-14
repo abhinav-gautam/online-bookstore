@@ -37,8 +37,9 @@ const Register = () => {
 
     // Function to handle register form submit
     const onRegisterFormSubmit = async (user) => {
-        // Specifying user role
+        // Specifying user role and an empty address array
         user.role = "user"
+        user.addresses = []
 
         // Generating hash for password
         const normalPassword = user.password

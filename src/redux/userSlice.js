@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateUser, userLogin } from './userReducers';
+import { addAddress, deleteAddress, updateAddress, updateUser, userLogin } from './userReducers';
 
 const initialUserState = {
     user: {}, isAuth: false,
@@ -48,6 +48,46 @@ const userSlice = createSlice({
             state.userErrors = ""
         },
         [updateUser.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Add Address
+        [addAddress.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [addAddress.fulfilled]: (state, action) => {
+            state.isUserLoading = false
+            state.user.addresses.push(action.payload)
+        },
+        [addAddress.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Delete Address
+        [deleteAddress.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [deleteAddress.fulfilled]: (state, action) => {
+            state.isUserLoading = false
+            state.user.addresses.splice(action.payload, 1)
+        },
+        [deleteAddress.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Update Address
+        [updateAddress.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [updateAddress.fulfilled]: (state, action) => {
+            console.log(action.payload);
+            state.isUserLoading = false
+            state.user.addresses.splice(action.payload.index, 1, action.payload.address)
+        },
+        [updateAddress.rejected]: (state, action) => {
             state.isUserLoading = false
             state.userErrors = action.payload.message
         },

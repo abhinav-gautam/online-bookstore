@@ -117,4 +117,33 @@ router.put("/update", verifyToken, multerObj.single("profilePicture"), asyncHand
     })
 }))
 
+// Add address
+router.post("/addAddress", verifyToken, asyncHandler(async (req, res) => {
+    const user = req.body
+    await users.updateOne({ username: user.username }, { $addToSet: { addresses: user.address } }, { upsert: true })
+    res.status(200).json({
+        status: "success",
+        message: "address added"
+    })
+}))
+
+// Delete Address
+router.post("/deleteAddress", verifyToken, asyncHandler(async (req, res) => {
+    const user = req.body
+    await users.updateOne({ username: user.username }, { $pull: { addresses: user.address } })
+    res.status(200).json({
+        status: "success",
+        message: "address deleted"
+    })
+}))
+
+// Update Address 
+router.post("/updateAddress", verifyToken, asyncHandler(async (req, res) => {
+    const user = req.body
+    await users.updateOne({ username: user.username }, { $set: { [`addresses.${user.index}`]: user.address } })
+    res.status(200).json({
+        status: "success",
+        message: "address updated"
+    })
+}))
 module.exports = router
