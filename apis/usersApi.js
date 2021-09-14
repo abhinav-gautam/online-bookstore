@@ -146,4 +146,34 @@ router.post("/updateAddress", verifyToken, asyncHandler(async (req, res) => {
         message: "address updated"
     })
 }))
+
+// Add Card
+router.post("/addCard", verifyToken, asyncHandler(async (req, res) => {
+    const user = req.body
+    await users.updateOne({ username: user.username }, { $addToSet: { cards: user.card } }, { upsert: true })
+    res.status(200).json({
+        status: "success",
+        message: "card added"
+    })
+}))
+
+// Delete Card
+router.post("/deleteCard", verifyToken, asyncHandler(async (req, res) => {
+    const user = req.body
+    await users.updateOne({ username: user.username }, { $pull: { cards: user.card } })
+    res.status(200).json({
+        status: "success",
+        message: "card deleted"
+    })
+}))
+
+// Update Card 
+router.post("/updateCard", verifyToken, asyncHandler(async (req, res) => {
+    const user = decrypt(req.body)
+    await users.updateOne({ username: user.username }, { $set: { [`cards.${user.index}`]: user.card } })
+    res.status(200).json({
+        status: "success",
+        message: "card updated"
+    })
+}))
 module.exports = router

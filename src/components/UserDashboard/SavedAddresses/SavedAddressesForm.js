@@ -26,6 +26,7 @@ const SavedAddressesForm = ({ updateIndex, setShow, setUpdateIndex }) => {
         // Adding a new Address
         if (!JSON.stringify(user.addresses).includes(JSON.stringify(newAddress))) {
             dispatch(addAddress(userAddress))
+            reset()
         }
     }
     return (

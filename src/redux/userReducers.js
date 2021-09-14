@@ -75,3 +75,48 @@ export const updateAddress = createAsyncThunk("updateAddress", async (user, thun
         return thunkAPI.rejectWithValue(data)
     }
 })
+
+// Add Card
+export const addCard = createAsyncThunk("addCard", async (user, thunkAPI) => {
+    const token = localStorage.getItem("token")
+    const { data } = await axios.post("http://localhost:4000/users/addCard", user, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return thunkAPI.fulfillWithValue(user.card)
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})
+
+// Delete Card
+export const deleteCard = createAsyncThunk("deleteCard", async ({ user, index }, thunkAPI) => {
+    const token = localStorage.getItem("token")
+    const { data } = await axios.post("http://localhost:4000/users/deleteCard", user, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return thunkAPI.fulfillWithValue(index)
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})
+
+// Update Card
+export const updateCard = createAsyncThunk("updateCard", async (user, thunkAPI) => {
+    const token = localStorage.getItem("token")
+    const { data } = await axios.post("http://localhost:4000/users/updateCard", user, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return thunkAPI.fulfillWithValue(user)
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})

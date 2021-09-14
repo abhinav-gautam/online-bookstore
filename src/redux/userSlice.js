@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addAddress, deleteAddress, updateAddress, updateUser, userLogin } from './userReducers';
+import { addAddress, addCard, deleteAddress, deleteCard, updateAddress, updateCard, updateUser, userLogin } from './userReducers';
 
 const initialUserState = {
     user: {}, isAuth: false,
@@ -88,6 +88,46 @@ const userSlice = createSlice({
             state.user.addresses.splice(action.payload.index, 1, action.payload.address)
         },
         [updateAddress.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Add Card
+        [addCard.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [addCard.fulfilled]: (state, action) => {
+            state.isUserLoading = false
+            state.user.cards.push(action.payload)
+        },
+        [addCard.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Delete Card
+        [deleteCard.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [deleteCard.fulfilled]: (state, action) => {
+            state.isUserLoading = false
+            state.user.cards.splice(action.payload, 1)
+        },
+        [deleteCard.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Update Card
+        [updateCard.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [updateCard.fulfilled]: (state, action) => {
+            console.log(action.payload);
+            state.isUserLoading = false
+            state.user.cards.splice(action.payload.index, 1, action.payload.card)
+        },
+        [updateCard.rejected]: (state, action) => {
             state.isUserLoading = false
             state.userErrors = action.payload.message
         },

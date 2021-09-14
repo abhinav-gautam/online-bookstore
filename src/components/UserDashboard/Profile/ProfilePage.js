@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SavedAddresses from '../SavedAddresses/SavedAddresses';
+import SavedCards from '../SavedCards/SavedCards';
 import EditProfile from './EditProfile';
 import ProfileSidebar from './ProfileSidebar';
 
@@ -34,7 +35,7 @@ const ProfilePage = () => {
                             </Route>
                             {/* Saved Credit Cards */}
                             <Route exact path={`${path}/cards`}>
-                                Saved Cards
+                                <SavedCards />
                             </Route>
                         </Switch>
                     </div>

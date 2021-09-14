@@ -14,7 +14,7 @@ const ProfileSidebar = ({ show, setShow, url }) => {
                     user.role === "user"
                         ? <>
                             <p><Link className="cursor-pointer text-decoration-none text-danger" to={`${url}/addresses`}>Manage Saved Addresses</Link></p>
-                            <p><Link className="cursor-pointer text-decoration-none text-danger" to={`${url}/cards`}>Manage Saved Credit Cards</Link></p>
+                            <p><Link className="cursor-pointer text-decoration-none text-danger" to={`${url}/cards`}>Manage Saved Cards</Link></p>
                             <p className="cursor-pointer" onClick={() => setShow(true)}>Change Password</p>
                             <p><Link className="cursor-pointer text-decoration-none text-danger" to={`${url}`}>Edit Profile</Link></p>
                         </>

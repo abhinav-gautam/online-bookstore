@@ -1,9 +1,15 @@
 import CryptoJS from 'crypto-js';
 
 export const encrypt = plainObject => {
-    return CryptoJS.AES.encrypt(JSON.stringify(plainObject), process.env.REACT_APP_SECRET_CRYPTO).toString()
+    if (plainObject) {
+        return CryptoJS.AES.encrypt(JSON.stringify(plainObject), process.env.REACT_APP_SECRET_CRYPTO).toString()
+    }
+    return
 }
 
 export const decrypt = cipherText => {
-    return JSON.parse(CryptoJS.AES.decrypt(cipherText, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+    if (cipherText) {
+        return JSON.parse(CryptoJS.AES.decrypt(cipherText, process.env.REACT_APP_SECRET_CRYPTO).toString(CryptoJS.enc.Utf8))
+    }
+    return
 }
