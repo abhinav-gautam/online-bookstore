@@ -1,45 +1,37 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, useRouteMatch } from 'react-router-dom';
-import CartPage from '../CartPage/CartPage';
-import WishlistPage from '../WishlistPage/WishlistPage';
-import ProfilePage from './ProfilePage';
-import UserDashboardSidebar from './UserDashboardSidebar';
+import ProfilePage from '../UserDashboard/ProfilePage';
+import AdminDashboardSidebar from './AdminDashboardSidebar';
 
-const UserDashboardMain = () => {
+const AdminDashboardMain = () => {
     const { path, url } = useRouteMatch()
-
     return (
         <Router>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-2">
-                        <UserDashboardSidebar url={url} />
+                        <AdminDashboardSidebar url={url} />
                     </div>
                     <div className="col-10 ">
                         <div className="border-start">
                             <Switch>
-                                {/* Cart Page */}
+                                {/* Books Module */}
                                 <Route exact path={`${path}/cart`}>
-                                    <CartPage />
                                 </Route>
-                                {/* Profile Page */}
+                                {/* Category Module */}
                                 <Route exact path={`${path}/profile`}>
                                     <ProfilePage />
                                 </Route>
-                                {/* Wishlist Page */}
+                                {/* User Module*/}
                                 <Route exact path={`${path}/wishlist`}>
-                                    <WishlistPage />
                                 </Route>
                             </Switch>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* Footer */}
-            {/* <Footer /> */}
-
         </Router>
     );
 }
 
-export default UserDashboardMain;
+export default AdminDashboardMain;

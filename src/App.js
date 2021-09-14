@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
+import AdminDashboardMain from "./components/AdminDashboard/AdminDashboardMain";
 import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
@@ -95,6 +96,10 @@ function App() {
         {/* Userdashboard */}
         <Route path="/userdashboard">
           <UserDashboardMain />
+        </Route>
+        {/* Amdindashboard */}
+        <Route path="/admindashboard">
+          <AdminDashboardMain />
         </Route>
       </Switch>
 

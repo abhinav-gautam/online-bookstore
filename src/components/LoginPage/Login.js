@@ -31,7 +31,7 @@ const Login = () => {
             if (user.role === "user") {
                 history.push(`/`)
             } else {
-                history.push(`/admindashboard/${user.username}`)
+                history.push(`/admindashboard/profile`)
             }
         }
     }, [isAuth]);

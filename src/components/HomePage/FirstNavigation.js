@@ -63,16 +63,19 @@ const FirstNavigation = () => {
             </div>
 
             {/* Search bar */}
-            <div className="w-25">
-                <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
-                    <input
-                        className="form-control me-2"
-                        type="search" name="searchQuery"
-                        placeholder="Search by Title, Author, Publisher or ISBN"
-                        {...register("searchQuery", { required: true })} />
-                    <button className="btn btn-outline-danger" type="submit">Search</button>
-                </form>
-            </div>
+            {
+                user.role === "user" &&
+                <div className="w-25">
+                    <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
+                        <input
+                            className="form-control me-2"
+                            type="search" name="searchQuery"
+                            placeholder="Search by Title, Author, Publisher or ISBN"
+                            {...register("searchQuery", { required: true })} />
+                        <button className="btn btn-outline-danger" type="submit">Search</button>
+                    </form>
+                </div>
+            }
 
             {/* Right options */}
             <div className="">
@@ -84,32 +87,43 @@ const FirstNavigation = () => {
                 {/* Nav */}
                 <div className="collapse navbar-collapse" id="menu">
                     <ul className="navbar-nav justify-content-evenly align-items-center ms-auto me-5">
-                        <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className="nav-link" to="/"><FontAwesomeIcon icon={faHome} /> Home</NavLink></li>
-                        {/* Categories Dropdown */}
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <FontAwesomeIcon icon={faBook} /> Categories
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {
-                                    categories.length
-                                        ? categories.map(category => (
-                                            <CategoryItem category={category} />
-                                        ))
-                                        : isCategoryLoading && <li><a className="dropdown-item" href="#"><LoadingSpinner message=" Loading Categories" /></a></li>
-                                }
-                            </ul>
-                        </li>
+                        {user.role !== "admin" &&
+                            <>
+                                <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className="nav-link" to="/"><FontAwesomeIcon icon={faHome} /> Home</NavLink></li>
+                                {/* Category */}
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <FontAwesomeIcon icon={faBook} /> Categories
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        {
+                                            categories.length
+                                                ? categories.map(category => (
+                                                    <CategoryItem category={category} />
+                                                ))
+                                                : isCategoryLoading && <li><a className="dropdown-item" href="#"><LoadingSpinner message=" Loading Categories" /></a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            </>
+                        }
                         {
                             isAuth
                                 ? <>
-                                    <li class="nav-item me-4">
-                                        <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to="/userdashboard/cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
-                                            {totalItems}
-                                        </span></NavLink>
-                                    </li>
+                                    {
+                                        user.role === "user" &&
+                                        <li class="nav-item me-4">
+                                            <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to="/userdashboard/cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                                {totalItems}
+                                            </span></NavLink>
+                                        </li>
+                                    }
+
                                     <li class="nav-item dropdown me-5">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {
+                                                user.name + " "
+                                            }
                                             {
                                                 user.profilePicture
                                                     ?
@@ -119,7 +133,10 @@ const FirstNavigation = () => {
                                             }
                                         </a>
                                         <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
-                                            <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard/profile" ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
+                                            {
+                                                user.role === "user" &&
+                                                <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard/profile" ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
+                                            }
                                             <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
                                         </ul>
                                     </li>

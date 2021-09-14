@@ -16,7 +16,13 @@ const ProfilePage = () => {
             <div className="container-fluid top-margin-150 ">
                 <div className="row mt-5">
                     <div className="col-12 col-md-8 ps-5 border-end">
-                        <p className="h3">Welcome {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                        {
+                            user.role === "user"
+                                ?
+                                <p className="h3">Welcome {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                                :
+                                <p className="h3">Welcome to Admin Dashboard, {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                        }
                         <Switch>
                             {/* Edit Profile */}
                             <Route exact path={path}>
