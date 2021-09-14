@@ -61,7 +61,7 @@ export const deleteAddress = createAsyncThunk("deleteAddress", async ({ user, in
     }
 })
 
-// Delete address
+// Update address
 export const updateAddress = createAsyncThunk("updateAddress", async (user, thunkAPI) => {
     const token = localStorage.getItem("token")
     const { data } = await axios.post("http://localhost:4000/users/updateAddress", user, {

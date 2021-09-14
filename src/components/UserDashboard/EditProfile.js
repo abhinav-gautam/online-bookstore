@@ -20,7 +20,6 @@ const EditProfile = ({ show }) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: { ...user }
     })
-    console.log(errors);
 
     // Cascade username update in cart and wishlist collection 
     useEffect(() => {

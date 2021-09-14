@@ -44,7 +44,7 @@ const AdminDashboardSidebar = ({ url }) => {
                         <NavLink exact
                             className="nav-link text-dark text-wrap"
                             activeStyle={activeLinkStyle}
-                            to={`${url}/wishlist`}>
+                            to={`${url}/category`}>
                             <span className="position-relative pt-2">
                                 <FontAwesomeIcon icon={faBorderAll} />  Categories
                             </span>
