@@ -44,7 +44,7 @@ const CartSummary = ({ totalItems, cartSummary }) => {
                                 </div>
                             </li>
                         </ul>
-                        <button class="btn btn-danger mt-3 btn-lg w-100" type="submit">Continue to checkout</button>
+                        <button className="btn btn-danger mt-3 btn-lg w-100" type="submit">Continue to checkout</button>
                     </>
                     : <li className="list-group-item d-flex justify-content-between mt-3">
                         <div>

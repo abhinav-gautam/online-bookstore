@@ -112,15 +112,15 @@ const FirstNavigation = () => {
                                 ? <>
                                     {
                                         user.role === "user" &&
-                                        <li class="nav-item me-4">
-                                            <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to="/userdashboard/cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                        <li className="nav-item me-4">
+                                            <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to="/userdashboard/cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
                                                 {totalItems}
                                             </span></NavLink>
                                         </li>
                                     }
 
-                                    <li class="nav-item dropdown me-5">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <li className="nav-item dropdown me-5">
+                                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             {
                                                 user.name + " "
                                             }
@@ -132,7 +132,7 @@ const FirstNavigation = () => {
                                                     <img src={defaultProfilePic} className="border border-dark rounded-circle" width="50px" alt="" />
                                             }
                                         </a>
-                                        <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
+                                        <ul className="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
                                             {
                                                 user.role === "user" &&
                                                 <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard/profile" ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>

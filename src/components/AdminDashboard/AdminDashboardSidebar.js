@@ -22,7 +22,7 @@ const AdminDashboardSidebar = ({ url }) => {
                         </NavLink>
                     </li>
                     <li className="">
-                        <button class="btn btn-link shadow-none text-dark text-decoration-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBooks" >
+                        <button className="btn btn-link shadow-none text-dark text-decoration-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBooks" >
                             <FontAwesomeIcon icon={faBook} /> Books
                         </button>
                     </li>

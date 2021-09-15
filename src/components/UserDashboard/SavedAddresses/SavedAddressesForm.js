@@ -35,97 +35,97 @@ const SavedAddressesForm = ({ updateIndex, setShow, setUpdateIndex }) => {
                 <div className="row">
                     <div className="col-6">
                         {/* Full Name */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="fullName"
                                 {...register("fullName", { required: true })} />
                             {errors.fullName?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">Full Name is required</p>}
-                            <label for="floatingInput">Full Name</label>
+                            <label htmlFor="floatingInput">Full Name</label>
                         </div>
                     </div>
                     <div className="col-6">
                         {/* Mobile Number */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="mobNumber"
                                 {...register("mobNumber", { required: true })} />
                             {errors.mobNumber?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">Mobile Number is required</p>}
-                            <label for="floatingInput">Mobile Number</label>
+                            <label htmlFor="floatingInput">Mobile Number</label>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6">
                         {/* Flat, House no., Building, Company, Apartment */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="houseNumber"
                                 {...register("houseNumber", { required: true })} />
                             {errors.houseNumber?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">This field is required</p>}
-                            <label for="floatingInput">Flat, House no., Building, Company, Apartment</label>
+                            <label htmlFor="floatingInput">Flat, House no., Building, Company, Apartment</label>
                         </div>
                     </div>
                     <div className="col-6">
                         {/* Area, Colony, Street, Sector, Village*/}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="area"
                                 {...register("area", { required: true })} />
                             {errors.area?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">This field is required</p>}
-                            <label for="floatingInput">Area, Colony, Street, Sector, Village</label>
+                            <label htmlFor="floatingInput">Area, Colony, Street, Sector, Village</label>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6">
                         {/* Town, City */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="city"
                                 {...register("city", { required: true })} />
                             {errors.city?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">This field is required</p>}
-                            <label for="floatingInput">Town, City</label>
+                            <label htmlFor="floatingInput">Town, City</label>
                         </div>
                     </div>
                     <div className="col-6">
                         {/* Pin Code */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="number" class="form-control"
+                                type="number" className="form-control"
                                 id="floatingInput" placeholder="#" name="pin"
                                 {...register("pin", { required: true, pattern: /^[0-9]{1,6}$/ })} />
                             {errors.pin?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">Pin Code is required</p>}
                             {errors.pin?.type === "pattern" && <p className="alert alert-danger w-75 text-center mx-auto py-2 mt-2">Pin Code contains 6 digit number</p>}
-                            <label for="floatingInput">Pin Code</label>
+                            <label htmlFor="floatingInput">Pin Code</label>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-6">
                         {/* State */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="state"
                                 {...register("state", { required: true })} />
                             {errors.state?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">State is required</p>}
-                            <label for="floatingInput">State</label>
+                            <label htmlFor="floatingInput">State</label>
                         </div>
                     </div>
                     <div className="col-6">
                         {/* Area, Colony, Street, Sector, Village*/}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="country"
                                 {...register("country", { required: true })} />
                             {errors.country?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">Country is required</p>}
-                            <label for="floatingInput">Country</label>
+                            <label htmlFor="floatingInput">Country</label>
                         </div>
                     </div>
                 </div>

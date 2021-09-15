@@ -16,8 +16,8 @@ const BookTitleDetails = ({ book, link }) => {
                     <>
                         {
                             tag === "newArrival"
-                                ? <span class="badge rounded-pill bg-danger me-4">NEW ARRIVAL</span>
-                                : <span class="badge rounded-pill bg-danger me-4">{tag.toUpperCase()}</span>
+                                ? <span className="badge rounded-pill bg-danger me-4">NEW ARRIVAL</span>
+                                : <span className="badge rounded-pill bg-danger me-4">{tag.toUpperCase()}</span>
                         }
                     </>
                 ))

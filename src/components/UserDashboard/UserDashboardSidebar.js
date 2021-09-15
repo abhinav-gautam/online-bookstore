@@ -42,7 +42,7 @@ const UserDashboardSidebar = ({ url }) => {
                             to={`${url}/cart`}>
                             <span className="position-relative pt-2">
                                 <FontAwesomeIcon icon={faShoppingCart} /> Cart
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
                                     {totalItems}
                                 </span>
                             </span>
@@ -55,7 +55,7 @@ const UserDashboardSidebar = ({ url }) => {
                             to={`${url}/wishlist`}>
                             <span className="position-relative pt-2">
                                 <FontAwesomeIcon icon={faClipboard} /> Wishlist
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
                                     {wishlistItems.length}
                                 </span>
                             </span>

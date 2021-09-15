@@ -77,44 +77,44 @@ const EditProfile = ({ show }) => {
                         </div>
                         {/* Name */}
                         <div className="col-5">
-                            <div class="form-floating mb-3">
+                            <div className="form-floating mb-3">
                                 <input
-                                    type="text" class="form-control"
+                                    type="text" className="form-control"
                                     id="floatingInput" placeholder="#" name="name"
                                     {...register("name", { required: true })} />
-                                <label for="floatingInput">Name</label>
+                                <label htmlFor="floatingInput">Name</label>
                             </div>
                         </div>
                         {/* Username */}
                         <div className="col-5">
-                            <div class="form-floating mb-3">
+                            <div className="form-floating mb-3">
                                 <input
-                                    type="text" class="form-control"
+                                    type="text" className="form-control"
                                     id="floatingInput" placeholder="#" name="username"
                                     {...register("username", { required: true })} />
-                                <label for="floatingInput">Username</label>
+                                <label htmlFor="floatingInput">Username</label>
                             </div>
                         </div>
                     </div>
                     <div className="row justify-content-center">
                         {/* Email */}
                         <div className="col-5">
-                            <div class="form-floating mb-3">
+                            <div className="form-floating mb-3">
                                 <input
-                                    type="email" class="form-control"
+                                    type="email" className="form-control"
                                     id="floatingInput" placeholder="#" name="email"
                                     {...register("email", { required: true })} />
-                                <label for="floatingInput">Email</label>
+                                <label htmlFor="floatingInput">Email</label>
                             </div>
                         </div>
                         {/* Phone number */}
                         <div className="col-5">
-                            <div class="form-floating mb-3">
+                            <div className="form-floating mb-3">
                                 <input
-                                    type="number" class="form-control"
+                                    type="number" className="form-control"
                                     id="floatingInput" placeholder="#" name="phone"
                                     {...register("phone")} />
-                                <label for="floatingInput">Phone Number</label>
+                                <label htmlFor="floatingInput">Phone Number</label>
                             </div>
                         </div>
 

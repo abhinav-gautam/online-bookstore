@@ -120,7 +120,7 @@ const Register = () => {
                                             <LoadingSpinner message=" Registering..." />
                                         </div>
                                     }
-                                    <button className="btn btn-success mb-3">Register <FontAwesomeIcon icon={faUserPlus} /></button><br />
+                                    <button className="btn btn-danger mb-3">Register <FontAwesomeIcon icon={faUserPlus} /></button><br />
                                     <Link className="text-decoration-none" to="/login">Already a user? Login!</Link>
                                 </div>
                             </form>

@@ -74,7 +74,7 @@ const Login = () => {
                                 }
                                 {userErrors && <p className="alert alert-danger py-2 mt-2">{userErrors}</p>}
                                 <div className="mt-4">
-                                    <button className="btn btn-success me-3 mb-3" >Login <FontAwesomeIcon icon={faSignInAlt} /></button><br />
+                                    <button className="btn btn-danger me-3 mb-3" >Login <FontAwesomeIcon icon={faSignInAlt} /></button><br />
                                     <Link className="text-decoration-none" to="/register">New User? Register!</Link>
                                 </div>
                             </form>

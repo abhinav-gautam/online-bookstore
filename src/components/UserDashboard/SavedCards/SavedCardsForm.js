@@ -34,24 +34,24 @@ const SavedCardsForm = ({ updateIndex, setShow, setUpdateIndex }) => {
                 <div className="row">
                     <div className="col-6">
                         {/* Full Name */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="text" class="form-control"
+                                type="text" className="form-control"
                                 id="floatingInput" placeholder="#" name="fullName"
                                 {...register("fullName", { required: true })} />
                             {errors.fullName?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">Full Name is required</p>}
-                            <label for="floatingInput">Name on Card</label>
+                            <label htmlFor="floatingInput">Name on Card</label>
                         </div>
                     </div>
                     <div className="col-6">
                         {/* Expiry Date */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <input
-                                type="month" class="form-control"
+                                type="month" className="form-control"
                                 id="floatingInput" placeholder="#" name="expiry"
                                 {...register("expiry", { required: true })} />
                             {errors.expiry?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">This field is required</p>}
-                            <label for="floatingInput">Expiry Date</label>
+                            <label htmlFor="floatingInput">Expiry Date</label>
                         </div>
                     </div>
                 </div>
@@ -60,13 +60,13 @@ const SavedCardsForm = ({ updateIndex, setShow, setUpdateIndex }) => {
                     <div className="row">
                         <div className="col-6">
                             {/* Card Number */}
-                            <div class="form-floating mb-3">
+                            <div className="form-floating mb-3">
                                 <input
-                                    type="number" class="form-control"
+                                    type="number" className="form-control"
                                     id="floatingInput" placeholder="#" name="cardNumber"
                                     {...register("cardNumber", { required: true })} />
                                 {errors.cardNumber?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">Card Number is required</p>}
-                                <label for="floatingInput">Card Number</label>
+                                <label htmlFor="floatingInput">Card Number</label>
                             </div>
                         </div>
 
