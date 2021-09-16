@@ -10,7 +10,7 @@ const BookCard = ({ book }) => {
     const dispatch = useDispatch()
     const { wishlistItems } = useSelector(state => state.wishlist)
     const history = useHistory()
-    const { isAuth } = useSelector(state => state.user)
+    const { isAuth, user } = useSelector(state => state.user)
     return (
         <div className="col d-flex align-items-stretch" key={book._id} >
             <div className="card mt-5 shadow w-75 cursor-pointer" >
@@ -45,7 +45,7 @@ const BookCard = ({ book }) => {
                         <p className="small">{book.author}</p>
                     </div>
                     {
-                        isAuth &&
+                        isAuth && user.status === "active" &&
                         <div className="btn-group">
                             <button className="btn btn-sm btn-danger " onClick={() => dispatch(addItemToCart({ book, quantity: 1 }))}>Add to Cart <FontAwesomeIcon icon={faCartPlus} /></button>
                             <button className="btn btn-sm btn-secondary" onClick={() => !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>Add to Wishlist <FontAwesomeIcon icon={faClipboardList} /></button>

@@ -6,6 +6,7 @@ const multerObj = require("./middlewares/saveImage")
 const jwt = require("jsonwebtoken")
 const ObjectId = require("mongodb").ObjectId;
 const { decrypt, encrypt } = require("../helpers/encryption");
+const { sendMail } = require("../helpers/mail");
 
 const router = express.Router()
 
@@ -199,6 +200,25 @@ router.get("/getUsers", verifyToken, asyncHandler(async (req, res) => {
 router.put("/updateRole", verifyToken, asyncHandler(async (req, res) => {
     const user = req.body
     if (user.status) {
+        if (user.status === "blocked") {
+            sendMail(user, "Your Account is Blocked", `
+           \rHi ${user.username},
+           
+           \rYour Bookworm account is blocked. Contact administrator to unblock and continue shopping.
+   
+           \rRegards,
+           \rBookworm Admin
+           `)
+        } else {
+            sendMail(user, "Your Account is Unblocked", `
+           \rHi ${user.username},
+           
+           \rYour Bookworm account is now unblocked. You can continue shopping.
+   
+           \rRegards,
+           \rBookworm Admin
+           `)
+        }
         await users.updateOne({ username: user.username }, { $set: { status: user.status } })
     }
     if (user.role) {

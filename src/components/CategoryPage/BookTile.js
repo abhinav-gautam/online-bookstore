@@ -6,7 +6,7 @@ import BookImage from '../BookDetailsPage/BookImage';
 import BookTitleDetails from '../BookDetailsPage/BookTitleDetails';
 
 const BookTile = ({ book }) => {
-    const { isAuth } = useSelector(state => state.user)
+    const { isAuth, user } = useSelector(state => state.user)
     return (
         <>
             <div className="mt-5 row">
@@ -15,14 +15,14 @@ const BookTile = ({ book }) => {
                         <BookImage book={book} width="200px" height="300px" />
                     </Link>
                 </div>
-                <div className={isAuth ? "col-xl-5 border-end pe-5" : "col-xl-5 pe-5"}>
+                <div className={isAuth && user.status === "active" ? "col-xl-5 border-end pe-5" : "col-xl-5 pe-5"}>
                     <div className="ms-4 mt-3">
                         <BookTitleDetails book={book} link={true} />
                     </div>
                 </div>
                 <div className="col-xl-5 ps-5">
                     {
-                        isAuth &&
+                        isAuth && user.status === "active" &&
                         <AvailabilityDetails book={book} />
                     }
                 </div>

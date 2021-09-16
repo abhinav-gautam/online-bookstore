@@ -76,6 +76,14 @@ function App() {
       {/* First Navigation bar */}
       <FirstNavigation />
 
+      {/* Account Blocked Alert */}
+      {
+        user.status === "blocked" &&
+        <div className={`alert alert-danger text-center p-0`} role="alert">
+          Your account is blocked. Contact Administrator to unblock and continue shopping.
+        </div>
+      }
+
       <Switch>
         {/* Homepage */}
         <Route exact path="/">

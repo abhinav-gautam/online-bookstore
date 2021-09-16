@@ -10,12 +10,12 @@ const UsersPage = () => {
     const dispatch = useDispatch()
 
     const toggleStatus = ({ user, index }) => {
-        const userEdited = { username: user.username }
+        const userEdited = { username: user.username, email: user.email }
         user.status === "active" ? userEdited.status = "blocked" : userEdited.status = "active"
         dispatch(updateRole({ user: userEdited, index }))
     }
     const toggleRole = ({ user, index }) => {
-        const userEdited = { username: user.username }
+        const userEdited = { username: user.username, email: user.email }
         user.role === "user" ? userEdited.role = "admin" : userEdited.role = "user"
         dispatch(updateRole({ user: userEdited, index }))
     }
@@ -23,8 +23,8 @@ const UsersPage = () => {
     return (
         <div className="container-fluid">
             <div className="h4 mt-5">All Users</div>
-            <div className="table-responsive">
-                <table className="table table-bordered ">
+            <div className="table-responsive mt-4">
+                <table className="table table-bordered table-sm">
                     <thead className="table-danger">
                         <tr className="text-center">
                             <th>S.no.</th>
@@ -38,7 +38,7 @@ const UsersPage = () => {
                             <th>Created At</th>
                             <th>Last Login</th>
                             <th>Status</th>
-                            <th>Options</th>
+                            <th colSpan="2">Options</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +58,9 @@ const UsersPage = () => {
                                     <td>{user.status}</td>
                                     <td className="text-center">
                                         <span className="text-danger fw-bold cursor-pointer" onClick={() => toggleStatus({ user, index })}>{user.status === "active" ? "Block" : "Unblock"}</span>
-                                        <span className="ms-3 text-danger fw-bold cursor-pointer" onClick={() => toggleRole({ user, index })}>{user.role === "user" ? "Make Admin" : "Make User"}</span>
+                                    </td>
+                                    <td className="text-center">
+                                        <span className="text-danger fw-bold cursor-pointer" onClick={() => toggleRole({ user, index })}>{user.role === "user" ? "Make Admin" : "Make User"}</span>
                                     </td>
                                 </tr>
                             ])

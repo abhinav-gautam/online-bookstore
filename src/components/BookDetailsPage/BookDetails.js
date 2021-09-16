@@ -6,7 +6,7 @@ import BookImage from './BookImage';
 import BookTitleDetails from './BookTitleDetails';
 
 const BookDetails = ({ book }) => {
-    const { isAuth } = useSelector(state => state.user)
+    const { isAuth, user } = useSelector(state => state.user)
 
     return (
         <>
@@ -20,7 +20,7 @@ const BookDetails = ({ book }) => {
                     </div>
                     <div className="ps-5 mt-5">
                         {
-                            isAuth &&
+                            isAuth && user.status === "active" &&
                             <AvailabilityDetails book={book} />
                         }
                     </div>

@@ -64,7 +64,7 @@ const FirstNavigation = () => {
 
             {/* Search bar */}
             {
-                user.role === "user" &&
+                (!isAuth || user.role === "user") &&
                 <div className="w-25">
                     <form className="d-flex" onSubmit={handleSubmit(onSearchFormSubmit)}>
                         <input
@@ -111,7 +111,7 @@ const FirstNavigation = () => {
                             isAuth
                                 ? <>
                                     {
-                                        user.role === "user" &&
+                                        user.role === "user" && user.status === "active" &&
                                         <li className="nav-item me-4">
                                             <NavLink className="nav-link text-decoration-none position-relative" activeClassName="nav-link active position-relative" to="/userdashboard/cart"><FontAwesomeIcon icon={faShoppingCart} /> Cart  <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
                                                 {totalItems}
@@ -134,7 +134,7 @@ const FirstNavigation = () => {
                                         </a>
                                         <ul className="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
                                             {
-                                                user.role === "user" &&
+                                                user.role === "user" && user.status === "active" &&
                                                 <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard/profile" ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
                                             }
                                             <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
