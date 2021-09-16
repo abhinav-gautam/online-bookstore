@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { addBook, updateBook } from '../../../redux/booksReducers';
 import LoadingSpinner from '../../Helpers/LoadingSpinner';
+import bookImagePlaceholder from "../../../media/bookPlaceholder.png"
 
 const AddBooks = ({ updateIndex, setUpdateIndex, setShow }) => {
     const { books, isBooksLoading } = useSelector(state => state.books)
@@ -48,38 +49,55 @@ const AddBooks = ({ updateIndex, setUpdateIndex, setShow }) => {
     }
 
     return (
-        <div className={updateIndex < 0 ? "container-fluid mt-5" : "container-fluid"}>
+        <div className={(updateIndex < 0 || updateIndex === undefined) ? "container-fluid mt-5" : "container-fluid"}>
             {
-                updateIndex < 0 &&
+                (updateIndex < 0 || updateIndex === undefined) &&
                 < div className="h4">Add Book</div>
             }
             <form className="mt-4" onSubmit={handleSubmit(formSubmit)}>
-                <div className="row">
-                    <div className="col-6 d-flex">
+                <div className="row align-items-center">
+                    <div className="col-6">
                         {/* Book Image */}
-                        <div className={watchBookImage.length === 0 ? "form-group mb-3 w-100" : "form-group mb-3 w-50"}>
-                            <label htmlFor="floatingInput">Book Cover</label>
+                        <div className="form-group mb-3 d-flex align-items-center">
+                            <label htmlFor="bookImage" className="cursor-pointer">
+                                {
+                                    watchBookImage.length !== 0 ?
+                                        <span className="ms-5 mb-3 card p-1">
+                                            <img src={URL.createObjectURL(watchBookImage[0])} width="100px" height="110px" alt="" />
+                                        </span>
+                                        : updateIndex < 0 || updateIndex === undefined
+                                            ?
+                                            <span className="ms-5 mb-3 card p-1">
+                                                <img src={bookImagePlaceholder} width="100px" height="110px" alt="" />
+                                            </span>
+                                            :
+                                            <span className="ms-5 mb-3 card p-1">
+                                                <img src={books[updateIndex].bookImage} width="100px" height="110px" alt="" />
+                                            </span>
+                                }
+
+                            </label>
+                            <label htmlFor="bookImage">
+                                <div className="text-danger fw-bold cursor-pointer ms-5">
+                                    Choose Book Cover
+                                </div>
+                            </label>
                             {
-                                updateIndex < 0
+                                (updateIndex < 0 || updateIndex === undefined)
                                     ?
                                     <input
-                                        type="file" className="form-control" accept="image/*"
-                                        id="floatingInput" placeholder="#" name="bookImage"
+                                        type="file" className="d-none" accept="image/*"
+                                        id="bookImage" placeholder="#" name="bookImage"
                                         {...register("bookImage", { required: true })} />
                                     :
                                     <input
-                                        type="file" className="form-control" accept="image/*"
-                                        id="floatingInput" placeholder="#" name="bookImage"
+                                        type="file" className="d-none" accept="image/*"
+                                        id="bookImage" placeholder="#" name="bookImage"
                                         {...register("bookImage")} />
                             }
-                            {errors.bookImage?.type === "required" && <p className="text-danger mt-1">Book Cover is required</p>}
                         </div>
-                        {
-                            watchBookImage.length !== 0 &&
-                            <div className="ms-5 mb-3">
-                                <img src={URL.createObjectURL(watchBookImage[0])} width="100px" alt="" />
-                            </div>
-                        }
+                        {errors.bookImage?.type === "required" && <p className="text-danger mt-1">Book Cover is required</p>}
+
                     </div>
                     <div className="col-6">
                         {/* ISBN */}
@@ -187,12 +205,12 @@ const AddBooks = ({ updateIndex, setUpdateIndex, setShow }) => {
                     </div>
                     <div className="col-6">
                         {/* Description */}
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" placeholder="#"
+                        <div class="form-group mb-3">
+                            <textarea class="form-control" placeholder="Description"
                                 id="floatingTextarea" name="description"
                                 {...register("description", { required: true })} ></textarea>
                             {errors.description?.type === "required" && <p className="text-danger mt-1">Description is required</p>}
-                            <label for="floatingTextarea">Description</label>
+                            {/* <label for="floatingTextarea">Description</label> */}
                         </div>
                     </div>
                 </div>
@@ -285,7 +303,7 @@ const AddBooks = ({ updateIndex, setUpdateIndex, setShow }) => {
                 <div className="text-center mt-4 mb-2">
                     {isBooksLoading && <LoadingSpinner message=" Saving Changes..." />}
                     {
-                        updateIndex < 0
+                        (updateIndex < 0 || updateIndex === undefined)
                             ?
                             <button className="btn btn-danger mt-3" type="submit">Add</button>
                             :
