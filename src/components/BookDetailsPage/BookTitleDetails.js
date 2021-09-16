@@ -27,14 +27,23 @@ const BookTitleDetails = ({ book, link }) => {
                     <p><strong>Author:</strong> {book.author}</p>
                     <p><strong>Publisher:</strong> {book.publisher}</p>
                     <div>
-                        <span className="text-decoration-line-through">₹ {book.price * .20 + book.price}</span> <br />
-                        <span className="fs-3 fw-bold text-danger">₹ {book.price}</span>
+                        {
+                            book.discount ?
+                                <>
+                                    <span className="text-decoration-line-through">₹ {book.price}</span> <br />
+                                    <span className="fs-3 fw-bold text-danger">₹ {Math.round(+book.price - +book.price * +book.discount / 100)}</span>
+                                </>
+                                :
+                                <>
+                                    <span className="fs-3 fw-bold text-danger">₹ {book.price}</span>
+                                </>
+                        }
                     </div>
                 </div>
                 <div className="ps-5">
                     <p><strong>Rating:</strong> {book.rating}</p>
                     <p><strong>Release Date:</strong> {book.releaseDate}</p>
-                    <p><strong>Language:</strong> English</p>
+                    <p><strong>Language:</strong> {book.language}</p>
                 </div>
             </div>
         </div>

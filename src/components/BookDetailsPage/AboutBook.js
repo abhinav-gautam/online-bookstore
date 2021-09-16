@@ -19,8 +19,8 @@ const AboutBook = ({ book }) => {
                     <div className="lead">{book.isbn}</div>
                     <div className="lead">{book.publisher}</div>
                     <div className="lead">{book.releaseDate}</div>
-                    <div className="lead">223 mm</div>
-                    <div className="lead">481 gm</div>
+                    <div className="lead">{book.height} mm</div>
+                    <div className="lead">{book.weight} gm</div>
                 </div>
                 <div className="mt-2">
                     <div className="lead fw-bold">Width:</div>
@@ -30,10 +30,10 @@ const AboutBook = ({ book }) => {
                     <div className="lead fw-bold">Returnable:</div>
                 </div>
                 <div className="mt-2 ms-5">
-                    <div className="lead">161 mm</div>
-                    <div className="lead">322</div>
-                    <div className="lead">English</div>
-                    <div className="lead">Hardback</div>
+                    <div className="lead">{book.width} mm</div>
+                    <div className="lead">{book.pages}</div>
+                    <div className="lead">{book.language}</div>
+                    <div className="lead">{book.binding}</div>
                     <div className="lead">No</div>
                 </div>
             </div>

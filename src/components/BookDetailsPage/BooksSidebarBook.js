@@ -18,8 +18,17 @@ const BooksSidebarBook = ({ book }) => {
                     }
                 </p>
                 <small>By: {book.author}</small>
-                <small className="mt-4 text-decoration-line-through">₹ {book.price * .20 + book.price}</small>
-                <span className="fs-5 fw-bold text-danger">₹ {book.price}</span>
+                {
+                    book.discount ?
+                        <>
+                            <small className="mt-4 text-decoration-line-through">₹ {book.price}</small>
+                            <span className="fs-5 fw-bold text-danger">₹ {Math.round(+book.price - +book.price * +book.discount / 100)}</span>
+                        </>
+                        :
+                        <>
+                            <span className="fs-5 fw-bold text-danger mt-3">₹ {book.price}</span>
+                        </>
+                }
             </div>
         </div >
     );
