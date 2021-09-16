@@ -26,10 +26,7 @@ const CartPage = () => {
         let totalDiscount = 0
         if (uniqueItems) {
             grossTotal = cartItems.map(item => +item.book.price * item.quantity).reduce((total, current) => total += current) + deliveryCharge
-            totalDiscount = cartItems.map(item => +item.book.price * +item.book.discount / 100 * item.quantity).reduce((total, current) => total += current)
-        }
-        if (isNaN(totalDiscount)) {
-            totalDiscount = 0
+            totalDiscount = cartItems.map(item => item.book.discount && (+item.book.price * +item.book.discount / 100 * item.quantity)).reduce((total, current) => total += +current)
         }
         const netTotal = grossTotal - totalDiscount
         setCartSummary({ totalDiscount, grossTotal, netTotal, deliveryCharge })
