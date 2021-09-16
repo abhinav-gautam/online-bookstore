@@ -61,7 +61,6 @@ const categorySlice = createSlice({
         },
         [updateCategory.fulfilled]: (state, action) => {
             state.isCategoryLoading = false
-            console.log(action.payload);
             state.categories.splice(action.payload.index, 1, action.payload.category)
         },
         [updateCategory.rejected]: (state, action) => {

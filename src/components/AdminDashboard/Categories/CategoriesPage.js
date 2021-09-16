@@ -22,7 +22,9 @@ const CategoriesPage = () => {
                     <AllCategories setShow={setShow} setUpdateIndex={setUpdateIndex} />
                 </div>
                 {/* Edit Category Modal */}
-                <EditCategory show={show} setShow={setShow} updateIndex={updateIndex} setUpdateIndex={setUpdateIndex} />
+                <EditCategory
+                    show={show} setShow={setShow}
+                    updateIndex={updateIndex} setUpdateIndex={setUpdateIndex} />
             </div>
         </div>
     );

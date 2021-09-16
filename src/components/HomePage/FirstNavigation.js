@@ -59,7 +59,7 @@ const FirstNavigation = () => {
 
             {/* Title */}
             <div>
-                <Link to="/" className="navbar-brand fs-1 text-decoration-none ms-5 cursor-pointer">Bookworm</Link>
+                <Link to={user.role === "user" ? "/" : "#"} className="navbar-brand fs-1 text-decoration-none ms-5 cursor-pointer">Bookworm</Link>
             </div>
 
             {/* Search bar */}

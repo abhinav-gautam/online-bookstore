@@ -51,14 +51,14 @@ function App() {
 
   // Loading cart from db
   useEffect(() => {
-    if (!cartItems.length && isAuth) {
+    if (!cartItems.length && isAuth && user.role === "user") {
       dispatch(loadCart())
     }
   }, [user])
 
   // Loading wishlist from db
   useEffect(() => {
-    if (!wishlistItems.length && isAuth) {
+    if (!wishlistItems.length && isAuth && user.role === "user") {
       dispatch(loadWishlist())
     }
   }, [user])
