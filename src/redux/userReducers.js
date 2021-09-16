@@ -120,3 +120,34 @@ export const updateCard = createAsyncThunk("updateCard", async (user, thunkAPI) 
         return thunkAPI.rejectWithValue(data)
     }
 })
+
+// Get all users
+export const getUsers = createAsyncThunk("getUsers", async (_, thunkAPI) => {
+    const token = localStorage.getItem("token")
+    const { data } = await axios.get("http://localhost:4000/users/getUsers", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return data.users
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})
+
+// Update user role
+export const updateRole = createAsyncThunk("updateRole", async ({ user, index }, thunkAPI) => {
+    console.log(user, index);
+    const token = localStorage.getItem("token")
+    const { data } = await axios.put("http://localhost:4000/users/updateRole", user, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    if (data.status === "success") {
+        return { user, index }
+    } else {
+        return thunkAPI.rejectWithValue(data)
+    }
+})

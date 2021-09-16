@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addAddress, addCard, deleteAddress, deleteCard, updateAddress, updateCard, updateUser, userLogin } from './userReducers';
+import { addAddress, addCard, deleteAddress, deleteCard, getUsers, updateAddress, updateCard, updateRole, updateUser, userLogin } from './userReducers';
 
 const initialUserState = {
     user: {}, isAuth: false,
     isUserLoading: false,
-    userErrors: ""
+    userErrors: "", allUsers: []
 }
 
 const userSlice = createSlice({
@@ -83,7 +83,6 @@ const userSlice = createSlice({
             state.isUserLoading = true
         },
         [updateAddress.fulfilled]: (state, action) => {
-            console.log(action.payload);
             state.isUserLoading = false
             state.user.addresses.splice(action.payload.index, 1, action.payload.address)
         },
@@ -123,11 +122,38 @@ const userSlice = createSlice({
             state.isUserLoading = true
         },
         [updateCard.fulfilled]: (state, action) => {
-            console.log(action.payload);
             state.isUserLoading = false
             state.user.cards.splice(action.payload.index, 1, action.payload.card)
         },
         [updateCard.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Get users
+        [getUsers.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [getUsers.fulfilled]: (state, action) => {
+            state.isUserLoading = false
+            state.allUsers = action.payload
+        },
+        [getUsers.rejected]: (state, action) => {
+            state.isUserLoading = false
+            state.userErrors = action.payload.message
+        },
+        // Update user role
+        [updateRole.pending]: (state, action) => {
+            state.userErrors = ""
+            state.isUserLoading = true
+        },
+        [updateRole.fulfilled]: (state, action) => {
+            state.isUserLoading = false
+            action.payload.user.status
+                ? state.allUsers[action.payload.index].status = action.payload.user.status
+                : state.allUsers[action.payload.index].role = action.payload.user.role
+        },
+        [updateRole.rejected]: (state, action) => {
             state.isUserLoading = false
             state.userErrors = action.payload.message
         },

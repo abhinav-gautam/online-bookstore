@@ -6,6 +6,7 @@ import AddBooks from './Books/AddBooks';
 import EditBook from './Books/EditBook';
 import ViewBooks from './Books/ViewBooks';
 import CategoriesPage from './Categories/CategoriesPage';
+import UsersPage from './Users/UsersPage';
 
 const AdminDashboardMain = () => {
     const { path, url } = useRouteMatch()
@@ -30,13 +31,17 @@ const AdminDashboardMain = () => {
                                 <Route exact path={`${path}/addBook`}>
                                     <AddBooks />
                                 </Route>
-                                {/* Category Module */}
+                                {/* Profile Module */}
                                 <Route exact path={`${path}/profile`}>
                                     <ProfilePage />
                                 </Route>
-                                {/* User Module*/}
+                                {/* Category Module*/}
                                 <Route exact path={`${path}/category`}>
                                     <CategoriesPage />
+                                </Route>
+                                {/* User Module*/}
+                                <Route exact path={`${path}/users`}>
+                                    <UsersPage />
                                 </Route>
                             </Switch>
                         </div>

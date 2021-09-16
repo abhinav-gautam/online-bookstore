@@ -38,7 +38,7 @@ const EditProfile = ({ show }) => {
             formData.append("profilePicture", file, file.name)
         }
 
-        // Appending productObj
+        // Appending user object
         userEdited._id = user._id
         userEdited.cartUsername = cartUsername
         userEdited = encrypt(userEdited)

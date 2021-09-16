@@ -29,7 +29,7 @@ router.get("/getItems", verifyToken, asyncHandler(async (req, res) => {
     const items = await wishlist.findOne({ username })
     res.status(200).json({
         status: "success",
-        items: items.wishlist,
+        items: items?.wishlist,
         wishlistUsername: items.username
     })
 }))

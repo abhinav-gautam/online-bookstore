@@ -1,4 +1,4 @@
-import { faBook, faBookMedical, faBookReader, faBorderAll, faUserCog } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBookMedical, faBookReader, faBorderAll, faUserCog, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -47,6 +47,16 @@ const AdminDashboardSidebar = ({ url }) => {
                             to={`${url}/category`}>
                             <span className="position-relative pt-2">
                                 <FontAwesomeIcon icon={faBorderAll} />  Categories
+                            </span>
+                        </NavLink>
+                    </li>
+                    <li className="mt-3">
+                        <NavLink exact
+                            className="nav-link text-dark text-wrap"
+                            activeStyle={activeLinkStyle}
+                            to={`${url}/users`}>
+                            <span className="position-relative pt-2">
+                                <FontAwesomeIcon icon={faUsers} />  Users
                             </span>
                         </NavLink>
                     </li>

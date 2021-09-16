@@ -27,6 +27,12 @@ router.post("/register", asyncHandler(async (req, res) => {
     if (userAlreadyExists) {
         throw new Error("user already exists")
     }
+    // Specifying some defaults
+    newUser.createdAt = new Date().toLocaleString()
+    newUser.role = "user"
+    newUser.addresses = []
+    newUser.cards = []
+    newUser.status = "active"
     // Inserting into database
     await users.insertOne(newUser)
     res.status(201).json({
@@ -52,6 +58,8 @@ router.post("/login", asyncHandler(async (req, res) => {
     }
     // Deleting the password from the user
     delete userAlreadyExists.password
+    // Adding Current time
+    await users.updateOne({ username: userAlreadyExists.username }, { $set: { lastLogin: new Date().toLocaleString() } }, { upsert: true })
     // Encrypting the user
     userAlreadyExists = encrypt(userAlreadyExists)
     // Generating token
@@ -176,4 +184,30 @@ router.post("/updateCard", verifyToken, asyncHandler(async (req, res) => {
         message: "card updated"
     })
 }))
+
+// Get all users
+router.get("/getUsers", verifyToken, asyncHandler(async (req, res) => {
+    const usersDb = await users.find().toArray()
+    res.status(200).json({
+        status: "success",
+        message: "all users",
+        users: usersDb
+    })
+}))
+
+// Update user role
+router.put("/updateRole", verifyToken, asyncHandler(async (req, res) => {
+    const user = req.body
+    if (user.status) {
+        await users.updateOne({ username: user.username }, { $set: { status: user.status } })
+    }
+    if (user.role) {
+        await users.updateOne({ username: user.username }, { $set: { role: user.role } })
+    }
+    res.status(200).json({
+        status: "success",
+        message: "user role updated"
+    })
+}))
+
 module.exports = router

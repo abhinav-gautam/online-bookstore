@@ -45,7 +45,7 @@ router.get("/getItems", verifyToken, asyncHandler(async (req, res) => {
     const items = await cart.findOne({ username })
     res.status(200).json({
         status: "success",
-        items: items.cart,
+        items: items?.cart,
         cartUsername: items.username
     })
 }))
