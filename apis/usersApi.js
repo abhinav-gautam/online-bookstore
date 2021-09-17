@@ -226,7 +226,7 @@ router.put("/updateRole", verifyToken, asyncHandler(async (req, res) => {
     }
     res.status(200).json({
         status: "success",
-        message: "user role updated"
+        message: "user updated"
     })
 }))
 
