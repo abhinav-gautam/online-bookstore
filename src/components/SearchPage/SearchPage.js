@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import BookTile from '../CategoryPage/BookTile';
+import LoadingSpinner from '../Helpers/LoadingSpinner';
 import CategorySidebar from '../HomePage/CategorySidebar';
 import Footer from '../HomePage/Footer';
 
@@ -11,7 +12,7 @@ const useQuery = () => new URLSearchParams(useLocation().search)
 const SearchPage = () => {
     const query = useQuery().get("query").toLowerCase()
 
-    const { books } = useSelector(state => state.books)
+    const { books, isBooksLoading } = useSelector(state => state.books)
 
     const [filteredBooks, setFilteredBooks] = useState([]);
 
@@ -23,7 +24,7 @@ const SearchPage = () => {
             book.publisher.toLowerCase().includes(query) ||
             book.isbn.toString().includes(query)
         ))
-    }, [query]);
+    }, [query, books]);
 
     return (
         <>
@@ -41,12 +42,15 @@ const SearchPage = () => {
                             <div className="display-5 mt-5">Search Results for "{query}"</div>
                             <div className="mt-3">{filteredBooks.length} books found</div>
                             {
+                                isBooksLoading && <div className="mt-5"><LoadingSpinner message=" Loading Books..." /></div>
+                            }
+                            {
                                 filteredBooks.map(book => (
                                     <BookTile book={book} />
                                 ))
                             }
                             {
-                                !filteredBooks.length &&
+                                !filteredBooks.length && !isBooksLoading &&
                                 <div className="mt-5 fs-3">Whoops! No books found.</div>
                             }
                         </div>

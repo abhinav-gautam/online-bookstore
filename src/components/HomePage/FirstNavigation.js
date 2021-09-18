@@ -57,8 +57,8 @@ const FirstNavigation = () => {
             </nav >
 
             {/* Offcanvas */}
-            <div class="offcanvas offcanvas-start " tabindex="-1" id="offcanvas" aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-body">
+            <div className="offcanvas offcanvas-start " tabIndex="-1" id="offcanvas" aria-labelledby="offcanvasExampleLabel">
+                <div className="offcanvas-body">
                     <div>
                         <Link to={user.role === "user" ? "/" : "#"} className="navbar-brand fs-1 text-decoration-none ms-5 cursor-pointer text-dark">Bookworm</Link>
                     </div>

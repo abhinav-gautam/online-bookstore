@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import LoadingSpinner from '../Helpers/LoadingSpinner';
 import CategorySidebar from '../HomePage/CategorySidebar';
 import Footer from '../HomePage/Footer';
 import BookTile from './BookTile';
@@ -9,7 +10,7 @@ import BookTile from './BookTile';
 const CategoryPage = () => {
     const { category } = useParams()
 
-    const { books } = useSelector(state => state.books)
+    const { books, isBooksLoading } = useSelector(state => state.books)
     const [filteredBooks, setFilteredBooks] = useState([]);
 
     // Filtering books based on category
@@ -32,6 +33,9 @@ const CategoryPage = () => {
                         <div className="container-fluid">
                             <div className="display-5 mt-5 text-center">{category} Books</div>
                             <div className="mt-3">{filteredBooks.length} books found</div>
+                            {
+                                isBooksLoading && <div className="mt-5"><LoadingSpinner message=" Loading Books..." /></div>
+                            }
                             {
                                 filteredBooks.map(book => (
                                     <BookTile book={book} />

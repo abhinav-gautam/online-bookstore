@@ -15,7 +15,7 @@ const CategorySidebar = () => {
                     categories.length
                         ?
                         categories.map(category => (
-                            <CategoryItem category={category} />
+                            <CategoryItem category={category} key={category._id} />
                         ))
                         : isCategoryLoading &&
                         <LoadingSpinner message=" Loading Categories..." />

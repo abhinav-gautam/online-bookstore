@@ -138,9 +138,9 @@ const AddBooks = ({ updateIndex, setUpdateIndex, setShow }) => {
                 <div className="row">
                     <div className="col-6">
                         {/* Category */}
-                        <div class="form-floating mb-3">
+                        <div className="form-floating mb-3">
                             <select
-                                class="form-select" id="floatingSelect" name="category"
+                                className="form-select" id="floatingSelect" name="category"
                                 {...register("category", { required: true })}
                             >
                                 <option value="">Choose...</option>
@@ -205,8 +205,8 @@ const AddBooks = ({ updateIndex, setUpdateIndex, setShow }) => {
                     </div>
                     <div className="col-6">
                         {/* Description */}
-                        <div class="form-group mb-3">
-                            <textarea class="form-control" placeholder="Description"
+                        <div className="form-group mb-3">
+                            <textarea className="form-control" placeholder="Description"
                                 id="floatingTextarea" name="description"
                                 {...register("description", { required: true })} ></textarea>
                             {errors.description?.type === "required" && <p className="text-danger mt-1">Description is required</p>}

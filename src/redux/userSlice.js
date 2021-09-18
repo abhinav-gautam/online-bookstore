@@ -132,7 +132,7 @@ const userSlice = createSlice({
         // Get users
         [getUsers.pending]: (state, action) => {
             state.userErrors = ""
-            state.isUserLoading = true
+            // state.isUserLoading = true
         },
         [getUsers.fulfilled]: (state, action) => {
             state.isUserLoading = false

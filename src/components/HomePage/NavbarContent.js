@@ -41,7 +41,7 @@ const NavbarContent = ({ totalItems, offcanvas }) => {
                             {
                                 categories.length
                                     ? categories.map(category => (
-                                        <CategoryItem category={category} />
+                                        <CategoryItem category={category} key={category._id} />
                                     ))
                                     : isCategoryLoading && <li><a className="dropdown-item" href="#"><LoadingSpinner message=" Loading Categories" /></a></li>
                             }

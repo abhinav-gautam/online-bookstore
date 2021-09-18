@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, } from "react-router-dom";
 import AdminDashboardMain from "./components/AdminDashboard/AdminDashboardMain";
 import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
+import { decrypt } from "./components/Helpers/encryption";
+import Message from "./components/Helpers/Message";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import HomePage from "./components/HomePage/HomePage";
 import Login from "./components/LoginPage/Login";
@@ -16,6 +18,7 @@ import { getBooks } from "./redux/booksReducers";
 import { loadCart } from "./redux/cartReducers";
 import { getCategories } from "./redux/categoryReducers";
 import { getUsers } from "./redux/userReducers";
+import { setUser } from "./redux/userSlice";
 import { loadWishlist } from "./redux/wishlistReducers";
 
 function App() {
@@ -25,6 +28,7 @@ function App() {
   const { wishlistItems } = useSelector(state => state.wishlist)
   const { categories } = useSelector(state => state.category)
   const { user, isAuth, allUsers } = useSelector(state => state.user)
+  const { error } = useSelector(state => state.error)
 
   const dispatch = useDispatch()
 
@@ -71,8 +75,20 @@ function App() {
     }
   }, [user])
 
+  useEffect(() => {
+    let storedUser = localStorage.getItem("user")
+    storedUser = decrypt(storedUser)
+    const token = localStorage.getItem("token")
+    if (storedUser && token) {
+      dispatch(setUser(storedUser))
+    }
+  }, []);
+
   return (
     <div >
+      {
+        error && <Message message={error} variant="danger" />
+      }
       {/* First Navigation bar */}
       <FirstNavigation />
 

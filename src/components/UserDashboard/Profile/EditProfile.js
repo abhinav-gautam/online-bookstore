@@ -16,8 +16,17 @@ const EditProfile = ({ show }) => {
 
     const [file, setFile] = useState(null);
 
+    useEffect(() => {
+        if (user) {
+            setValue("name", user.name)
+            setValue("username", user.username)
+            setValue("email", user.email)
+            setValue("phone", user.phone)
+        }
+    }, [user]);
+
     // Useform hook with form pre-population
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
         defaultValues: { ...user }
     })
 

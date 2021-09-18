@@ -3,6 +3,7 @@ import authorsReducer from './authorsSlice';
 import booksReducer from './booksSlice';
 import cartReducer from './cartSlice';
 import categoryReducer from './categorySlice';
+import errorReducer from './errorSlice';
 import userReducer from './userSlice';
 import wishlistReducer from './wishlistSlice';
 
@@ -13,6 +14,7 @@ export default configureStore({
         authors: authorsReducer,
         user: userReducer,
         cart: cartReducer,
-        wishlist: wishlistReducer
+        wishlist: wishlistReducer,
+        error: errorReducer
     }
 })

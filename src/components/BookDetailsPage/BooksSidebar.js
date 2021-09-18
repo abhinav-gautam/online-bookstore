@@ -9,13 +9,14 @@ const BooksSidebar = ({ recentlyViewed }) => {
     const [similarBooks, setSimilarBooks] = useState([]);
 
     let { bookId } = useParams()
+
     useEffect(() => {
         const currentBook = books.find(book => book._id === bookId)
         setSimilarBooks(books.filter(book => (
             book.category === currentBook.category &&
             book._id !== bookId
         )).slice(0, 3))
-    }, [bookId]);
+    }, [bookId, books]);
 
     return (
         <div className="container-fluid mt-5 border-start bs-booksSidebar">

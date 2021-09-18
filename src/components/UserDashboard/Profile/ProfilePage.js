@@ -1,15 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouteMatch, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useRouteMatch, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import SavedAddresses from '../SavedAddresses/SavedAddresses';
 import SavedCards from '../SavedCards/SavedCards';
 import EditProfile from './EditProfile';
 import ProfileSidebar from './ProfileSidebar';
 
-const ProfilePage = () => {
+const ProfilePage = ({ show, setShow }) => {
     const { user } = useSelector(state => state.user)
-    const [show, setShow] = useState(false);
     const { path, url } = useRouteMatch()
 
     return (
@@ -18,11 +16,13 @@ const ProfilePage = () => {
                 <div className="row mt-5">
                     <div className="col-12 col-md-9 ps-5 border-end">
                         {
-                            user.role === "user"
-                                ?
-                                <p className="h3">Welcome {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
-                                :
-                                <p className="h3">Welcome to Admin Dashboard, {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                            user.username && (
+                                user.role === "user"
+                                    ?
+                                    <p className="h3">Welcome {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                                    :
+                                    <p className="h3">Welcome to Admin Dashboard, {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                            )
                         }
                         <Switch>
                             {/* Edit Profile */}
