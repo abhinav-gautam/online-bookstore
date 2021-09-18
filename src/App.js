@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch, } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import AdminDashboardMain from "./components/AdminDashboard/AdminDashboardMain";
 import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import { decrypt } from "./components/Helpers/encryption";
 import Message from "./components/Helpers/Message";
+import { unAuthReqFallback } from "./components/Helpers/unAuthReqFallback";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import HomePage from "./components/HomePage/HomePage";
 import Login from "./components/LoginPage/Login";
@@ -31,6 +32,7 @@ function App() {
   const { error } = useSelector(state => state.error)
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
 
   // Loading categories from db 
@@ -77,7 +79,11 @@ function App() {
 
   useEffect(() => {
     let storedUser = localStorage.getItem("user")
-    storedUser = decrypt(storedUser)
+    try {
+      storedUser = decrypt(storedUser)
+    } catch (err) {
+      unAuthReqFallback(dispatch, history)
+    }
     const token = localStorage.getItem("token")
     if (storedUser && token) {
       dispatch(setUser(storedUser))

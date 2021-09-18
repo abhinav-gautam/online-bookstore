@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
-import { setError } from '../../redux/errorSlice';
 import { setUser } from '../../redux/userSlice';
 import { decrypt } from '../Helpers/encryption';
-import resetAllState from '../Helpers/resetAllState';
+import { unAuthReqFallback } from '../Helpers/unAuthReqFallback';
 import ProfilePage from '../UserDashboard/Profile/ProfilePage';
 import AdminDashboardSidebar from './AdminDashboardSidebar';
 import AddBooks from './Books/AddBooks';
@@ -25,17 +24,18 @@ const AdminDashboardMain = () => {
     // For handling refresh and unauth access
     useEffect(() => {
         let storedUser = localStorage.getItem("user")
-        storedUser = decrypt(storedUser)
+        try {
+            storedUser = decrypt(storedUser)
+        } catch (err) {
+            unAuthReqFallback(dispatch, history)
+        }
         const token = localStorage.getItem("token")
         if (storedUser && storedUser.role === "admin" && token) {
             if (!Object.keys(user).length) {
                 dispatch(setUser(storedUser))
-                // history.push(`/admindashboard/profile`)
             }
         } else if (user.role !== "admin") {
-            resetAllState(dispatch)
-            dispatch(setError("Unauthorized access detected. Please login again."))
-            history.push("/")
+            unAuthReqFallback(dispatch, history)
         }
     }, [user]);
 

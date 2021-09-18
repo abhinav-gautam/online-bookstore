@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
-import { setError } from '../../redux/errorSlice';
 import { setUser } from '../../redux/userSlice';
 import CartPage from '../CartPage/CartPage';
 import { decrypt } from '../Helpers/encryption';
-import resetAllState from '../Helpers/resetAllState';
+import { unAuthReqFallback } from '../Helpers/unAuthReqFallback';
 import ProfilePage from './Profile/ProfilePage';
 import UserDashboardSidebar from './UserDashboardSidebar';
 import WishlistPage from './Wishlist/WishlistPage';
@@ -21,17 +20,18 @@ const UserDashboardMain = () => {
     // For handling refresh and unauth access
     useEffect(() => {
         let storedUser = localStorage.getItem("user")
-        storedUser = decrypt(storedUser)
         const token = localStorage.getItem("token")
+        try {
+            storedUser = decrypt(storedUser)
+        } catch (err) {
+            unAuthReqFallback(dispatch, history)
+        }
         if (storedUser && storedUser.role === "user" && token) {
             if (!Object.keys(user).length) {
                 dispatch(setUser(storedUser))
-                // history.push(`/userdashboard/profile`)
             }
         } else if (user.role !== "user") {
-            resetAllState(dispatch)
-            dispatch(setError("Unauthorized access detected. Please login again."))
-            history.push("/")
+            unAuthReqFallback(dispatch, history)
         }
     }, [user]);
 
