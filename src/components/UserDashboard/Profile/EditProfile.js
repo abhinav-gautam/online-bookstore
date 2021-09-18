@@ -114,7 +114,7 @@ const EditProfile = ({ show }) => {
                                     type="number" className="form-control"
                                     id="floatingInput" placeholder="#" name="phone"
                                     {...register("phone")} />
-                                <label htmlFor="floatingInput">Phone Number</label>
+                                <label htmlFor="floatingInput">Phone</label>
                             </div>
                         </div>
 

@@ -1,0 +1,96 @@
+/* Above xxl */
+@media screen and (min-width: 1400px) {
+    .bd-bookImage {
+        width: 350px;
+    }
+}
+/* xl */
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+    .bd-bookImage {
+        width: 350px;
+    }
+}
+/* lg */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .bd-bookImage {
+        width: 180px;
+    }
+    .bd-availabilityDetails {
+        margin-left: -220px;
+    }
+}
+/* md */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .cp-bookTitleDetail {
+        margin-top: -40px !important;
+        margin-left: 20px;
+        border: 0px solid black !important;
+    }
+    .bd-bookImage {
+        width: 200px;
+    }
+    .bd-availabilityDetails {
+        margin-left: -240px;
+        padding-top: 50px;
+    }
+    .bs-bookSidebarStrip {
+        border-right: 1px solid #d6d6d7;
+    }
+}
+/* sm */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .cp-bookTitleDetail {
+        margin-top: -40px !important;
+        margin-left: 20px;
+        border: 0px solid black !important;
+    }
+    .bd-bookImage {
+        width: 500px;
+    }
+    .bd-bookTitleDetails,
+    .bd-availabilityDetails {
+        margin-left: -40px;
+    }
+}
+/* Below sm */
+@media screen and (max-width: 575px) {
+    .display-500-none {
+        display: none;
+    }
+    .cp-bookTitleDetail {
+        margin-left: -25px;
+    }
+    .aboutBook {
+        flex-direction: column;
+    }
+    .bd-bookTitleDetails,
+    .bd-availabilityDetails {
+        margin-left: -40px;
+    }
+    .bd-bookImage {
+        width: 100%;
+    }
+}
+/* lg and below */
+@media screen and (max-width: 1199px) {
+    .cp-bookTitleDetail {
+        border: 0px solid black !important;
+    }
+    .cp-availabilityDetails {
+        padding-left: 10px !important;
+        margin-top: 20px;
+    }
+}
+/* md and below */
+@media screen and (max-width: 991px) {
+    .bs-booksSidebar {
+        border: 0px solid black !important;
+        border-top: 1px solid #d6d6d7 !important;
+    }
+    .ud-mainContent {
+        border: 0px solid black !important;
+    }
+    .ud-sidebar {
+        display: flex;
+    }
+}

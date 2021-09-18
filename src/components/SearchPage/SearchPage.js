@@ -31,23 +31,25 @@ const SearchPage = () => {
                 <div className="row">
 
                     {/* Categories Sidebar */}
-                    <div className="col-2">
+                    <div className="col-md-3 col-xl-2">
                         <CategorySidebar />
                     </div>
 
                     {/* Main Content */}
-                    <div className="col-10 border-start mt-4 mb-5 ps-5">
-                        <div className="display-5 mt-5">Search Results for "{query}"</div>
-                        <div className="mt-3">{filteredBooks.length} books found</div>
-                        {
-                            filteredBooks.map(book => (
-                                <BookTile book={book} />
-                            ))
-                        }
-                        {
-                            !filteredBooks.length &&
-                            <div className="mt-5 fs-3">Whoops! No books found.</div>
-                        }
+                    <div className="col-md-9 col-xl-10 border-start mt-4 mb-5">
+                        <div className="container-fluid">
+                            <div className="display-5 mt-5">Search Results for "{query}"</div>
+                            <div className="mt-3">{filteredBooks.length} books found</div>
+                            {
+                                filteredBooks.map(book => (
+                                    <BookTile book={book} />
+                                ))
+                            }
+                            {
+                                !filteredBooks.length &&
+                                <div className="mt-5 fs-3">Whoops! No books found.</div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

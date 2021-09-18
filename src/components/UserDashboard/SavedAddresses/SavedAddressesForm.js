@@ -65,7 +65,7 @@ const SavedAddressesForm = ({ updateIndex, setShow, setUpdateIndex }) => {
                                 id="floatingInput" placeholder="#" name="houseNumber"
                                 {...register("houseNumber", { required: true })} />
                             {errors.houseNumber?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">This field is required</p>}
-                            <label htmlFor="floatingInput">Flat, House no., Building, Company, Apartment</label>
+                            <label htmlFor="floatingInput">Flat, House no., Building</label>
                         </div>
                     </div>
                     <div className="col-6">
@@ -76,7 +76,7 @@ const SavedAddressesForm = ({ updateIndex, setShow, setUpdateIndex }) => {
                                 id="floatingInput" placeholder="#" name="area"
                                 {...register("area", { required: true })} />
                             {errors.area?.type === "required" && <p className="alert alert-danger w-50 text-center mx-auto py-2 mt-2">This field is required</p>}
-                            <label htmlFor="floatingInput">Area, Colony, Street, Sector, Village</label>
+                            <label htmlFor="floatingInput">Area, Colony, Sector</label>
                         </div>
                     </div>
                 </div>

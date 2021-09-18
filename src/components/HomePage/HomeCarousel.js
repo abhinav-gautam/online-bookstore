@@ -5,7 +5,7 @@ import carouselImage4 from '../../media/carouselImage4.png';
 
 const HomeCarousel = () => {
     return (
-        <div className="container-fluid mt-4">
+        <div className="display-500-none mt-4">
             <div className="carousel slide carousel-fade" data-bs-ride="carousel" id="cr">
 
                 {/* Carousel Indicators */}

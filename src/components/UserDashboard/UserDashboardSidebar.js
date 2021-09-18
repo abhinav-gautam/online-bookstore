@@ -24,12 +24,12 @@ const UserDashboardSidebar = ({ url }) => {
     }
     return (
         <div className="container mt-5 ">
-            <div className="ms-4">
+            <div className="">
                 <div className="h3">Dashboard</div>
-                <ul className="list-unstyled mt-3">
+                <ul className="list-unstyled mt-3 ud-sidebar">
                     <li className="dropdown-item">
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/profile`}>
                             <FontAwesomeIcon icon={faUserCog} /> Profile
@@ -37,7 +37,7 @@ const UserDashboardSidebar = ({ url }) => {
                     </li>
                     <li className="dropdown-item">
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/cart`}>
                             <span className="position-relative pt-2">
@@ -50,7 +50,7 @@ const UserDashboardSidebar = ({ url }) => {
                     </li>
                     <li className="dropdown-item">
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/wishlist`}>
                             <span className="position-relative pt-2">

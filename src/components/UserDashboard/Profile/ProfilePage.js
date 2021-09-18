@@ -16,7 +16,7 @@ const ProfilePage = () => {
         <Router>
             <div className="container-fluid top-margin-150 ">
                 <div className="row mt-5">
-                    <div className="col-12 col-md-8 ps-5 border-end">
+                    <div className="col-12 col-md-9 ps-5 border-end">
                         {
                             user.role === "user"
                                 ?
@@ -39,7 +39,7 @@ const ProfilePage = () => {
                             </Route>
                         </Switch>
                     </div>
-                    <div className="col-12 col-md-4">
+                    <div className="col-12 col-md-3">
                         <ProfileSidebar show={show} setShow={setShow} url={url} />
                     </div>
                 </div>

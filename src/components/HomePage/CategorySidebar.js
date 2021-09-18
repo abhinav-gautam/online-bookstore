@@ -9,20 +9,18 @@ const CategorySidebar = () => {
 
     return (
         <div className="container mt-5 ">
-            <div className="ms-4">
-                <div className="h3">Categories</div>
-                <ul className="list-unstyled mt-3">
-                    {
-                        categories.length
-                            ?
-                            categories.map(category => (
-                                <CategoryItem category={category} />
-                            ))
-                            : isCategoryLoading &&
-                            <LoadingSpinner message=" Loading Categories..." />
-                    }
-                </ul>
-            </div>
+            <div className="h3">Categories</div>
+            <ul className="list-unstyled mt-3">
+                {
+                    categories.length
+                        ?
+                        categories.map(category => (
+                            <CategoryItem category={category} />
+                        ))
+                        : isCategoryLoading &&
+                        <LoadingSpinner message=" Loading Categories..." />
+                }
+            </ul>
             <hr />
         </div>
     );

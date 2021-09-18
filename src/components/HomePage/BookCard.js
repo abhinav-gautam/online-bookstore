@@ -12,8 +12,8 @@ const BookCard = ({ book }) => {
     const history = useHistory()
     const { isAuth, user } = useSelector(state => state.user)
     return (
-        <div className="col d-flex align-items-stretch" key={book._id} >
-            <div className="card mt-5 shadow w-75 cursor-pointer" >
+        <div className="col justify-content-center mb-5" key={book._id} >
+            <div className="card mt-5 shadow cursor-pointer h-100" >
                 {
                     book.discount &&
                     <span className="position-absolute top-0 start-0 translate-middle badge rounded-circle bg-danger p-2" >
@@ -23,7 +23,7 @@ const BookCard = ({ book }) => {
                 }
                 <div className="card-body w-100">
                     <div onClick={() => history.push({ pathname: `/book/${book._id}`, state: { book } })}>
-                        <img src={book.bookImage} alt="" width="100%" height="320px" />
+                        <img src={book.bookImage} alt="" width="100%" />
                         <div className="mt-3 mb-3">
                             {
                                 book.discount ?
@@ -47,8 +47,12 @@ const BookCard = ({ book }) => {
                     {
                         isAuth && user.status === "active" &&
                         <div className="btn-group">
-                            <button className="btn btn-sm btn-danger " onClick={() => dispatch(addItemToCart({ book, quantity: 1 }))}>Add to Cart <FontAwesomeIcon icon={faCartPlus} /></button>
-                            <button className="btn btn-sm btn-secondary" onClick={() => !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>Add to Wishlist <FontAwesomeIcon icon={faClipboardList} /></button>
+                            <button className="btn btn-sm btn-danger " onClick={() => dispatch(addItemToCart({ book, quantity: 1 }))}>
+                                <span className="">Add to Cart</span> <FontAwesomeIcon icon={faCartPlus} />
+                            </button>
+                            <button className="btn btn-sm btn-secondary" onClick={() => !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>
+                                <span className="">Add to Whishlist</span> <FontAwesomeIcon icon={faClipboardList} />
+                            </button>
                         </div>
                     }
 

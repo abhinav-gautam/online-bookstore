@@ -18,12 +18,17 @@ const BooksSidebar = ({ recentlyViewed }) => {
     }, [bookId]);
 
     return (
-        <div className="container mt-5 border-start">
-            {/* Similar Books */}
-            <BooksSidebarStip title="Similar Books" books={similarBooks} />
-
-            {/* Recently Viewed Books */}
-            <BooksSidebarStip title="Recently Viewed" books={recentlyViewed.slice(0, 3)} />
+        <div className="container-fluid mt-5 border-start bs-booksSidebar">
+            <div className="row">
+                <div className="col-12 col-md-6 col-lg-12 bs-bookSidebarStrip">
+                    {/* Similar Books */}
+                    <BooksSidebarStip title="Similar Books" books={similarBooks} />
+                </div>
+                <div className="col-12 col-md-6 col-lg-12">
+                    {/* Recently Viewed Books */}
+                    <BooksSidebarStip title="Recently Viewed" books={recentlyViewed.slice(0, 3)} />
+                </div>
+            </div>
 
         </div>
     );

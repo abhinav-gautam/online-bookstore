@@ -5,7 +5,7 @@ const FeaturedAuthors = ({ authors, isAuthorsLoading }) => {
     return (
         <>
             <div className="display-5 mt-5">Featured Authors</div>
-            <div className="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-3 row-cols-xl-5 mt-3 ">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-5 mt-3 ">
                 {
                     isAuthorsLoading
                         ? <LoadingSpinner message=" Loading Authors..." />

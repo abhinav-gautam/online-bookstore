@@ -25,11 +25,11 @@ const BookDetailsPage = () => {
                 <div className="row">
 
                     {/* Main Content */}
-                    <div className="col-8 mt-4 mb-5 ms-5 ps-5">
+                    <div className="col-xl-8 col-lg-7 mt-4 mb-5  ps-5">
                         <BookDetails book={book} />
                     </div>
                     {/* Suggested books Sidebar */}
-                    <div className="col-3">
+                    <div className="col-xl-3 col-lg-4">
                         <BooksSidebar recentlyViewed={recentlyViewed} />
                     </div>
                 </div>

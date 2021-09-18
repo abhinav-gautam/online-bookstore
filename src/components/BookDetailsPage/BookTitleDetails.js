@@ -31,7 +31,7 @@ const BookTitleDetails = ({ book, link }) => {
                             book.discount ?
                                 <>
                                     <span className="text-decoration-line-through">₹ {book.price}</span> <br />
-                                    <span className="fs-3 fw-bold text-danger">₹ {Math.round(+book.price - +book.price * +book.discount / 100)}</span>
+                                    <span className="fs-3 fw-bold text-danger text-nowrap">₹ {Math.round(+book.price - +book.price * +book.discount / 100)}</span>
                                 </>
                                 :
                                 <>
