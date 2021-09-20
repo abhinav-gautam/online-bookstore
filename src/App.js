@@ -7,6 +7,7 @@ import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
 import { decrypt } from "./components/Helpers/encryption";
 import Message from "./components/Helpers/Message";
+import resetAllState from "./components/Helpers/resetAllState";
 import { unAuthReqFallback } from "./components/Helpers/unAuthReqFallback";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import HomePage from "./components/HomePage/HomePage";
@@ -18,17 +19,18 @@ import { getAuthors } from "./redux/authorsReducers";
 import { getBooks } from "./redux/booksReducers";
 import { loadCart } from "./redux/cartReducers";
 import { getCategories } from "./redux/categoryReducers";
+import { setError } from "./redux/errorSlice";
 import { getUsers } from "./redux/userReducers";
 import { setUser } from "./redux/userSlice";
 import { loadWishlist } from "./redux/wishlistReducers";
 
 function App() {
-  const { books } = useSelector(state => state.books)
+  const { books, booksError } = useSelector(state => state.books)
   const { authors } = useSelector(state => state.authors)
-  const { cartItems } = useSelector(state => state.cart)
-  const { wishlistItems } = useSelector(state => state.wishlist)
-  const { categories } = useSelector(state => state.category)
-  const { user, isAuth, allUsers } = useSelector(state => state.user)
+  const { cartItems, cartError } = useSelector(state => state.cart)
+  const { wishlistItems, wishlistError } = useSelector(state => state.wishlist)
+  const { categories, categoryError } = useSelector(state => state.category)
+  const { user, isAuth, allUsers, userErrors } = useSelector(state => state.user)
   const { error } = useSelector(state => state.error)
 
   const dispatch = useDispatch()
@@ -77,6 +79,7 @@ function App() {
     }
   }, [user])
 
+  // For user session and unauth access
   useEffect(() => {
     let storedUser = localStorage.getItem("user")
     try {
@@ -89,6 +92,15 @@ function App() {
       dispatch(setUser(storedUser))
     }
   }, []);
+
+  // For session expired and token not available errors
+  useEffect(() => {
+    if (["jwt expired", "token not available"].indexOf(userErrors || cartError || wishlistError || booksError || categoryError) >= 0) {
+      resetAllState(dispatch)
+      dispatch(setError("Session expired. Please login again."))
+      history.push("/")
+    }
+  }, [userErrors, cartError, wishlistError, booksError, categoryError]);
 
   return (
     <div >

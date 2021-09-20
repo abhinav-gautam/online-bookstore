@@ -59,10 +59,10 @@ const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {
                                     <li className="list-group-item ">
                                         <div className="row">
                                             <div className="col-10 d-flex">
-                                                <div>
+                                                <div className="hc-bookImage">
                                                     <img src={item.book.bookImage} alt="" width="150px" height="210px" />
                                                 </div>
-                                                <div className="ps-4">
+                                                <div className="ps-4 hc-bookTitleDetails">
                                                     <h6 className="fw-bold fs-5">{item.book.bookTitle}</h6>
                                                     <div className="d-flex mt-3">
                                                         <div className="pe-5">
@@ -83,9 +83,9 @@ const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {
                                             <div className="col-2">
                                                 <div className="d-flex flex-column align-items-end">
                                                     <div className="text-muted">
-                                                        <small> {item.quantity} X Rs. {item.book.price}=</small>
+                                                        <small className="text-nowrap"> {item.quantity} X Rs. {item.book.price}=</small>
                                                     </div>
-                                                    <div className="fw-bold text-danger">
+                                                    <div className="fw-bold text-danger text-nowrap">
                                                         Rs. {item.quantity * item.book.price}
                                                     </div>
                                                     <div onClick={() => handleRemoveCartItem({ item, index })} className="text-muted cursor-pointer"><FontAwesomeIcon icon={faTrashAlt} /></div>

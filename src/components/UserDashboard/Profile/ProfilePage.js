@@ -14,7 +14,7 @@ const ProfilePage = ({ show, setShow }) => {
         <Router>
             <div className="container-fluid top-margin-150 ">
                 <div className="row mt-5">
-                    <div className="col-12 col-md-9 ps-5 border-end">
+                    <div className="col-12 col-md-9 ps-5 border-end pp-main">
                         {
                             user.username && (
                                 user.role === "user"
@@ -39,7 +39,7 @@ const ProfilePage = ({ show, setShow }) => {
                             </Route>
                         </Switch>
                     </div>
-                    <div className="col-12 col-md-3">
+                    <div className="col-12 col-md-3 pp-sidebar">
                         <ProfileSidebar show={show} setShow={setShow} url={url} />
                     </div>
                 </div>

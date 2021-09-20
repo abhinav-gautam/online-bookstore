@@ -9,7 +9,7 @@ const ProfileSidebar = ({ show, setShow, url }) => {
     return (
         <div className="ps-5">
             <p className="h4 text-nowrap">Useful Links</p>
-            <div className="mt-4 lh-6 text-danger fw-bold">
+            <div className="mt-4 lh-6 text-danger fw-bold pp-sidebar">
                 {
                     user.role === "user"
                         ? <>

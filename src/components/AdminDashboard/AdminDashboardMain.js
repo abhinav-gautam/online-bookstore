@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
+import { setError } from '../../redux/errorSlice';
 import { setUser } from '../../redux/userSlice';
 import { decrypt } from '../Helpers/encryption';
+import Message from '../Helpers/Message';
+import resetAllState from '../Helpers/resetAllState';
 import { unAuthReqFallback } from '../Helpers/unAuthReqFallback';
 import ProfilePage from '../UserDashboard/Profile/ProfilePage';
 import AdminDashboardSidebar from './AdminDashboardSidebar';
@@ -17,11 +20,23 @@ const AdminDashboardMain = () => {
     const { path, url } = useRouteMatch()
     const [show, setShow] = useState(false);
     const [updateIndex, setUpdateIndex] = useState(-1);
-    const { user, } = useSelector(state => state.user)
+    const { user, userErrors } = useSelector(state => state.user)
+    const { booksError } = useSelector(state => state.books)
+    const { categoryError } = useSelector(state => state.category)
+    const { error } = useSelector(state => state.error)
     const dispatch = useDispatch()
     const history = useHistory()
 
-    // For handling refresh and unauth access
+    // For session expired and token not available errors
+    useEffect(() => {
+        if (["jwt expired", "token not available"].indexOf(userErrors || booksError || categoryError) >= 0) {
+            resetAllState(dispatch)
+            dispatch(setError("Session expired. Please login again."))
+            history.push("/")
+        }
+    }, [userErrors, booksError, categoryError]);
+
+    // For user session and unauth access
     useEffect(() => {
         let storedUser = localStorage.getItem("user")
         try {
@@ -41,6 +56,9 @@ const AdminDashboardMain = () => {
 
     return (
         <div className="container-fluid">
+            {
+                error && <Message message={error} variant="danger" />
+            }
             <div className="row">
                 <div className="col-2">
                     <AdminDashboardSidebar url={url} />

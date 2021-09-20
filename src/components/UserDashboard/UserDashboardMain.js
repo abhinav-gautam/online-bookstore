@@ -2,20 +2,35 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
+import { setError } from '../../redux/errorSlice';
 import { setUser } from '../../redux/userSlice';
 import CartPage from '../CartPage/CartPage';
 import { decrypt } from '../Helpers/encryption';
+import Message from '../Helpers/Message';
+import resetAllState from '../Helpers/resetAllState';
 import { unAuthReqFallback } from '../Helpers/unAuthReqFallback';
 import ProfilePage from './Profile/ProfilePage';
 import UserDashboardSidebar from './UserDashboardSidebar';
 import WishlistPage from './Wishlist/WishlistPage';
 
 const UserDashboardMain = () => {
-    const { user, } = useSelector(state => state.user)
+    const { user, userErrors } = useSelector(state => state.user)
+    const { cartError } = useSelector(state => state.cart)
+    const { wishlistError } = useSelector(state => state.wishlist)
     const [show, setShow] = useState(false);
     const { path, url } = useRouteMatch()
     const dispatch = useDispatch()
+    const { error } = useSelector(state => state.error)
     const history = useHistory()
+
+    // For session expired and token not available errors
+    useEffect(() => {
+        if (["jwt expired", "token not available"].indexOf(userErrors || cartError || wishlistError) >= 0) {
+            resetAllState(dispatch)
+            dispatch(setError("Session expired. Please login again."))
+            history.push("/")
+        }
+    }, [userErrors, cartError, wishlistError]);
 
     // For handling refresh and unauth access
     useEffect(() => {
@@ -38,6 +53,9 @@ const UserDashboardMain = () => {
 
     return (
         <div className="container-fluid">
+            {
+                error && <Message message={error} variant="danger" />
+            }
             <div className="row">
                 <div className="col-lg-2 col-md-12">
                     <UserDashboardSidebar url={url} />

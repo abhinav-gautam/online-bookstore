@@ -35,12 +35,12 @@ const CartPage = () => {
         <>
             <div className="container-fluid top-margin-150">
                 <div className="row mt-5">
-                    <div className="col-12 col-md-6 ps-5">
+                    <div className="col-xl-7 col-12">
                         <HomeCart
                             cartItems={cartItems} totalItems={totalItems}
                             isCartLoading={isCartLoading} cartSummary={cartSummary} />
                     </div>
-                    <div className="col-12 col-md-6 ps-5">
+                    <div className="col-xl-5 col-12 ">
                         <CartSummary cartSummary={cartSummary} totalItems={totalItems} />
                     </div>
                 </div>

@@ -138,7 +138,6 @@ export const getUsers = createAsyncThunk("getUsers", async (_, thunkAPI) => {
 
 // Update user role
 export const updateRole = createAsyncThunk("updateRole", async ({ user, index }, thunkAPI) => {
-    console.log(user, index);
     const token = localStorage.getItem("token")
     const { data } = await axios.put("http://localhost:4000/users/updateRole", user, {
         headers: {

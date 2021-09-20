@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 import AvailabilityDetails from '../../BookDetailsPage/AvailabilityDetails';
-import BookImage from '../../BookDetailsPage/BookImage';
 import BookTitleDetails from '../../BookDetailsPage/BookTitleDetails';
 import LoadingSpinner from '../../Helpers/LoadingSpinner';
 
@@ -34,15 +33,15 @@ const WishlistPage = () => {
                         : <>
                             {
                                 wishlistItems.map((item, index) => (
-                                    <li className="list-group-item p-5">
+                                    <li className="list-group-item container-fluid py-5">
                                         <div className="row">
-                                            <div className="col-2 ">
-                                                <BookImage book={item} width="180px" height="240px" />
+                                            <div className="col-xl-3 col-lg-4 col-md-4 ">
+                                                <img src={item.bookImage} className="wp-bookImage" alt="" />
                                             </div>
-                                            <div className="col-6 border-end pe-4">
+                                            <div className="col-xl-5 col-lg-8 col-md-8 border-end pe-4 wp-bookTitleDetails">
                                                 <BookTitleDetails book={item} />
                                             </div>
-                                            <div className="col-4 ps-5">
+                                            <div className="col-xl-4 col-lg-12 ps-5 wp-availabilityDetails">
                                                 <AvailabilityDetails book={item} index={index} wishlist={true} />
                                             </div>
                                         </div>

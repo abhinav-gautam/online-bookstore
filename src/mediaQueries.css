@@ -44,19 +44,24 @@
         margin-left: 20px;
         border: 0px solid black !important;
     }
-    .bd-bookImage {
-        width: 500px;
-    }
-    .bd-bookTitleDetails,
-    .bd-availabilityDetails {
-        margin-left: -40px;
-    }
 }
-/* Below sm */
+/* xs */
 @media screen and (max-width: 575px) {
     .display-500-none {
         display: none;
     }
+    .ud-mainContent {
+        margin-left: -20px;
+    }
+    .hc-bookImage {
+        display: none;
+    }
+    .hc-bookTitleDetails {
+        padding-left: 0px !important;
+    }
+}
+/* sm and below */
+@media screen and (max-width: 767px) {
     .cp-bookTitleDetail {
         margin-left: -25px;
     }
@@ -70,15 +75,28 @@
     .bd-bookImage {
         width: 100%;
     }
-}
-/* lg and below */
-@media screen and (max-width: 1199px) {
-    .cp-bookTitleDetail {
+    .pp-main {
         border: 0px solid black !important;
     }
-    .cp-availabilityDetails {
-        padding-left: 10px !important;
-        margin-top: 20px;
+    .pp-sidebar {
+        display: flex;
+    }
+    .pp-sidebar > p {
+        padding-right: 10px;
+        padding-left: 10px;
+        border-right: 1px solid #d6d6d7;
+    }
+    .pp-sidebar > :first-child {
+        padding-left: 0px;
+    }
+    .pp-sidebar > :last-child {
+        border-right: 0px solid black !important;
+    }
+    .wp-bookImage {
+        display: block;
+        margin-right: auto !important;
+        margin-left: auto !important;
+        width: 100%;
     }
 }
 /* md and below */
@@ -92,5 +110,23 @@
     }
     .ud-sidebar {
         display: flex;
+    }
+    .wp-availabilityDetails {
+        margin-left: -30px;
+        margin-top: 10px;
+    }
+}
+
+/* lg and below */
+@media screen and (max-width: 1199px) {
+    .cp-bookTitleDetail {
+        border: 0px solid black !important;
+    }
+    .cp-availabilityDetails {
+        padding-left: 10px !important;
+        margin-top: 20px;
+    }
+    .wp-bookTitleDetails {
+        border: 0px solid black !important;
     }
 }
