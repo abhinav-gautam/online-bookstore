@@ -59,6 +59,9 @@
     .hc-bookTitleDetails {
         padding-left: 0px !important;
     }
+    .adm-bookImageInput {
+        flex-direction: column;
+    }
 }
 /* sm and below */
 @media screen and (max-width: 767px) {
@@ -105,18 +108,20 @@
         border: 0px solid black !important;
         border-top: 1px solid #d6d6d7 !important;
     }
-    .ud-mainContent {
+    .ud-mainContent,
+    .adm-mainContent {
         border: 0px solid black !important;
     }
-    .ud-sidebar {
+    .ud-sidebar,
+    .adm-sidebar {
         display: flex;
+        flex-wrap: wrap;
     }
     .wp-availabilityDetails {
         margin-left: -30px;
         margin-top: 10px;
     }
 }
-
 /* lg and below */
 @media screen and (max-width: 1199px) {
     .cp-bookTitleDetail {
@@ -128,5 +133,11 @@
     }
     .wp-bookTitleDetails {
         border: 0px solid black !important;
+    }
+    .adm-addCategory {
+        border: 0px solid black !important;
+    }
+    .adm-viewCategory {
+        margin-left: 0px !important;
     }
 }

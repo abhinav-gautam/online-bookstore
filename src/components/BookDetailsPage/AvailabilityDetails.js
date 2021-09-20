@@ -24,13 +24,13 @@ const AvailabilityDetails = ({ book, wishlist, index }) => {
                     <div className="input-group-text cursor-pointer" onClick={() => quantity >= 1 && setQuantity(+quantity + 1)}>+</div>
                 </div>
             </div>
-            <button className="btn btn-danger mt-4" onClick={() => dispatch(addItemToCart({ book, quantity }))}>Add to Cart <FontAwesomeIcon icon={faCartPlus} /></button>
+            <button className="btn btn-danger mt-4 rounded-pill" onClick={() => dispatch(addItemToCart({ book, quantity }))}>Add to Cart <FontAwesomeIcon icon={faCartPlus} /></button>
             {
                 !wishlist ?
-                    <button className="btn btn-secondary mt-4 ms-4" onClick={() => !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>Add to Wishlist <FontAwesomeIcon icon={faClipboardList} /></button>
+                    <button className="btn btn-secondary mt-4 ms-4 rounded-pill" onClick={() => !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>Add to Wishlist <FontAwesomeIcon icon={faClipboardList} /></button>
                     : <>
                         <br />
-                        <button className="btn btn-secondary mt-4" onClick={() => dispatch(removeWishlistItem({ book, index }))}>Remove from Wishlist <FontAwesomeIcon icon={faTrashAlt} /></button>
+                        <button className="btn btn-secondary mt-4 rounded-pill" onClick={() => dispatch(removeWishlistItem({ book, index }))}>Remove from Wishlist <FontAwesomeIcon icon={faTrashAlt} /></button>
                     </>
             }
         </div>

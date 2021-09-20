@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../redux/userReducers';
 import { encrypt } from '../Helpers/encryption';
+import { setError } from '../../redux/errorSlice';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -25,7 +26,7 @@ const Register = () => {
 
     useEffect(() => {
         if (isAuth) {
-            // dispatch(setError(""))
+            dispatch(setError(""))
             if (user.role === "user") {
                 history.push(`/`)
             } else {

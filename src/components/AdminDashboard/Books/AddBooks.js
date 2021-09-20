@@ -58,7 +58,7 @@ const AddBooks = ({ updateIndex, setUpdateIndex, setShow }) => {
                 <div className="row align-items-center">
                     <div className="col-6">
                         {/* Book Image */}
-                        <div className="form-group mb-3 d-flex align-items-center">
+                        <div className="form-group mb-3 d-flex align-items-center adm-bookImageInput">
                             <label htmlFor="bookImage" className="cursor-pointer">
                                 {
                                     watchBookImage.length !== 0 ?

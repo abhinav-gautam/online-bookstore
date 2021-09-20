@@ -9,6 +9,7 @@ import { userLogin } from '../../redux/userReducers';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 import "./loginStyles.css";
 import { encrypt } from '../Helpers/encryption';
+import { setError } from '../../redux/errorSlice';
 // import { setError } from '../redux/errorSlice';
 
 const Login = () => {
@@ -27,7 +28,7 @@ const Login = () => {
 
     useEffect(() => {
         if (isAuth) {
-            // dispatch(setError(""))
+            dispatch(setError(""))
             if (user.role === "user") {
                 history.push(`/`)
             } else {

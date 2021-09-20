@@ -60,11 +60,11 @@ const AdminDashboardMain = () => {
                 error && <Message message={error} variant="danger" />
             }
             <div className="row">
-                <div className="col-2">
+                <div className="col-xl-2 col-lg-3">
                     <AdminDashboardSidebar url={url} />
                 </div>
-                <div className="col-10 ">
-                    <div className="border-start">
+                <div className="col-xl-10 col-lg-9">
+                    <div className="border-start adm-mainContent">
                         <Switch>
                             {/* View Books */}
                             <Route exact path={`${path}/viewBooks`}>

@@ -10,31 +10,31 @@ const AdminDashboardSidebar = ({ url }) => {
     }
     return (
         <div className="container mt-5 ">
-            <div className="ms-4">
+            <div className="">
                 <div className="h3">Dashboard</div>
-                <ul className="list-unstyled mt-3">
-                    <li className="mb-3">
+                <ul className="list-unstyled mt-3 adm-sidebar">
+                    <li className="mt-3">
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/profile`}>
                             <FontAwesomeIcon icon={faUserCog} /> Profile
                         </NavLink>
                     </li>
-                    <li className="">
-                        <button className="btn btn-link shadow-none text-dark text-decoration-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBooks" >
+                    <li className="mt-3">
+                        <button className="btn btn-link shadow-none text-nowrap text-dark text-decoration-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBooks" >
                             <FontAwesomeIcon icon={faBook} /> Books
                         </button>
                     </li>
                     <div className="collapse ms-4" id="collapseBooks">
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/addBook`}>
                             <FontAwesomeIcon icon={faBookMedical} /> Add Book
                         </NavLink>
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/viewBooks`}>
                             <FontAwesomeIcon icon={faBookReader} /> View Books
@@ -42,7 +42,7 @@ const AdminDashboardSidebar = ({ url }) => {
                     </div>
                     <li className="mt-3">
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/category`}>
                             <span className="position-relative pt-2">
@@ -52,7 +52,7 @@ const AdminDashboardSidebar = ({ url }) => {
                     </li>
                     <li className="mt-3">
                         <NavLink exact
-                            className="nav-link text-dark text-wrap"
+                            className="nav-link text-dark text-nowrap"
                             activeStyle={activeLinkStyle}
                             to={`${url}/users`}>
                             <span className="position-relative pt-2">
