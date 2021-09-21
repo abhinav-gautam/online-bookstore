@@ -17,5 +17,5 @@ it("should reset the user", () => {
         user: { name: "testUser", email: "test@test.com" }, isAuth: true,
         isUserLoading: false,
         userErrors: "", allUsers: []
-    }, resetUser)).toEqual(initialUserState)
+    }, resetUser())).toEqual(initialUserState)
 })

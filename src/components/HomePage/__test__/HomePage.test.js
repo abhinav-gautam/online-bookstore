@@ -11,3 +11,4 @@ it('renders home page', () => {
     const categoriesComponents = screen.getAllByText("Categories")
     expect(categoriesComponents.length).toBeTruthy();
 });
+

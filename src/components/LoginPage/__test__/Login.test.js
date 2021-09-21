@@ -38,7 +38,7 @@ it("should check proper error message is displayed when fields are empty", async
     fireEvent.click(loginButton)
     // Finding alert msg with required text
     const reqAlert = await screen.findAllByText(/required/i)
-    // Two alret messages must be there for username and password
+    // Two alert messages must be there for username and password
     expect(reqAlert.length).toBe(2)
 })
 
