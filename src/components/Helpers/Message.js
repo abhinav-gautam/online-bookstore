@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import "./helpersStyles.css";
 
-const Message = ({ variant, message }) => {
+const Message = ({ variant, message, duration = 3000 }) => {
     const [show, setShow] = useState(true)
 
     useEffect(() => {
         const timeId = setTimeout(() => {
             setShow(false)
-        }, 3000)
+        }, duration)
 
         return () => {
             clearTimeout(timeId)

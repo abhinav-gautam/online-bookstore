@@ -10,7 +10,7 @@ const CategorySidebar = () => {
     return (
         <div className="container mt-5 ">
             <div className="h3">Categories</div>
-            <ul className="list-unstyled mt-3">
+            <ul className="list-unstyled mt-3" aria-label="categoriesList">
                 {
                     categories.length
                         ?

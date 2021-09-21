@@ -44,18 +44,14 @@ const BookCard = ({ book }) => {
                         </p>
                         <p className="small">{book.author}</p>
                     </div>
-                    {
-                        isAuth && user.status === "active" &&
-                        <div className="btn-group">
-                            <button className="btn btn-sm btn-danger " onClick={() => dispatch(addItemToCart({ book, quantity: 1 }))}>
-                                <span className="">Add to Cart</span> <FontAwesomeIcon icon={faCartPlus} />
-                            </button>
-                            <button className="btn btn-sm btn-secondary" onClick={() => !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>
-                                <span className="">Add to Whishlist</span> <FontAwesomeIcon icon={faClipboardList} />
-                            </button>
-                        </div>
-                    }
-
+                    <div className="btn-group">
+                        <button className={`btn btn-sm btn-danger ${user?.status === "blocked" && "disabled"}`} onClick={() => !isAuth ? history.push({ pathname: "/login", state: { message: "login required" } }) : dispatch(addItemToCart({ book, quantity: 1 }))}>
+                            <span className="">Add to Cart</span> <FontAwesomeIcon icon={faCartPlus} />
+                        </button>
+                        <button className={`btn btn-sm btn-secondary ${user?.status === "blocked" && "disabled"}`} onClick={() => !isAuth ? history.push({ pathname: "/login", state: { message: "login required" } }) : !JSON.stringify(wishlistItems).includes(JSON.stringify(book)) && dispatch(addItemToWishlist({ book }))}>
+                            <span className="">Add to Whishlist</span> <FontAwesomeIcon icon={faClipboardList} />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div >

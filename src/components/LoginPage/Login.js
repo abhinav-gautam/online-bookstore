@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import LoadingSpinner from '../Helpers/LoadingSpinner';
 import "./loginStyles.css";
 import { encrypt } from '../Helpers/encryption';
 import { setError } from '../../redux/errorSlice';
+import Message from '../Helpers/Message';
 // import { setError } from '../redux/errorSlice';
 
 const Login = () => {
@@ -37,8 +38,10 @@ const Login = () => {
         }
     }, [isAuth]);
 
+    const state = useLocation().state
     return (
         <div className="container">
+            {state?.message === "login required" && <Message message="Login to continue shopping" variant="info" duration={5000} />}
             <div className="row text-center mt-5">
                 <div className="col-11 col-sm-9 col-md-8 col-lg-6 col-xl-4 mx-auto">
                     <div className="card mx-auto shadow mb-5">

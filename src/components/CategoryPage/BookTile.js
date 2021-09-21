@@ -22,13 +22,9 @@ const BookTile = ({ book }) => {
                         <BookTitleDetails book={book} link={true} />
                     </div>
                 </div>
-                {
-                    isAuth && user.status === "active" &&
-                    <div className="col-xl-4 ps-5 cp-availabilityDetails">
-                        <AvailabilityDetails book={book} />
-                    </div>
-                }
-
+                <div className="col-xl-4 ps-5 cp-availabilityDetails">
+                    <AvailabilityDetails book={book} />
+                </div>
             </div>
             <hr width="75%" className="mx-auto mt-5" />
         </>

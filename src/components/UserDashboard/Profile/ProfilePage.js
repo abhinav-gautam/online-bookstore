@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import SavedAddresses from '../SavedAddresses/SavedAddresses';
@@ -6,8 +7,9 @@ import SavedCards from '../SavedCards/SavedCards';
 import EditProfile from './EditProfile';
 import ProfileSidebar from './ProfileSidebar';
 
-const ProfilePage = ({ show, setShow }) => {
+const ProfilePage = () => {
     const { user } = useSelector(state => state.user)
+    const [show, setShow] = useState(false);
     const { path, url } = useRouteMatch()
 
     return (

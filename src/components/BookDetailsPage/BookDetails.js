@@ -1,12 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import AboutBook from './AboutBook';
 import AvailabilityDetails from './AvailabilityDetails';
 import BookTitleDetails from './BookTitleDetails';
 
 const BookDetails = ({ book }) => {
-    const { isAuth, user } = useSelector(state => state.user)
-
     return (
         <>
             <div className="mt-5 row">
@@ -27,10 +24,7 @@ const BookDetails = ({ book }) => {
                         <BookTitleDetails book={book} />
                     </div>
                     <div className="ps-5 mt-5 bd-availabilityDetails">
-                        {
-                            isAuth && user.status === "active" &&
-                            <AvailabilityDetails book={book} />
-                        }
+                        <AvailabilityDetails book={book} />
                     </div>
                 </div>
             </div>

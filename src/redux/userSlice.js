@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addAddress, addCard, deleteAddress, deleteCard, getUsers, updateAddress, updateCard, updateRole, updateUser, userLogin } from './userReducers';
 
-const initialUserState = {
+export const initialUserState = {
     user: {}, isAuth: false,
     isUserLoading: false,
     userErrors: "", allUsers: []

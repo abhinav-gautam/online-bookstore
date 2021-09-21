@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import { setError } from '../../redux/errorSlice';
@@ -17,10 +17,9 @@ const UserDashboardMain = () => {
     const { user, userErrors } = useSelector(state => state.user)
     const { cartError } = useSelector(state => state.cart)
     const { wishlistError } = useSelector(state => state.wishlist)
-    const [show, setShow] = useState(false);
     const { path, url } = useRouteMatch()
-    const dispatch = useDispatch()
     const { error } = useSelector(state => state.error)
+    const dispatch = useDispatch()
     const history = useHistory()
 
     // For session expired and token not available errors
@@ -53,9 +52,7 @@ const UserDashboardMain = () => {
 
     return (
         <div className="container-fluid">
-            {
-                error && <Message message={error} variant="danger" />
-            }
+            {error && <Message message={error} variant="danger" />}
             <div className="row">
                 <div className="col-lg-2 col-md-12">
                     <UserDashboardSidebar url={url} />
@@ -70,7 +67,7 @@ const UserDashboardMain = () => {
                             </Route>
                             {/* Profile Page */}
                             <Route exact path={`${path}/profile`}>
-                                <ProfilePage show={show} setShow={setShow} />
+                                <ProfilePage />
                             </Route>
                             {/* Wishlist Page */}
                             <Route exact path={`${path}/wishlist`}>
