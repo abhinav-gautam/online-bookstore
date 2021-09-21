@@ -5,12 +5,14 @@ import { Route, Switch, useHistory } from "react-router-dom";
 import AdminDashboardMain from "./components/AdminDashboard/AdminDashboardMain";
 import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
+import FeaturedPage from "./components/FeaturedPage/FeaturedPage";
 import { decrypt } from "./components/Helpers/encryption";
 import Message from "./components/Helpers/Message";
 import resetAllState from "./components/Helpers/resetAllState";
 import { unAuthReqFallback } from "./components/Helpers/unAuthReqFallback";
 import FirstNavigation from "./components/HomePage/FirstNavigation";
 import HomePage from "./components/HomePage/HomePage";
+import SecondNavbar from "./components/HomePage/SecondNavbar";
 import Login from "./components/LoginPage/Login";
 import Register from "./components/RegisterPage/Register";
 import SearchPage from "./components/SearchPage/SearchPage";
@@ -121,10 +123,12 @@ function App() {
       <Switch>
         {/* Homepage */}
         <Route exact path="/">
+          <SecondNavbar />
           <HomePage />
         </Route>
         {/* Search Page */}
         <Route exact path="/search">
+          <SecondNavbar />
           <SearchPage />
         </Route>
         {/* Book Details Page */}
@@ -133,7 +137,13 @@ function App() {
         </Route>
         {/* Category Page */}
         <Route exact path="/category/:category">
+          <SecondNavbar />
           <CategoryPage />
+        </Route>
+        {/* Featured Page */}
+        <Route exact path="/featured/:feature">
+          <SecondNavbar />
+          <FeaturedPage />
         </Route>
         {/* Login */}
         <Route exact path="/login">
