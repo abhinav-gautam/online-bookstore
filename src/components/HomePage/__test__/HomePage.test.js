@@ -1,13 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import TestComponent from '../../Helpers/TestComponent';
+import { screen } from '@testing-library/react';
+import { renderWithContainer } from '../../Helpers/renderWithContainer';
 import HomePage from '../HomePage';
 
 it('renders home page', () => {
-    render(
-        <TestComponent>
-            <HomePage />
-        </TestComponent>
-    );
+    renderWithContainer(<HomePage />)
     const categoriesComponents = screen.getAllByText("Categories")
     expect(categoriesComponents.length).toBeTruthy();
 });

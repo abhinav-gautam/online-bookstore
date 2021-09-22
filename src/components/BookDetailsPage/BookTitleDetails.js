@@ -12,14 +12,14 @@ const BookTitleDetails = ({ book, link }) => {
                     <p className="h3 fw-bold"> {book.bookTitle}</p>
             }
             {
-                book.tags && book.tags.split(",").map(tag => (
-                    <>
+                book.tags && book.tags.split(",").map((tag, index) => (
+                    <span key={index}>
                         {
                             tag === "newArrival"
                                 ? <span className="badge rounded-pill bg-danger me-4">NEW ARRIVAL</span>
                                 : <span className="badge rounded-pill bg-danger me-4">{tag.toUpperCase()}</span>
                         }
-                    </>
+                    </span>
                 ))
             }
             <div className="d-flex mt-3">

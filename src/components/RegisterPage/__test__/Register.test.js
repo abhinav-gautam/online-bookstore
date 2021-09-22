@@ -1,13 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import TestComponent from '../../Helpers/TestComponent';
+import { screen } from '@testing-library/react';
+import { renderWithContainer } from '../../Helpers/renderWithContainer';
 import Register from '../Register';
 
 it('renders register page', () => {
-    render(
-        <TestComponent>
-            <Register />
-        </TestComponent>
-    );
+    renderWithContainer(<Register />)
     const registerComponents = screen.getAllByText("Register")
     expect(registerComponents.length).toBeTruthy()
 });

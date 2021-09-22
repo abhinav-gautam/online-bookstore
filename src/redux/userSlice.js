@@ -7,156 +7,94 @@ export const initialUserState = {
     userErrors: "", allUsers: []
 }
 
+const promisePending = state => {
+    return state = { ...state, isUserLoading: true, userErrors: "" }
+}
+
+const promiseRejected = (state, action) => {
+    return state = { ...state, isUserLoading: false, userErrors: action.payload.message }
+}
+
+const updateState = (state, newState) => {
+    return state = { ...state, ...newState }
+}
+
 const userSlice = createSlice({
     name: "user",
     initialState: initialUserState,
     reducers: {
-        setUser: (state, action) => {
-            state.user = action.payload
-            state.isAuth = true
-            return state
-        },
-        resetUser: state => {
-            state = initialUserState
-            return state
-        }
+        setUser: (state, action) => updateState(state, { user: action.payload, isAuth: true }),
+        resetUser: state => updateState(state, initialUserState)
     },
     extraReducers: {
         // User login
-        [userLogin.pending]: (state, action) => {
-            state.isUserLoading = true
-            state.userErrors = ""
-        },
-        [userLogin.fulfilled]: (state, action) => {
-            state.user = action.payload
-            state.isAuth = true
-            state.isUserLoading = false
-            state.userErrors = ""
-        },
-        [userLogin.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [userLogin.pending]: promisePending,
+        [userLogin.fulfilled]: (state, action) => updateState(state, { isUserLoading: false, user: action.payload, isAuth: true }),
+        [userLogin.rejected]: promiseRejected,
         // Update User
-        [updateUser.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
-        [updateUser.fulfilled]: (state, action) => {
-            state.user = { ...state.user, ...action.payload }
-            state.isUserLoading = false
-            state.userErrors = ""
-        },
-        [updateUser.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [updateUser.pending]: promisePending,
+        [updateUser.fulfilled]: (state, action) => updateState(state, { user: { ...state.user, ...action.payload }, isUserLoading: false }),
+        [updateUser.rejected]: promiseRejected,
         // Add Address
-        [addAddress.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
+        [addAddress.pending]: promisePending,
         [addAddress.fulfilled]: (state, action) => {
             state.isUserLoading = false
             state.user.addresses.push(action.payload)
         },
-        [addAddress.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [addAddress.rejected]: promiseRejected,
         // Delete Address
-        [deleteAddress.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
+        [deleteAddress.pending]: promisePending,
         [deleteAddress.fulfilled]: (state, action) => {
             state.isUserLoading = false
             state.user.addresses.splice(action.payload, 1)
         },
-        [deleteAddress.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [deleteAddress.rejected]: promiseRejected,
         // Update Address
-        [updateAddress.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
+        [updateAddress.pending]: promisePending,
         [updateAddress.fulfilled]: (state, action) => {
             state.isUserLoading = false
             state.user.addresses.splice(action.payload.index, 1, action.payload.address)
         },
-        [updateAddress.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [updateAddress.rejected]: promiseRejected,
         // Add Card
-        [addCard.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
+        [addCard.pending]: promisePending,
         [addCard.fulfilled]: (state, action) => {
             state.isUserLoading = false
             state.user.cards.push(action.payload)
         },
-        [addCard.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [addCard.rejected]: promiseRejected,
         // Delete Card
-        [deleteCard.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
+        [deleteCard.pending]: promisePending,
         [deleteCard.fulfilled]: (state, action) => {
             state.isUserLoading = false
             state.user.cards.splice(action.payload, 1)
         },
-        [deleteCard.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [deleteCard.rejected]: promiseRejected,
         // Update Card
-        [updateCard.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
+        [updateCard.pending]: promisePending,
         [updateCard.fulfilled]: (state, action) => {
             state.isUserLoading = false
             state.user.cards.splice(action.payload.index, 1, action.payload.card)
         },
-        [updateCard.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [updateCard.rejected]: promiseRejected,
         // Get users
-        [getUsers.pending]: (state, action) => {
+        [getUsers.pending]: state => {
             state.userErrors = ""
-            // state.isUserLoading = true
         },
         [getUsers.fulfilled]: (state, action) => {
             state.isUserLoading = false
             state.allUsers = action.payload
         },
-        [getUsers.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [getUsers.rejected]: promiseRejected,
         // Update user role
-        [updateRole.pending]: (state, action) => {
-            state.userErrors = ""
-            state.isUserLoading = true
-        },
+        [updateRole.pending]: promisePending,
         [updateRole.fulfilled]: (state, action) => {
             state.isUserLoading = false
             action.payload.user.status
                 ? state.allUsers[action.payload.index].status = action.payload.user.status
                 : state.allUsers[action.payload.index].role = action.payload.user.role
         },
-        [updateRole.rejected]: (state, action) => {
-            state.isUserLoading = false
-            state.userErrors = action.payload.message
-        },
+        [updateRole.rejected]: promiseRejected,
     }
 })
 

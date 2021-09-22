@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { toTitleCase } from '../../Helpers/toTitleCase';
 import SavedAddresses from '../SavedAddresses/SavedAddresses';
 import SavedCards from '../SavedCards/SavedCards';
 import EditProfile from './EditProfile';
@@ -21,9 +22,9 @@ const ProfilePage = () => {
                             user.username && (
                                 user.role === "user"
                                     ?
-                                    <p className="h3">Welcome {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                                    <p className="h3">Welcome {toTitleCase(user.username)}</p>
                                     :
-                                    <p className="h3">Welcome to Admin Dashboard, {user.username.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())}</p>
+                                    <p className="h3">Welcome to Admin Dashboard, {toTitleCase(user.username)}</p>
                             )
                         }
                         <Switch>

@@ -8,10 +8,10 @@ const SecondNavbar = () => {
         { feature: "awarded", title: "Awarded" },
     ]
     return (
-        <ul class="nav nav-pills mt-3 justify-content-evenly">
+        <ul className="nav nav-pills mt-3 justify-content-evenly">
             {
                 featureTitle.map((item, index) => (
-                    <li class="nav-item">
+                    <li className="nav-item" key={index}>
                         <NavLink className="nav-link text-danger fw-bold text-decoration-none" activeClassName="nav-link text-white bg-danger active" to={{ pathname: `/featured/${item.feature}`, state: { title: item.title } }}> {item.title}</NavLink>
                     </li>
                 ))
