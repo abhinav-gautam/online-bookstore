@@ -1,7 +1,9 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import LoadingSpinner from '../Helpers/LoadingSpinner';
 
 const FeaturedAuthors = ({ authors, isAuthorsLoading }) => {
+    const history = useHistory()
     return (
         <>
             <div className="display-5 mt-5">Featured Authors</div>
@@ -13,8 +15,8 @@ const FeaturedAuthors = ({ authors, isAuthorsLoading }) => {
                             ?
                             authors.slice(0, 5).map(author => (
                                 <div key={author._id} >
-                                    <img src={author.authorImage} className="border border-white rounded-circle img-small" alt="" width="150px" height="150px" />
-                                    <p className="ms-4 mt-3">{author.authorName}</p>
+                                    <img src={author.authorImage} className="border border-white rounded-circle img-small cursor-pointer" onClick={() => history.push({ pathname: `/author/${author.authorName}`, state: { authorImage: author.authorImage, authorAbout: author.authorAbout } })} alt="" width="150px" height="150px" />
+                                    <p className="ms-4 mt-3 cursor-pointer" onClick={() => history.push({ pathname: `/author/${author.authorName}`, state: { authorImage: author.authorImage, authorAbout: author.authorAbout } })}>{author.authorName}</p>
                                 </div>
                             ))
                             : <p className="lead">Nothing to show here</p>

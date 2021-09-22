@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, useHistory } from "react-router-dom";
 import AdminDashboardMain from "./components/AdminDashboard/AdminDashboardMain";
 import BookDetailsPage from "./components/BookDetailsPage/BookDetailsPage";
 import CategoryPage from "./components/CategoryPage/CategoryPage";
-import FeaturedPage from "./components/FeaturedPage/FeaturedPage";
+import FeaturedPageAuthor from "./components/FeaturedPage/FeaturedPageAuthor";
+import FeaturedPageTags from "./components/FeaturedPage/FeaturedPageTags";
 import { decrypt } from "./components/Helpers/encryption";
+import LoadingSpinner from "./components/Helpers/LoadingSpinner";
 import Message from "./components/Helpers/Message";
 import resetAllState from "./components/Helpers/resetAllState";
 import { unAuthReqFallback } from "./components/Helpers/unAuthReqFallback";
@@ -25,6 +27,11 @@ import { setError } from "./redux/errorSlice";
 import { getUsers } from "./redux/userReducers";
 import { setUser } from "./redux/userSlice";
 import { loadWishlist } from "./redux/wishlistReducers";
+
+// Dynamic Imports
+const ContactUs = React.lazy(() => import("./components/MislPages/ContactUs"))
+const Terms = React.lazy(() => import("./components/MislPages/Terms"))
+const PageNotFound = React.lazy(() => import("./components/MislPages/PageNotFound"))
 
 function App() {
   const { books, booksError } = useSelector(state => state.books)
@@ -140,10 +147,15 @@ function App() {
           <SecondNavbar />
           <CategoryPage />
         </Route>
-        {/* Featured Page */}
+        {/* Featured Page - Tag */}
         <Route exact path="/featured/:feature">
           <SecondNavbar />
-          <FeaturedPage />
+          <FeaturedPageTags />
+        </Route>
+        {/* Featured Page - Author */}
+        <Route exact path="/author/:author">
+          <SecondNavbar />
+          <FeaturedPageAuthor />
         </Route>
         {/* Login */}
         <Route exact path="/login">
@@ -161,9 +173,25 @@ function App() {
         <Route path="/admindashboard">
           <AdminDashboardMain />
         </Route>
+        {/* Contact Us */}
+        <Route exact path="/contactus">
+          <Suspense fallback={<div className="container mt-5 text-center"> <LoadingSpinner message=" Loading..." /> </div>}>
+            <ContactUs />
+          </Suspense>
+        </Route>
+        {/* Contact Us */}
+        <Route exact path="/terms">
+          <Suspense fallback={<div className="container mt-5 text-center"> <LoadingSpinner message=" Loading..." /> </div>}>
+            <Terms />
+          </Suspense>
+        </Route>
+        {/* Page Not Found */}
+        <Route path="*">
+          <Suspense fallback={<div className="container mt-5 text-center"> <LoadingSpinner message=" Loading..." /> </div>}>
+            <PageNotFound />
+          </Suspense>
+        </Route>
       </Switch>
-
-
     </div>
   );
 }

@@ -7,17 +7,17 @@ import LoadingSpinner from '../Helpers/LoadingSpinner';
 import CategorySidebar from '../HomePage/CategorySidebar';
 import Footer from '../HomePage/Footer';
 
-const FeaturedPage = () => {
-    const { feature } = useParams()
-    const { title } = useLocation().state
+const FeaturedPageAuthor = () => {
+    const { author } = useParams()
+    const { authorImage, authorAbout } = useLocation().state
 
     const { books, isBooksLoading } = useSelector(state => state.books)
     const [filteredBooks, setFilteredBooks] = useState([]);
 
     // Filtering books based on category
     useEffect(() => {
-        setFilteredBooks(books.filter(book => book.tags.includes(feature)))
-    }, [feature, books]);
+        setFilteredBooks(books.filter(book => book.author.includes(author)))
+    }, [author, books]);
 
     return (
         <>
@@ -31,8 +31,16 @@ const FeaturedPage = () => {
 
                     {/* Main Content */}
                     <div className="col-md-9 col-xl-10 border-start mt-4 mb-5">
-                        <div className="container-fluid">
-                            <div className="display-5 mt-5 text-center">{title}</div>
+                        <div className="container-fluid mt-4">
+                            <div className="d-flex">
+                                <img src={authorImage} className="border border-white rounded-circle img-small cursor-pointer" alt="" width="150px" height="150px" />
+                                <div className="ps-5">
+                                    <div className="h4 text-danger fw-bold">{author}</div>
+                                    <p className="lead">{authorAbout}</p>
+                                </div>
+                            </div>
+
+                            <div className="display-5 mt-5 text-center">{author}'s Books</div>
                             <div className="mt-3">{filteredBooks.length} books found</div>
                             {
                                 isBooksLoading && <div className="mt-5"><LoadingSpinner message=" Loading Books..." /></div>
@@ -52,4 +60,4 @@ const FeaturedPage = () => {
     );
 }
 
-export default FeaturedPage;
+export default FeaturedPageAuthor;
