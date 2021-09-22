@@ -16,7 +16,7 @@ const promiseRejected = (state, action) => {
 }
 
 const updateState = (state, newState) => {
-    return state = { ...state, ...newState }
+    return state = { ...state, ...newState, isUserLoading: false }
 }
 
 const userSlice = createSlice({
@@ -29,18 +29,15 @@ const userSlice = createSlice({
     extraReducers: {
         // User login
         [userLogin.pending]: promisePending,
-        [userLogin.fulfilled]: (state, action) => updateState(state, { isUserLoading: false, user: action.payload, isAuth: true }),
+        [userLogin.fulfilled]: (state, action) => updateState(state, { user: action.payload, isAuth: true }),
         [userLogin.rejected]: promiseRejected,
         // Update User
         [updateUser.pending]: promisePending,
-        [updateUser.fulfilled]: (state, action) => updateState(state, { user: { ...state.user, ...action.payload }, isUserLoading: false }),
+        [updateUser.fulfilled]: (state, action) => updateState(state, { user: { ...state.user, ...action.payload } }),
         [updateUser.rejected]: promiseRejected,
         // Add Address
         [addAddress.pending]: promisePending,
-        [addAddress.fulfilled]: (state, action) => {
-            state.isUserLoading = false
-            state.user.addresses.push(action.payload)
-        },
+        [addAddress.fulfilled]: (state, action) => updateState(state, { user: { ...state.user, addresses: [...state.user.addresses, action.payload] } }),
         [addAddress.rejected]: promiseRejected,
         // Delete Address
         [deleteAddress.pending]: promisePending,
@@ -58,10 +55,7 @@ const userSlice = createSlice({
         [updateAddress.rejected]: promiseRejected,
         // Add Card
         [addCard.pending]: promisePending,
-        [addCard.fulfilled]: (state, action) => {
-            state.isUserLoading = false
-            state.user.cards.push(action.payload)
-        },
+        [addCard.fulfilled]: (state, action) => updateState(state, { user: { ...state.user, cards: [...state.user.cards, action.payload] } }),
         [addCard.rejected]: promiseRejected,
         // Delete Card
         [deleteCard.pending]: promisePending,
@@ -81,10 +75,7 @@ const userSlice = createSlice({
         [getUsers.pending]: state => {
             state.userErrors = ""
         },
-        [getUsers.fulfilled]: (state, action) => {
-            state.isUserLoading = false
-            state.allUsers = action.payload
-        },
+        [getUsers.fulfilled]: (state, action) => updateState(state, { allUsers: action.payload }),
         [getUsers.rejected]: promiseRejected,
         // Update user role
         [updateRole.pending]: promisePending,

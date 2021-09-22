@@ -24,6 +24,7 @@ export const updateUser = createAsyncThunk("updateuser", async (formData, thunkA
         }
     })
     if (data.status === "success") {
+        localStorage.setItem("user", data.user)
         const decryptedUser = decrypt(data.user)
         return decryptedUser
     } else {
