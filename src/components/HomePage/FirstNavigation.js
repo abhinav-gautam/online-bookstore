@@ -69,10 +69,10 @@ const FirstNavigation = () => {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <div className="mt-4">
-                        <SearchBar offcanvas={true} />
+                        <SearchBar offcanvas={true} setShow={setShow} />
                     </div>
                     <ul className="justify-content-right align-items-center mt-3 list-unstyled">
-                        <NavbarContent totalItems={totalItems} offcanvas={true} />
+                        <NavbarContent totalItems={totalItems} offcanvas={true} setShow={setShow} />
                     </ul>
                 </Offcanvas.Body>
             </Offcanvas>

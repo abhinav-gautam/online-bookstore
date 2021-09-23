@@ -32,8 +32,8 @@ const FeaturedPageAuthor = () => {
                     {/* Main Content */}
                     <div className="col-md-9 col-xl-10 border-start mt-4 mb-5">
                         <div className="container-fluid mt-4">
-                            <div className="d-flex">
-                                <img src={authorImage} className="border border-white rounded-circle img-small cursor-pointer" alt="" width="150px" height="150px" />
+                            <div className="d-flex fpa-authorDetails">
+                                <img src={authorImage} className="border border-white rounded-circle img-small cursor-pointer fpa-authorImage" alt="" width="150px" height="150px" />
                                 <div className="ps-5">
                                     <div className="h4 text-danger fw-bold">{author}</div>
                                     <p className="lead">{authorAbout}</p>

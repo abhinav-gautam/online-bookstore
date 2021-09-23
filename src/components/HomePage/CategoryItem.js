@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const CategoryItem = ({ category }) => {
+const CategoryItem = ({ category, setShow }) => {
 
     // Active link style
     const activeLinkStyle = {
@@ -12,7 +12,8 @@ const CategoryItem = ({ category }) => {
             <NavLink exact
                 className="nav-link text-dark text-wrap"
                 activeStyle={activeLinkStyle}
-                to={`/category/${category.categoryName}`}>
+                to={`/category/${category.categoryName}`}
+                onClick={() => setShow(false)} >
                 {category.categoryName}
             </NavLink>
         </li>

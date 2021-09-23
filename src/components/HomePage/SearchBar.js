@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
-const SearchBar = ({ offcanvas }) => {
+const SearchBar = ({ offcanvas, setShow }) => {
     const { register, handleSubmit, reset } = useForm();
     const { user, isAuth } = useSelector(state => state.user)
     const history = useHistory()
     const onSearchFormSubmit = searchField => {
         history.push(`/search?query=${searchField.searchQuery}`)
+        setShow(false)
         reset()
     }
     return (

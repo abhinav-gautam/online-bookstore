@@ -57,13 +57,13 @@ const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {
                             {
                                 cartItems.map((item, index) => (
                                     <li className="list-group-item ">
-                                        <div className="row">
-                                            <div className="col-10 d-flex">
+                                        <div className="row cp-itemContainer">
+                                            <div className="col-10 d-flex ">
                                                 <div className="hc-bookImage">
                                                     <img src={item.book.bookImage} alt="" width="150px" height="210px" />
                                                 </div>
                                                 <div className="ps-4 hc-bookTitleDetails">
-                                                    <h6 className="fw-bold fs-5">{item.book.bookTitle}</h6>
+                                                    <h6 className="fw-bold fs-5 ">{item.book.bookTitle}</h6>
                                                     <div className="d-flex mt-3">
                                                         <div className="pe-5">
                                                             <p><strong>Author:</strong> {item.book.author}</p>
@@ -80,8 +80,8 @@ const HomeCart = ({ cartItems, totalItems, isCartLoading, cartSummary }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="col-2">
-                                                <div className="d-flex flex-column align-items-end">
+                                            <div className="col-2 ">
+                                                <div className="d-flex flex-column cp-priceContainer align-items-end">
                                                     <div className="text-muted">
                                                         <small className="text-nowrap"> {item.quantity} X Rs. {item.book.price}=</small>
                                                     </div>

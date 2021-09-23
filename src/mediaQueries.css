@@ -62,6 +62,16 @@
     .adm-bookImageInput {
         flex-direction: column;
     }
+    .cp-itemContainer {
+        flex-direction: column;
+    }
+    .cp-priceContainer {
+        flex-direction: row !important;
+        margin-top: 20px;
+    }
+    .cp-priceContainer > :last-child {
+        margin-left: 10px;
+    }
 }
 /* sm and below */
 @media screen and (max-width: 767px) {
@@ -100,6 +110,17 @@
         margin-right: auto !important;
         margin-left: auto !important;
         width: 100%;
+    }
+    .fpa-authorDetails {
+        flex-direction: column;
+    }
+    .fpa-authorDetails > :last-child {
+        margin-top: 20px;
+    }
+    .fpa-authorImage {
+        display: block;
+        margin-right: auto !important;
+        margin-left: auto !important;
     }
 }
 /* md and below */
