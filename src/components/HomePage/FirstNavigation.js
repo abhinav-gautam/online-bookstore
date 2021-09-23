@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
+import { Offcanvas } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Message from '../Helpers/Message';
@@ -13,6 +14,9 @@ const FirstNavigation = () => {
     const { user } = useSelector(state => state.user)
     const { cartItems } = useSelector(state => state.cart)
     const [totalItems, setTotalItems] = useState(0);
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
 
     useEffect(() => {
         if (cartItems.length) {
@@ -43,7 +47,7 @@ const FirstNavigation = () => {
 
                 <div>
                     {/* Collapse Button */}
-                    <button className="navbar-toggler me-5 shadow-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+                    <button className="navbar-toggler me-5 shadow-none" onClick={() => setShow(true)}>
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
@@ -57,19 +61,21 @@ const FirstNavigation = () => {
             </nav >
 
             {/* Offcanvas */}
-            <div className="offcanvas offcanvas-start " tabIndex="-1" id="offcanvas" aria-labelledby="offcanvasExampleLabel">
-                <div className="offcanvas-body">
+            <Offcanvas show={show} onHide={handleClose}>
+                <Offcanvas.Header closeButton>
                     <div>
                         <Link to={user.role === "user" ? "/" : "#"} className="navbar-brand fs-1 text-decoration-none ms-5 cursor-pointer text-dark">Bookworm</Link>
                     </div>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
                     <div className="mt-4">
                         <SearchBar offcanvas={true} />
                     </div>
                     <ul className="justify-content-right align-items-center mt-3 list-unstyled">
                         <NavbarContent totalItems={totalItems} offcanvas={true} />
                     </ul>
-                </div>
-            </div>
+                </Offcanvas.Body>
+            </Offcanvas>
         </>
     );
 }
