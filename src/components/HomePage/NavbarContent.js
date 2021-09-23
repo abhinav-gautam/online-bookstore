@@ -20,7 +20,7 @@ const NavbarContent = ({ totalItems, offcanvas, setShow }) => {
     const handleLogout = () => {
         resetAllState(dispatch)
         history.push("/")
-        setShow(false)
+        offcanvas && setShow(false)
     }
 
     // Active link style
@@ -32,7 +32,7 @@ const NavbarContent = ({ totalItems, offcanvas, setShow }) => {
         <>
             {user.role !== "admin" &&
                 <>
-                    <li className="nav-item text-nowrap"><NavLink exact activeStyle={activeLinkStyle} className={`nav-link ${offcanvas && "text-danger"}`} to="/" onClick={() => setShow(false)} ><FontAwesomeIcon icon={faHome} /> Home</NavLink></li>
+                    <li className="nav-item text-nowrap"><NavLink exact activeStyle={activeLinkStyle} className={`nav-link ${offcanvas && "text-danger"}`} to="/" onClick={() => offcanvas && setShow(false)} ><FontAwesomeIcon icon={faHome} /> Home</NavLink></li>
                     {/* Category */}
                     <li className="nav-item dropdown">
                         <a className={`nav-link dropdown-toggle ${offcanvas && "text-danger"}`} href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,7 +42,7 @@ const NavbarContent = ({ totalItems, offcanvas, setShow }) => {
                             {
                                 categories.length
                                     ? categories.map(category => (
-                                        <CategoryItem category={category} key={category._id} setShow={setShow} />
+                                        <CategoryItem category={category} key={category._id} setShow={setShow} offcanvas={offcanvas} />
                                     ))
                                     : isCategoryLoading && <li><a className="dropdown-item" href="#"><LoadingSpinner message=" Loading Categories" /></a></li>
                             }
@@ -56,7 +56,7 @@ const NavbarContent = ({ totalItems, offcanvas, setShow }) => {
                         {
                             user.role === "user" && user.status === "active" &&
                             <li className={`nav-item me-4 text-nowrap ${offcanvas && "mt-2"}`}>
-                                <NavLink className={`nav-link text-decoration-none position-relative ${offcanvas && "text-danger"}`} activeClassName="nav-link active" to="/userdashboard/cart" onClick={() => setShow(false)} >
+                                <NavLink className={`nav-link text-decoration-none position-relative ${offcanvas && "text-danger"}`} activeClassName="nav-link active" to="/userdashboard/cart" onClick={() => offcanvas && setShow(false)} >
                                     <span className=" position-relative pt-2 pe-2">
                                         <FontAwesomeIcon icon={faShoppingCart} /> Cart
                                         <span className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
@@ -83,7 +83,7 @@ const NavbarContent = ({ totalItems, offcanvas, setShow }) => {
                             <ul className="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
                                 {
                                     user.role === "user" && user.status === "active" &&
-                                    <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard/profile" onClick={() => setShow(false)} ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
+                                    <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/userdashboard/profile" onClick={() => offcanvas && setShow(false)} ><FontAwesomeIcon icon={faColumns} /> Dashboard</NavLink></li>
                                 }
                                 <li className="nav-item" ><NavLink exact className="nav-link text-dark" to="/" onClick={handleLogout}><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
                             </ul>
@@ -91,8 +91,8 @@ const NavbarContent = ({ totalItems, offcanvas, setShow }) => {
                     </>
                     :
                     <>
-                        <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className={`nav-link ${offcanvas && "text-danger"}`} to="/login" onClick={() => setShow(false)}><FontAwesomeIcon icon={faSignInAlt} /> Login</NavLink></li>
-                        <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className={`nav-link ${offcanvas && "text-danger"}`} to="/register" onClick={() => setShow(false)} ><FontAwesomeIcon icon={faUserPlus} /> Register</NavLink></li>
+                        <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className={`nav-link ${offcanvas && "text-danger"}`} to="/login" onClick={() => offcanvas && setShow(false)}><FontAwesomeIcon icon={faSignInAlt} /> Login</NavLink></li>
+                        <li className="nav-item"><NavLink exact activeStyle={activeLinkStyle} className={`nav-link ${offcanvas && "text-danger"}`} to="/register" onClick={() => offcanvas && setShow(false)} ><FontAwesomeIcon icon={faUserPlus} /> Register</NavLink></li>
                     </>
             }
 
