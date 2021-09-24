@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addBook, deleteBook, getBooks, updateBook } from './booksReducers';
 
-const initialBooksState = {
+export const initialBooksState = {
     books: [], isBooksLoading: false, booksError: "", recentlyViewed: []
 }
 
